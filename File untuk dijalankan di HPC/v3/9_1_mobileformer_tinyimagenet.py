@@ -1724,7 +1724,7 @@ __all__ = ['MobileFormer']
 
 def _cfg(url='', **kwargs):
     return {
-        'url': url, 'num_classes': 1000, 'input_size': (3, 64, 64), 'pool_size': (1, 1),
+        'url': url, 'num_classes': 1000, 'input_size': (3, 224, 224), 'pool_size': (1, 1),
         'crop_pct': 0.875, 'interpolation': 'bilinear',
         'mean': IMAGENET_DEFAULT_MEAN, 'std': IMAGENET_DEFAULT_STD,
         'first_conv': 'conv_stem', 'classifier': 'classifier',
@@ -1740,7 +1740,7 @@ class MobileFormer(nn.Module):
         self,
         block_args,
         num_classes=1000,
-        img_size=64,
+        img_size=224,
         width_mult=1.,
         in_chans=3,
         stem_chs=16,

@@ -2212,65 +2212,6 @@ def mobile_former_26m(pretrained=False, **kwargs):
     model = _create_mobile_former("mobile_former_26m", pretrained, **model_kwargs)
     return model
 
-train_batch_size = 32 # Seharusnya 1024
-test_batch_size = 32 # Seharusnya 1024
-id_dict = {}
-for i, line in enumerate(open('/home/tasi2425111/tiny-imagenet-200/wnids.txt', 'r')):
-  id_dict[line.replace('\n', '')] = i
-
-class TrainTinyImageNetDataset(Dataset):
-    def __init__(self, id, transform=None):
-        self.filenames = glob.glob("/home/tasi2425111/tiny-imagenet-200/train/*/*/*.JPEG")
-        self.transform = transform
-        self.id_dict = id
-
-    def __len__(self):
-        return len(self.filenames)
-
-    def __getitem__(self, idx):
-        img_path = self.filenames[idx]
-        image = read_image(img_path)
-        if image.shape[0] == 1:
-          image = read_image(img_path,ImageReadMode.RGB)
-        label = self.id_dict[img_path.split('/')[5]]
-        if self.transform:
-            image = self.transform(image.type(torch.FloatTensor))
-        return image, label
-
-class TestTinyImageNetDataset(Dataset):
-    def __init__(self, id, transform=None):
-        self.filenames = glob.glob("/home/tasi2425111/tiny-imagenet-200/val/images/*.JPEG")
-        self.transform = transform
-        self.id_dict = id
-        self.cls_dic = {}
-        for i, line in enumerate(open('/home/tasi2425111/tiny-imagenet-200/val/val_annotations.txt', 'r')):
-            a = line.split('\t')
-            img, cls_id = a[0],a[1]
-            self.cls_dic[img] = self.id_dict[cls_id]
-
-
-    def __len__(self):
-        return len(self.filenames)
-
-    def __getitem__(self, idx):
-        img_path = self.filenames[idx]
-        image = read_image(img_path)
-        if image.shape[0] == 1:
-          image = read_image(img_path,ImageReadMode.RGB)
-        label = self.cls_dic[img_path.split('/')[-1]]
-        if self.transform:
-            image = self.transform(image.type(torch.FloatTensor))
-        return image, label
-
-transform = transforms.Normalize((122.4786, 114.2755, 101.3963), (70.4924, 68.5679, 71.8127))
-
-train_dataset = TrainTinyImageNetDataset(id=id_dict, transform = transform)
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=train_batch_size, shuffle=True, num_workers=2)
-# batch size untuk train dibuat 2 karena ga bisa 1
-
-test_dataset = TestTinyImageNetDataset(id=id_dict, transform=transform)
-test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=test_batch_size, shuffle=False, num_workers=2)
-
 num_classes = 200
 
 model = mobile_former_294m()
@@ -2289,9 +2230,72 @@ model = model.to(device)
 
 # print(output.shape)
 
-num_epochs = 120
+train_batch_size = 1024 # Seharusnya 1024
+test_batch_size = 1024 # Seharusnya 1024
+id_dict = {}
+for i, line in enumerate(open('/home/tasi2425111/tiny-imagenet-200/wnids.txt', 'r')):
+  id_dict[line.replace('\n', '')] = i
+
+class TrainTinyImageNetDataset(Dataset):
+    def __init__(self, id, transform=None):
+        self.filenames = glob.glob("/home/tasi2425111/tiny-imagenet-200/train/*/*/*.JPEG")
+        self.transform = transform
+        self.id_dict = id
+
+    def __len__(self):
+        return len(self.filenames)
+
+    def __getitem__(self, idx):
+        img_path = self.filenames[idx]
+        image = read_image(img_path)
+        if image.shape[0] == 1:
+            image = read_image(img_path, ImageReadMode.RGB)
+
+        image = image.type(torch.FloatTensor)
+
+        label = self.id_dict[img_path.split('/')[5]]
+        if self.transform:
+            image = self.transform(image)
+        return image, label
+
+class TestTinyImageNetDataset(Dataset):
+    def __init__(self, id, transform=None):
+        self.filenames = glob.glob("/home/tasi2425111/tiny-imagenet-200/val/images/*.JPEG")
+        self.transform = transform
+        self.id_dict = id
+        self.cls_dic = {}
+        for i, line in enumerate(open('/home/tasi2425111/tiny-imagenet-200/val/val_annotations.txt', 'r')):
+            a = line.split('\t')
+            img, cls_id = a[0], a[1]
+            self.cls_dic[img] = self.id_dict[cls_id]
+
+    def __len__(self):
+        return len(self.filenames)
+
+    def __getitem__(self, idx):
+        img_path = self.filenames[idx]
+        image = read_image(img_path)
+        if image.shape[0] == 1:
+            image = read_image(img_path, ImageReadMode.RGB)
+
+        image = image.type(torch.FloatTensor)
+
+        label = self.cls_dic[img_path.split('/')[-1]]
+        if self.transform:
+            image = self.transform(image)
+        return image, label
+
+transform = None
+
+train_dataset = TrainTinyImageNetDataset(id=id_dict, transform = transform)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=train_batch_size, shuffle=True, num_workers=2)
+
+test_dataset = TestTinyImageNetDataset(id=id_dict, transform=transform)
+test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=test_batch_size, shuffle=False, num_workers=2)
+
+num_epochs = 100
 lr_val = 0.001
-patience = 20
+patience = 10
 
 criterion = nn.CrossEntropyLoss()
 
@@ -2411,9 +2415,8 @@ test_accuracy = 100 * correct_test / total_test
 
 print(f"Test Loss: {test_loss:.4f}, Top-1 Accuracy: {test_accuracy:.2f}%")
 
-
 # FLOPs calculation
-dummy_input = torch.randn(test_batch_size, 3, 64, 64).to(device)
+dummy_input = torch.randn(1, 3, 224, 224).to(device)
 
 flops = FlopCountAnalysis(model, dummy_input)
 print(f"FLOPs: {flops.total()}")

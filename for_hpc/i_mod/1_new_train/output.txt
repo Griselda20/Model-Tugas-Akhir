@@ -1,0 +1,1098 @@
+nohup: ignoring input
+Using device: cuda:0
+block: 12544, cnn-drop 0.0000, mlp-drop 0.0000
+block: 12544, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 16, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 24, token: 192
+block: 3136, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 24, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 24, token: 192
+block: 3136, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 24, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 48, token: 192
+block: 784, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 48, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 48, token: 192
+block: 784, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 48, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 96, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 96, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 96, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 96, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 128, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 128, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 128, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 128, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 192, token: 192
+block: 49, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 192, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 192, token: 192
+block: 49, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 192, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 192, token: 192
+L2G: 2 heads, inp: 192, token: 192
+MobileFormer(
+  (tokens): Embedding(6, 192)
+  (stem): Sequential(
+    (0): Conv2d(3, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU6(inplace=True)
+  )
+  (features): Sequential(
+    (0): DnaBlock3(
+      (conv): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+        (3): Sequential()
+        (4): Conv2d(32, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (5): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(16, 96, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(24, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=24, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=16, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=16, bias=True)
+        (proj): Linear(in_features=16, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=192, out_features=24, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (2): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(24, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(96, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=96, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=24, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=24, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=192, out_features=24, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (3): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(24, 144, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=24, bias=False)
+        (1): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=288, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(144, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(48, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=384, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=24, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=24, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=192, out_features=48, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (4): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(48, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=384, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=192, bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=384, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=48, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=192, out_features=48, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (5): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(48, 288, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=576, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(288, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(96, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=96, bias=False)
+        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=768, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=48, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=192, out_features=96, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (6): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(96, 384, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=768, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=384, bias=False)
+        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=768, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=96, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=96, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=192, out_features=96, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (7): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(96, 576, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1152, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=576, bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1152, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(576, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=96, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=96, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=192, out_features=128, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (8): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(128, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=768, bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(768, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=128, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=128, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=192, out_features=128, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (9): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(128, 768, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=128, bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(768, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(192, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=192, bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(768, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=128, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=128, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (10): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(1152, 1152, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1152, bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(1152, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=192, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (11): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(1152, 1152, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1152, bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(1152, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=192, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (attn): PreNorm(
+          (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+          (fn): Attention(
+            (attend): Softmax(dim=-1)
+            (to_qkv): Linear(in_features=192, out_features=576, bias=False)
+            (to_out): Sequential(
+              (0): Linear(in_features=192, out_features=192, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+  )
+  (local_global): Local2Global(
+    (alpha): Sequential(
+      (0): Linear(in_features=192, out_features=192, bias=True)
+      (1): h_sigmoid(
+        (relu): ReLU6(inplace=True)
+      )
+    )
+    (q): Linear(in_features=192, out_features=192, bias=True)
+    (proj): Linear(in_features=192, out_features=192, bias=True)
+    (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+    (drop_path): DropPath(drop_prob=0.000)
+  )
+  (classifier): MergeClassifier(
+    (conv): Sequential(
+      (0): Sequential()
+      (1): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (2): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (act): DyReLU(
+      (act): ReLU6(inplace=True)
+    )
+    (hyper): Sequential()
+    (avgpool): Sequential(
+      (0): AdaptiveAvgPool2d(output_size=(1, 1))
+      (1): h_swish(
+        (sigmoid): h_sigmoid(
+          (relu): ReLU6(inplace=True)
+        )
+      )
+    )
+    (fc): Sequential(
+      (0): Linear(in_features=1344, out_features=1920, bias=True)
+      (1): BatchNorm1d(1920, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): h_swish(
+        (sigmoid): h_sigmoid(
+          (relu): ReLU6(inplace=True)
+        )
+      )
+    )
+    (classifier): Sequential(
+      (0): Dropout(p=0.0, inplace=False)
+      (1): Linear(in_features=1920, out_features=1000, bias=True)
+    )
+  )
+)
+Epoch 1/300:   0%|          | 0/64059 [00:00<?, ?it/s]Epoch 1/300:   0%|          | 0/64059 [00:01<?, ?it/s, loss=6.96, lr=1e-5]Epoch 1/300:   0%|          | 1/64059 [00:01<34:04:34,  1.92s/it, loss=6.96, lr=1e-5]Epoch 1/300:   0%|          | 1/64059 [00:02<34:04:34,  1.92s/it, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 2/64059 [00:02<20:27:41,  1.15s/it, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 2/64059 [00:03<20:27:41,  1.15s/it, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 3/64059 [00:03<15:00:29,  1.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 3/64059 [00:03<15:00:29,  1.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 4/64059 [00:03<12:53:36,  1.38it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 4/64059 [00:04<12:53:36,  1.38it/s, loss=6.96, lr=1e-5]Epoch 1/300:   0%|          | 5/64059 [00:04<12:13:47,  1.45it/s, loss=6.96, lr=1e-5]Epoch 1/300:   0%|          | 5/64059 [00:04<12:13:47,  1.45it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 6/64059 [00:04<11:13:51,  1.58it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 6/64059 [00:05<11:13:51,  1.58it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 7/64059 [00:05<10:34:31,  1.68it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 7/64059 [00:05<10:34:31,  1.68it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 8/64059 [00:05<10:03:35,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 8/64059 [00:06<10:03:35,  1.77it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 9/64059 [00:06<9:29:45,  1.87it/s, loss=6.95, lr=1e-5] Epoch 1/300:   0%|          | 9/64059 [00:06<9:29:45,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 10/64059 [00:06<9:01:14,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 10/64059 [00:07<9:01:14,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 11/64059 [00:07<8:43:02,  2.04it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 11/64059 [00:07<8:43:02,  2.04it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 12/64059 [00:07<8:28:02,  2.10it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 12/64059 [00:07<8:28:02,  2.10it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 13/64059 [00:07<8:20:53,  2.13it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 13/64059 [00:08<8:20:53,  2.13it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 14/64059 [00:08<8:20:42,  2.13it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 14/64059 [00:08<8:20:42,  2.13it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 15/64059 [00:08<8:37:57,  2.06it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 15/64059 [00:09<8:37:57,  2.06it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 16/64059 [00:09<9:14:41,  1.92it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 16/64059 [00:10<9:14:41,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 17/64059 [00:10<9:38:36,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 17/64059 [00:10<9:38:36,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 18/64059 [00:10<9:57:30,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 18/64059 [00:11<9:57:30,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 19/64059 [00:11<10:10:12,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 19/64059 [00:11<10:10:12,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 20/64059 [00:11<10:16:10,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 20/64059 [00:12<10:16:10,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 21/64059 [00:12<10:20:05,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 21/64059 [00:13<10:20:05,  1.72it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 22/64059 [00:13<10:23:08,  1.71it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 22/64059 [00:13<10:23:08,  1.71it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 23/64059 [00:13<10:27:46,  1.70it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 23/64059 [00:14<10:27:46,  1.70it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 24/64059 [00:14<10:28:08,  1.70it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 24/64059 [00:14<10:28:08,  1.70it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 25/64059 [00:14<10:30:38,  1.69it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 25/64059 [00:15<10:30:38,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 26/64059 [00:15<10:33:16,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 26/64059 [00:16<10:33:16,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 27/64059 [00:16<10:32:26,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 27/64059 [00:16<10:32:26,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 28/64059 [00:16<10:32:56,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 28/64059 [00:17<10:32:56,  1.69it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 29/64059 [00:17<10:31:42,  1.69it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 29/64059 [00:17<10:31:42,  1.69it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 30/64059 [00:17<10:32:20,  1.69it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 30/64059 [00:18<10:32:20,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 31/64059 [00:18<9:47:02,  1.82it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 31/64059 [00:18<9:47:02,  1.82it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 32/64059 [00:18<8:38:15,  2.06it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 32/64059 [00:19<8:38:15,  2.06it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 33/64059 [00:19<8:27:33,  2.10it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 33/64059 [00:19<8:27:33,  2.10it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 34/64059 [00:19<8:19:41,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 34/64059 [00:20<8:19:41,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 35/64059 [00:20<8:15:16,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 35/64059 [00:20<8:15:16,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 36/64059 [00:20<8:11:45,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 36/64059 [00:20<8:11:45,  2.17it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 37/64059 [00:20<8:09:45,  2.18it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 37/64059 [00:21<8:09:45,  2.18it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 38/64059 [00:21<8:07:02,  2.19it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 38/64059 [00:21<8:07:02,  2.19it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 39/64059 [00:21<8:05:37,  2.20it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 39/64059 [00:22<8:05:37,  2.20it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 40/64059 [00:22<8:03:32,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 40/64059 [00:22<8:03:32,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 41/64059 [00:22<8:02:34,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 41/64059 [00:23<8:02:34,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 42/64059 [00:23<8:02:16,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 42/64059 [00:23<8:02:16,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 43/64059 [00:23<8:01:05,  2.22it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 43/64059 [00:24<8:01:05,  2.22it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 44/64059 [00:24<8:02:14,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 44/64059 [00:24<8:02:14,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 45/64059 [00:24<8:01:42,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 45/64059 [00:25<8:01:42,  2.21it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 46/64059 [00:25<8:06:25,  2.19it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 46/64059 [00:25<8:06:25,  2.19it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 47/64059 [00:25<8:11:40,  2.17it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 47/64059 [00:25<8:11:40,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 48/64059 [00:25<8:15:47,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 48/64059 [00:26<8:15:47,  2.15it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 49/64059 [00:26<8:22:51,  2.12it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 49/64059 [00:26<8:22:51,  2.12it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 50/64059 [00:26<8:18:19,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 50/64059 [00:27<8:18:19,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 51/64059 [00:27<8:17:26,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 51/64059 [00:27<8:17:26,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 52/64059 [00:27<8:16:41,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 52/64059 [00:28<8:16:41,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 53/64059 [00:28<8:16:00,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 53/64059 [00:28<8:16:00,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 54/64059 [00:28<8:14:37,  2.16it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 54/64059 [00:29<8:14:37,  2.16it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 55/64059 [00:29<8:12:03,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 55/64059 [00:29<8:12:03,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 56/64059 [00:29<8:09:16,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 56/64059 [00:30<8:09:16,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 57/64059 [00:30<8:10:04,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 57/64059 [00:30<8:10:04,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 58/64059 [00:30<8:22:51,  2.12it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 58/64059 [00:31<8:22:51,  2.12it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 59/64059 [00:31<8:32:22,  2.08it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 59/64059 [00:31<8:32:22,  2.08it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 60/64059 [00:31<8:24:44,  2.11it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 60/64059 [00:32<8:24:44,  2.11it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 61/64059 [00:32<8:18:23,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 61/64059 [00:32<8:18:23,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 62/64059 [00:32<8:14:34,  2.16it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 62/64059 [00:32<8:14:34,  2.16it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 63/64059 [00:32<8:10:55,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 63/64059 [00:33<8:10:55,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 64/64059 [00:33<8:10:00,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 64/64059 [00:33<8:10:00,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 65/64059 [00:33<8:08:22,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 65/64059 [00:34<8:08:22,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 66/64059 [00:34<8:06:52,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 66/64059 [00:34<8:06:52,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 67/64059 [00:34<8:06:32,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 67/64059 [00:35<8:06:32,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 68/64059 [00:35<8:05:10,  2.20it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 68/64059 [00:35<8:05:10,  2.20it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 69/64059 [00:35<8:10:12,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 69/64059 [00:36<8:10:12,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 70/64059 [00:36<8:11:22,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 70/64059 [00:36<8:11:22,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 71/64059 [00:36<8:20:16,  2.13it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 71/64059 [00:37<8:20:16,  2.13it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 72/64059 [00:37<8:16:43,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 72/64059 [00:37<8:16:43,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 73/64059 [00:37<8:18:37,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 73/64059 [00:38<8:18:37,  2.14it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 74/64059 [00:38<8:24:28,  2.11it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 74/64059 [00:38<8:24:28,  2.11it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 75/64059 [00:38<8:21:36,  2.13it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 75/64059 [00:38<8:21:36,  2.13it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 76/64059 [00:38<8:16:50,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 76/64059 [00:39<8:16:50,  2.15it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 77/64059 [00:39<8:12:39,  2.16it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 77/64059 [00:39<8:12:39,  2.16it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 78/64059 [00:39<8:11:09,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 78/64059 [00:40<8:11:09,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 79/64059 [00:40<8:09:50,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 79/64059 [00:40<8:09:50,  2.18it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 80/64059 [00:40<8:10:20,  2.17it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 80/64059 [00:41<8:10:20,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 81/64059 [00:41<8:08:20,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 81/64059 [00:41<8:08:20,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 82/64059 [00:41<8:07:46,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 82/64059 [00:42<8:07:46,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 83/64059 [00:42<8:06:42,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 83/64059 [00:42<8:06:42,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 84/64059 [00:42<8:06:26,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 84/64059 [00:43<8:06:26,  2.19it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 85/64059 [00:43<8:08:15,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 85/64059 [00:43<8:08:15,  2.18it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 86/64059 [00:43<8:11:50,  2.17it/s, loss=6.95, lr=1e-5]Epoch 1/300:   0%|          | 86/64059 [00:44<8:11:50,  2.17it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 87/64059 [00:44<8:54:32,  1.99it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 87/64059 [00:44<8:54:32,  1.99it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 88/64059 [00:44<9:23:24,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 88/64059 [00:45<9:23:24,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 89/64059 [00:45<9:46:38,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 89/64059 [00:45<9:46:38,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 90/64059 [00:45<10:04:45,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 90/64059 [00:46<10:04:45,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 91/64059 [00:46<10:25:48,  1.70it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 91/64059 [00:47<10:25:48,  1.70it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 92/64059 [00:47<10:57:23,  1.62it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 92/64059 [00:47<10:57:23,  1.62it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 93/64059 [00:47<11:02:34,  1.61it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 93/64059 [00:48<11:02:34,  1.61it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 94/64059 [00:48<11:14:48,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 94/64059 [00:49<11:14:48,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 95/64059 [00:49<11:23:41,  1.56it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 95/64059 [00:49<11:23:41,  1.56it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 96/64059 [00:49<11:29:17,  1.55it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 96/64059 [00:50<11:29:17,  1.55it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 97/64059 [00:50<11:00:40,  1.61it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 97/64059 [00:50<11:00:40,  1.61it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 98/64059 [00:50<10:27:42,  1.70it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 98/64059 [00:51<10:27:42,  1.70it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 99/64059 [00:51<10:16:52,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 99/64059 [00:52<10:16:52,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 100/64059 [00:52<9:58:36,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 100/64059 [00:52<9:58:36,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 101/64059 [00:52<9:59:08,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 101/64059 [00:53<9:59:08,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 102/64059 [00:53<9:49:15,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 102/64059 [00:53<9:49:15,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 103/64059 [00:53<9:33:45,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 103/64059 [00:54<9:33:45,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 104/64059 [00:54<9:25:19,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 104/64059 [00:54<9:25:19,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 105/64059 [00:54<9:44:27,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 105/64059 [00:55<9:44:27,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 106/64059 [00:55<9:26:10,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 106/64059 [00:55<9:26:10,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 107/64059 [00:55<9:36:31,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 107/64059 [00:56<9:36:31,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 108/64059 [00:56<9:35:08,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 108/64059 [00:56<9:35:08,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 109/64059 [00:56<10:01:32,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 109/64059 [00:57<10:01:32,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 110/64059 [00:57<9:58:24,  1.78it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 110/64059 [00:58<9:58:24,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 111/64059 [00:58<10:01:38,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 111/64059 [00:58<10:01:38,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 112/64059 [00:58<10:00:45,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 112/64059 [00:59<10:00:45,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 113/64059 [00:59<9:48:34,  1.81it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 113/64059 [00:59<9:48:34,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 114/64059 [00:59<9:29:55,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 114/64059 [01:00<9:29:55,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 115/64059 [01:00<9:12:27,  1.93it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 115/64059 [01:00<9:12:27,  1.93it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 116/64059 [01:00<9:00:16,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 116/64059 [01:01<9:00:16,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 117/64059 [01:01<9:15:16,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 117/64059 [01:01<9:15:16,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 118/64059 [01:01<9:29:10,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 118/64059 [01:02<9:29:10,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 119/64059 [01:02<9:30:31,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 119/64059 [01:02<9:30:31,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 120/64059 [01:02<9:35:39,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 120/64059 [01:03<9:35:39,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 121/64059 [01:03<9:43:14,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 121/64059 [01:03<9:43:14,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 122/64059 [01:03<9:57:50,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 122/64059 [01:04<9:57:50,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 123/64059 [01:04<9:55:03,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 123/64059 [01:05<9:55:03,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 124/64059 [01:05<9:33:32,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 124/64059 [01:05<9:33:32,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 125/64059 [01:05<9:21:26,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 125/64059 [01:05<9:21:26,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 126/64059 [01:05<8:59:23,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 126/64059 [01:06<8:59:23,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 127/64059 [01:06<9:07:43,  1.95it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 127/64059 [01:07<9:07:43,  1.95it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 128/64059 [01:07<9:20:35,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 128/64059 [01:07<9:20:35,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 129/64059 [01:07<9:20:04,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 129/64059 [01:08<9:20:04,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 130/64059 [01:08<9:05:12,  1.95it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 130/64059 [01:08<9:05:12,  1.95it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 131/64059 [01:08<9:12:52,  1.93it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 131/64059 [01:09<9:12:52,  1.93it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 132/64059 [01:09<9:23:28,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 132/64059 [01:09<9:23:28,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 133/64059 [01:09<9:33:56,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 133/64059 [01:10<9:33:56,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 134/64059 [01:10<9:37:58,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 134/64059 [01:10<9:37:58,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 135/64059 [01:10<9:34:25,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 135/64059 [01:11<9:34:25,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 136/64059 [01:11<9:35:03,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 136/64059 [01:11<9:35:03,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 137/64059 [01:11<9:21:43,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 137/64059 [01:12<9:21:43,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 138/64059 [01:12<9:56:33,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 138/64059 [01:13<9:56:33,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 139/64059 [01:13<10:39:11,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 139/64059 [01:13<10:39:11,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 140/64059 [01:13<10:14:43,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 140/64059 [01:14<10:14:43,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 141/64059 [01:14<10:20:43,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 141/64059 [01:14<10:20:43,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 142/64059 [01:14<10:17:46,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 142/64059 [01:15<10:17:46,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 143/64059 [01:15<10:10:23,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 143/64059 [01:15<10:10:23,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 144/64059 [01:15<10:11:49,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 144/64059 [01:16<10:11:49,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 145/64059 [01:16<10:07:34,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 145/64059 [01:17<10:07:34,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 146/64059 [01:17<10:10:23,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 146/64059 [01:17<10:10:23,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 147/64059 [01:17<10:01:27,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 147/64059 [01:18<10:01:27,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 148/64059 [01:18<10:08:09,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 148/64059 [01:18<10:08:09,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 149/64059 [01:18<10:04:10,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 149/64059 [01:19<10:04:10,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 150/64059 [01:19<9:55:10,  1.79it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 150/64059 [01:19<9:55:10,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 151/64059 [01:19<9:59:28,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 151/64059 [01:20<9:59:28,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 152/64059 [01:20<10:13:10,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 152/64059 [01:21<10:13:10,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 153/64059 [01:21<10:09:31,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 153/64059 [01:21<10:09:31,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 154/64059 [01:21<10:11:24,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 154/64059 [01:22<10:11:24,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 155/64059 [01:22<9:52:41,  1.80it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 155/64059 [01:22<9:52:41,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 156/64059 [01:22<9:38:27,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 156/64059 [01:23<9:38:27,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 157/64059 [01:23<9:32:28,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 157/64059 [01:23<9:32:28,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 158/64059 [01:23<9:20:34,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 158/64059 [01:24<9:20:34,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 159/64059 [01:24<9:04:05,  1.96it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 159/64059 [01:24<9:04:05,  1.96it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 160/64059 [01:24<9:30:00,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 160/64059 [01:25<9:30:00,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 161/64059 [01:25<9:42:05,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 161/64059 [01:25<9:42:05,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 162/64059 [01:25<9:52:55,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 162/64059 [01:26<9:52:55,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 163/64059 [01:26<9:58:42,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 163/64059 [01:27<9:58:42,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 164/64059 [01:27<10:01:31,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 164/64059 [01:27<10:01:31,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 165/64059 [01:27<10:02:14,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 165/64059 [01:28<10:02:14,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 166/64059 [01:28<10:03:54,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 166/64059 [01:28<10:03:54,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 167/64059 [01:28<9:48:35,  1.81it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 167/64059 [01:29<9:48:35,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 168/64059 [01:29<9:30:18,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 168/64059 [01:29<9:30:18,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 169/64059 [01:29<9:18:05,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 169/64059 [01:30<9:18:05,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 170/64059 [01:30<9:19:04,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 170/64059 [01:30<9:19:04,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 171/64059 [01:30<9:21:58,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 171/64059 [01:31<9:21:58,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 172/64059 [01:31<9:31:05,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 172/64059 [01:31<9:31:05,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 173/64059 [01:31<9:21:57,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 173/64059 [01:32<9:21:57,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 174/64059 [01:32<9:09:50,  1.94it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 174/64059 [01:32<9:09:50,  1.94it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 175/64059 [01:32<8:58:14,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 175/64059 [01:33<8:58:14,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 176/64059 [01:33<9:01:25,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 176/64059 [01:33<9:01:25,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 177/64059 [01:33<9:28:07,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 177/64059 [01:34<9:28:07,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 178/64059 [01:34<9:46:36,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 178/64059 [01:35<9:46:36,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 179/64059 [01:35<9:50:52,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 179/64059 [01:35<9:50:52,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 180/64059 [01:35<9:33:17,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 180/64059 [01:36<9:33:17,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 181/64059 [01:36<9:22:31,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 181/64059 [01:36<9:22:31,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 182/64059 [01:36<9:05:48,  1.95it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 182/64059 [01:37<9:05:48,  1.95it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 183/64059 [01:37<8:56:31,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 183/64059 [01:37<8:56:31,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 184/64059 [01:37<9:18:44,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 184/64059 [01:38<9:18:44,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 185/64059 [01:38<9:29:20,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 185/64059 [01:38<9:29:20,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 186/64059 [01:38<9:36:56,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 186/64059 [01:39<9:36:56,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 187/64059 [01:39<9:43:48,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 187/64059 [01:39<9:43:48,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 188/64059 [01:39<9:51:09,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 188/64059 [01:40<9:51:09,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 189/64059 [01:40<9:32:51,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 189/64059 [01:40<9:32:51,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 190/64059 [01:40<9:39:07,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 190/64059 [01:41<9:39:07,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 191/64059 [01:41<9:47:36,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 191/64059 [01:42<9:47:36,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 192/64059 [01:42<9:44:24,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 192/64059 [01:42<9:44:24,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 193/64059 [01:42<9:36:00,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 193/64059 [01:43<9:36:00,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 194/64059 [01:43<9:37:25,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 194/64059 [01:43<9:37:25,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 195/64059 [01:43<9:16:56,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 195/64059 [01:44<9:16:56,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 196/64059 [01:44<9:11:00,  1.93it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 196/64059 [01:44<9:11:00,  1.93it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 197/64059 [01:44<8:57:02,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 197/64059 [01:45<8:57:02,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 198/64059 [01:45<8:54:04,  1.99it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 198/64059 [01:45<8:54:04,  1.99it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 199/64059 [01:45<9:14:17,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 199/64059 [01:46<9:14:17,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 200/64059 [01:46<9:27:01,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 200/64059 [01:46<9:27:01,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 201/64059 [01:46<9:34:40,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 201/64059 [01:47<9:34:40,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 202/64059 [01:47<9:40:26,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 202/64059 [01:47<9:40:26,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 203/64059 [01:47<9:46:22,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 203/64059 [01:48<9:46:22,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 204/64059 [01:48<9:50:30,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 204/64059 [01:49<9:50:30,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 205/64059 [01:49<9:57:59,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 205/64059 [01:49<9:57:59,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 206/64059 [01:49<9:59:04,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 206/64059 [01:50<9:59:04,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 207/64059 [01:50<10:31:30,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 207/64059 [01:50<10:31:30,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 208/64059 [01:50<10:11:09,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 208/64059 [01:51<10:11:09,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 209/64059 [01:51<10:14:08,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 209/64059 [01:51<10:14:08,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 210/64059 [01:51<10:14:46,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 210/64059 [01:52<10:14:46,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 211/64059 [01:52<9:56:18,  1.78it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 211/64059 [01:53<9:56:18,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 212/64059 [01:53<9:45:09,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 212/64059 [01:53<9:45:09,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 213/64059 [01:53<9:43:06,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 213/64059 [01:54<9:43:06,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 214/64059 [01:54<9:47:17,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 214/64059 [01:54<9:47:17,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 215/64059 [01:54<9:51:41,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 215/64059 [01:55<9:51:41,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 216/64059 [01:55<9:55:47,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 216/64059 [01:55<9:55:47,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 217/64059 [01:55<9:51:02,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 217/64059 [01:56<9:51:02,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 218/64059 [01:56<9:42:21,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 218/64059 [01:56<9:42:21,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 219/64059 [01:56<9:41:06,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 219/64059 [01:57<9:41:06,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 220/64059 [01:57<9:47:09,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 220/64059 [01:57<9:47:09,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 221/64059 [01:57<9:47:54,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 221/64059 [01:58<9:47:54,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 222/64059 [01:58<9:30:36,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 222/64059 [01:58<9:30:36,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 223/64059 [01:58<9:17:56,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 223/64059 [01:59<9:17:56,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 224/64059 [01:59<9:06:00,  1.95it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 224/64059 [01:59<9:06:00,  1.95it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 225/64059 [01:59<9:01:39,  1.96it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 225/64059 [02:00<9:01:39,  1.96it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 226/64059 [02:00<8:58:27,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 226/64059 [02:00<8:58:27,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 227/64059 [02:00<8:57:46,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 227/64059 [02:01<8:57:46,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 228/64059 [02:01<8:54:10,  1.99it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 228/64059 [02:01<8:54:10,  1.99it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 229/64059 [02:01<8:50:50,  2.00it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 229/64059 [02:02<8:50:50,  2.00it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 230/64059 [02:02<8:42:43,  2.04it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 230/64059 [02:02<8:42:43,  2.04it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 231/64059 [02:02<8:36:13,  2.06it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 231/64059 [02:03<8:36:13,  2.06it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 232/64059 [02:03<8:57:45,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 232/64059 [02:03<8:57:45,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 233/64059 [02:03<9:08:32,  1.94it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 233/64059 [02:04<9:08:32,  1.94it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 234/64059 [02:04<9:15:28,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 234/64059 [02:05<9:15:28,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 235/64059 [02:05<9:14:17,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 235/64059 [02:05<9:14:17,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 236/64059 [02:05<9:16:17,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 236/64059 [02:06<9:16:17,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 237/64059 [02:06<9:17:23,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 237/64059 [02:06<9:17:23,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 238/64059 [02:06<9:20:44,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 238/64059 [02:07<9:20:44,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 239/64059 [02:07<9:25:06,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 239/64059 [02:07<9:25:06,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 240/64059 [02:07<9:34:00,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 240/64059 [02:08<9:34:00,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 241/64059 [02:08<9:47:46,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 241/64059 [02:08<9:47:46,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 242/64059 [02:08<9:36:41,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 242/64059 [02:09<9:36:41,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 243/64059 [02:09<9:26:15,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 243/64059 [02:09<9:26:15,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 244/64059 [02:09<9:23:39,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 244/64059 [02:10<9:23:39,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 245/64059 [02:10<9:30:38,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 245/64059 [02:10<9:30:38,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 246/64059 [02:10<9:31:44,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 246/64059 [02:11<9:31:44,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 247/64059 [02:11<9:41:45,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 247/64059 [02:12<9:41:45,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 248/64059 [02:12<9:45:48,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 248/64059 [02:12<9:45:48,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 249/64059 [02:12<9:46:41,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 249/64059 [02:13<9:46:41,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 250/64059 [02:13<9:48:50,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 250/64059 [02:13<9:48:50,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 251/64059 [02:13<9:52:55,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 251/64059 [02:14<9:52:55,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 252/64059 [02:14<10:13:38,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 252/64059 [02:15<10:13:38,  1.73it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 253/64059 [02:15<10:40:57,  1.66it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 253/64059 [02:15<10:40:57,  1.66it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 254/64059 [02:15<10:47:25,  1.64it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 254/64059 [02:16<10:47:25,  1.64it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 255/64059 [02:16<10:22:43,  1.71it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 255/64059 [02:16<10:22:43,  1.71it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 256/64059 [02:16<9:42:23,  1.83it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 256/64059 [02:17<9:42:23,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 257/64059 [02:17<9:44:56,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 257/64059 [02:17<9:44:56,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 258/64059 [02:17<9:40:50,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 258/64059 [02:18<9:40:50,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 259/64059 [02:18<9:38:29,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 259/64059 [02:18<9:38:29,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 260/64059 [02:18<9:38:18,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 260/64059 [02:19<9:38:18,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 261/64059 [02:19<9:37:20,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 261/64059 [02:19<9:37:20,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 262/64059 [02:19<9:37:16,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 262/64059 [02:20<9:37:16,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 263/64059 [02:20<9:46:02,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 263/64059 [02:21<9:46:02,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 264/64059 [02:21<9:49:30,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 264/64059 [02:21<9:49:30,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 265/64059 [02:21<9:54:15,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 265/64059 [02:22<9:54:15,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 266/64059 [02:22<9:56:32,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 266/64059 [02:22<9:56:32,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 267/64059 [02:22<9:57:27,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 267/64059 [02:23<9:57:27,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 268/64059 [02:23<9:54:48,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 268/64059 [02:23<9:54:48,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 269/64059 [02:23<10:01:04,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 269/64059 [02:24<10:01:04,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 270/64059 [02:24<10:00:32,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 270/64059 [02:24<10:00:32,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 271/64059 [02:24<9:55:50,  1.78it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 271/64059 [02:25<9:55:50,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 272/64059 [02:25<9:54:51,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 272/64059 [02:26<9:54:51,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 273/64059 [02:26<9:44:58,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 273/64059 [02:26<9:44:58,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 274/64059 [02:26<9:45:56,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 274/64059 [02:27<9:45:56,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 275/64059 [02:27<9:43:54,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 275/64059 [02:27<9:43:54,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 276/64059 [02:27<9:46:28,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 276/64059 [02:28<9:46:28,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 277/64059 [02:28<9:49:50,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 277/64059 [02:28<9:49:50,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 278/64059 [02:28<9:50:03,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 278/64059 [02:29<9:50:03,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 279/64059 [02:29<9:58:16,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 279/64059 [02:30<9:58:16,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 280/64059 [02:30<10:01:18,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 280/64059 [02:30<10:01:18,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 281/64059 [02:30<9:59:12,  1.77it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 281/64059 [02:31<9:59:12,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 282/64059 [02:31<9:51:35,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 282/64059 [02:31<9:51:35,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 283/64059 [02:31<9:41:50,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 283/64059 [02:32<9:41:50,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 284/64059 [02:32<9:43:13,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 284/64059 [02:32<9:43:13,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 285/64059 [02:32<9:47:08,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 285/64059 [02:33<9:47:08,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 286/64059 [02:33<9:48:53,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 286/64059 [02:33<9:48:53,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 287/64059 [02:33<9:47:41,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 287/64059 [02:34<9:47:41,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 288/64059 [02:34<9:51:55,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 288/64059 [02:34<9:51:55,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 289/64059 [02:34<9:50:02,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 289/64059 [02:35<9:50:02,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 290/64059 [02:35<9:58:55,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 290/64059 [02:36<9:58:55,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 291/64059 [02:36<9:52:06,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 291/64059 [02:36<9:52:06,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 292/64059 [02:36<9:56:36,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 292/64059 [02:37<9:56:36,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 293/64059 [02:37<9:56:47,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 293/64059 [02:37<9:56:47,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 294/64059 [02:37<9:43:06,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 294/64059 [02:38<9:43:06,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 295/64059 [02:38<9:41:50,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 295/64059 [02:38<9:41:50,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 296/64059 [02:38<9:45:09,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 296/64059 [02:39<9:45:09,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 297/64059 [02:39<9:51:05,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 297/64059 [02:39<9:51:05,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 298/64059 [02:39<9:44:38,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 298/64059 [02:40<9:44:38,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 299/64059 [02:40<9:37:21,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 299/64059 [02:40<9:37:21,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 300/64059 [02:40<9:17:50,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 300/64059 [02:41<9:17:50,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 301/64059 [02:41<8:58:00,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 301/64059 [02:41<8:58:00,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 302/64059 [02:41<8:52:38,  1.99it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 302/64059 [02:42<8:52:38,  1.99it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 303/64059 [02:42<8:58:31,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 303/64059 [02:42<8:58:31,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 304/64059 [02:42<9:11:54,  1.93it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 304/64059 [02:43<9:11:54,  1.93it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 305/64059 [02:43<9:21:06,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 305/64059 [02:44<9:21:06,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 306/64059 [02:44<9:20:10,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 306/64059 [02:44<9:20:10,  1.90it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 307/64059 [02:44<9:27:15,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 307/64059 [02:45<9:27:15,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 308/64059 [02:45<9:44:08,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 308/64059 [02:45<9:44:08,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 309/64059 [02:45<9:47:11,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 309/64059 [02:46<9:47:11,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 310/64059 [02:46<10:07:25,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 310/64059 [02:46<10:07:25,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 311/64059 [02:46<10:06:20,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 311/64059 [02:47<10:06:20,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 312/64059 [02:47<10:17:27,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 312/64059 [02:48<10:17:27,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 313/64059 [02:48<10:44:03,  1.65it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 313/64059 [02:48<10:44:03,  1.65it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 314/64059 [02:48<10:46:44,  1.64it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 314/64059 [02:49<10:46:44,  1.64it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 315/64059 [02:49<10:29:32,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 315/64059 [02:49<10:29:32,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 316/64059 [02:49<9:57:04,  1.78it/s, loss=6.94, lr=1e-5] Epoch 1/300:   0%|          | 316/64059 [02:50<9:57:04,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 317/64059 [02:50<10:18:06,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 317/64059 [02:51<10:18:06,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 318/64059 [02:51<10:41:05,  1.66it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 318/64059 [02:51<10:41:05,  1.66it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 319/64059 [02:51<10:29:14,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 319/64059 [02:52<10:29:14,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 320/64059 [02:52<10:09:43,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   0%|          | 320/64059 [02:52<10:09:43,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 321/64059 [02:52<10:02:23,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 321/64059 [02:53<10:02:23,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 322/64059 [02:53<9:57:35,  1.78it/s, loss=6.94, lr=1e-5] Epoch 1/300:   1%|          | 322/64059 [02:53<9:57:35,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 323/64059 [02:53<9:52:33,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 323/64059 [02:54<9:52:33,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 324/64059 [02:54<10:07:32,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 324/64059 [02:55<10:07:32,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 325/64059 [02:55<10:23:30,  1.70it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 325/64059 [02:55<10:23:30,  1.70it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 326/64059 [02:55<10:34:07,  1.68it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 326/64059 [02:56<10:34:07,  1.68it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 327/64059 [02:56<10:56:12,  1.62it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 327/64059 [02:57<10:56:12,  1.62it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 328/64059 [02:57<11:09:53,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 328/64059 [02:57<11:09:53,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 329/64059 [02:57<11:05:58,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 329/64059 [02:58<11:05:58,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 330/64059 [02:58<11:10:58,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 330/64059 [02:59<11:10:58,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 331/64059 [02:59<11:32:09,  1.53it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 331/64059 [02:59<11:32:09,  1.53it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 332/64059 [02:59<10:51:43,  1.63it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 332/64059 [03:00<10:51:43,  1.63it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 333/64059 [03:00<10:34:06,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 333/64059 [03:00<10:34:06,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 334/64059 [03:00<10:17:33,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 334/64059 [03:01<10:17:33,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 335/64059 [03:01<10:29:29,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 335/64059 [03:01<10:29:29,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 336/64059 [03:01<10:31:08,  1.68it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 336/64059 [03:02<10:31:08,  1.68it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 337/64059 [03:02<10:07:49,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 337/64059 [03:02<10:07:49,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 338/64059 [03:02<9:57:59,  1.78it/s, loss=6.94, lr=1e-5] Epoch 1/300:   1%|          | 338/64059 [03:03<9:57:59,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 339/64059 [03:03<9:59:18,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 339/64059 [03:04<9:59:18,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 340/64059 [03:04<10:00:08,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 340/64059 [03:04<10:00:08,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 341/64059 [03:04<9:57:17,  1.78it/s, loss=6.94, lr=1e-5] Epoch 1/300:   1%|          | 341/64059 [03:05<9:57:17,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 342/64059 [03:05<10:02:05,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 342/64059 [03:05<10:02:05,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 343/64059 [03:05<10:01:48,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 343/64059 [03:06<10:01:48,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 344/64059 [03:06<9:58:32,  1.77it/s, loss=6.94, lr=1e-5] Epoch 1/300:   1%|          | 344/64059 [03:06<9:58:32,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 345/64059 [03:06<10:02:23,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 345/64059 [03:07<10:02:23,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 346/64059 [03:07<10:02:41,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 346/64059 [03:08<10:02:41,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 347/64059 [03:08<10:01:49,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 347/64059 [03:08<10:01:49,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 348/64059 [03:08<9:47:29,  1.81it/s, loss=6.94, lr=1e-5] Epoch 1/300:   1%|          | 348/64059 [03:09<9:47:29,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 349/64059 [03:09<9:48:11,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 349/64059 [03:09<9:48:11,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 350/64059 [03:09<9:53:07,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 350/64059 [03:10<9:53:07,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 351/64059 [03:10<9:56:47,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 351/64059 [03:10<9:56:47,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 352/64059 [03:10<10:21:32,  1.71it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 352/64059 [03:11<10:21:32,  1.71it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 353/64059 [03:11<10:00:44,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 353/64059 [03:11<10:00:44,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 354/64059 [03:11<9:47:08,  1.81it/s, loss=6.94, lr=1e-5] Epoch 1/300:   1%|          | 354/64059 [03:12<9:47:08,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 355/64059 [03:12<9:53:34,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 355/64059 [03:13<9:53:34,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 356/64059 [03:13<9:53:58,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 356/64059 [03:13<9:53:58,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 357/64059 [03:13<10:02:16,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 357/64059 [03:14<10:02:16,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 358/64059 [03:14<10:04:03,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 358/64059 [03:14<10:04:03,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 359/64059 [03:14<10:07:20,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 359/64059 [03:15<10:07:20,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 360/64059 [03:15<10:05:18,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 360/64059 [03:16<10:05:18,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 361/64059 [03:16<10:37:27,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 361/64059 [03:16<10:37:27,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 362/64059 [03:16<10:45:44,  1.64it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 362/64059 [03:17<10:45:44,  1.64it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 363/64059 [03:17<10:48:47,  1.64it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 363/64059 [03:17<10:48:47,  1.64it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 364/64059 [03:17<11:02:26,  1.60it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 364/64059 [03:18<11:02:26,  1.60it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 365/64059 [03:18<11:01:43,  1.60it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 365/64059 [03:19<11:01:43,  1.60it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 366/64059 [03:19<10:36:22,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 366/64059 [03:19<10:36:22,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 367/64059 [03:19<10:11:15,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 367/64059 [03:20<10:11:15,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 368/64059 [03:20<10:03:11,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 368/64059 [03:20<10:03:11,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 369/64059 [03:20<10:09:19,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 369/64059 [03:21<10:09:19,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 370/64059 [03:21<9:57:05,  1.78it/s, loss=6.94, lr=1e-5] Epoch 1/300:   1%|          | 370/64059 [03:21<9:57:05,  1.78it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 371/64059 [03:21<9:36:44,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 371/64059 [03:22<9:36:44,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 372/64059 [03:22<9:13:58,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 372/64059 [03:22<9:13:58,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 373/64059 [03:22<8:59:25,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 373/64059 [03:23<8:59:25,  1.97it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 374/64059 [03:23<9:23:25,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 374/64059 [03:23<9:23:25,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 375/64059 [03:23<9:28:13,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 375/64059 [03:24<9:28:13,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 376/64059 [03:24<9:37:34,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 376/64059 [03:24<9:37:34,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 377/64059 [03:24<9:33:59,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 377/64059 [03:25<9:33:59,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 378/64059 [03:25<9:37:33,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 378/64059 [03:26<9:37:33,  1.84it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 379/64059 [03:26<9:39:52,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 379/64059 [03:26<9:39:52,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 380/64059 [03:26<9:45:31,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 380/64059 [03:27<9:45:31,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 381/64059 [03:27<9:49:18,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 381/64059 [03:27<9:49:18,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 382/64059 [03:27<9:47:47,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 382/64059 [03:28<9:47:47,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 383/64059 [03:28<9:52:00,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 383/64059 [03:28<9:52:00,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 384/64059 [03:28<9:51:04,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 384/64059 [03:29<9:51:04,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 385/64059 [03:29<9:31:38,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 385/64059 [03:29<9:31:38,  1.86it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 386/64059 [03:29<9:14:29,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 386/64059 [03:30<9:14:29,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 387/64059 [03:30<8:56:36,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 387/64059 [03:30<8:56:36,  1.98it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 388/64059 [03:30<8:48:19,  2.01it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 388/64059 [03:31<8:48:19,  2.01it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 389/64059 [03:31<8:46:12,  2.02it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 389/64059 [03:31<8:46:12,  2.02it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 390/64059 [03:31<9:07:01,  1.94it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 390/64059 [03:32<9:07:01,  1.94it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 391/64059 [03:32<9:16:10,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 391/64059 [03:32<9:16:10,  1.91it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 392/64059 [03:32<9:13:54,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 392/64059 [03:33<9:13:54,  1.92it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 393/64059 [03:33<9:20:54,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 393/64059 [03:34<9:20:54,  1.89it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 394/64059 [03:34<9:53:11,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 394/64059 [03:34<9:53:11,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 395/64059 [03:34<9:44:54,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 395/64059 [03:35<9:44:54,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 396/64059 [03:35<9:40:39,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 396/64059 [03:35<9:40:39,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 397/64059 [03:35<9:42:41,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 397/64059 [03:36<9:42:41,  1.82it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 398/64059 [03:36<9:41:19,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 398/64059 [03:36<9:41:19,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 399/64059 [03:36<9:52:08,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 399/64059 [03:37<9:52:08,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 400/64059 [03:37<9:49:39,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 400/64059 [03:37<9:49:39,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 401/64059 [03:37<9:48:44,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 401/64059 [03:38<9:48:44,  1.80it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 402/64059 [03:38<9:34:43,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 402/64059 [03:38<9:34:43,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 403/64059 [03:38<9:28:31,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 403/64059 [03:39<9:28:31,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 404/64059 [03:39<9:34:45,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 404/64059 [03:40<9:34:45,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 405/64059 [03:40<9:38:36,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 405/64059 [03:40<9:38:36,  1.83it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 406/64059 [03:40<9:45:54,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 406/64059 [03:41<9:45:54,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 407/64059 [03:41<10:02:51,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 407/64059 [03:41<10:02:51,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 408/64059 [03:41<10:27:34,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 408/64059 [03:42<10:27:34,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 409/64059 [03:42<10:33:43,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 409/64059 [03:43<10:33:43,  1.67it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 410/64059 [03:43<10:40:19,  1.66it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 410/64059 [03:43<10:40:19,  1.66it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 411/64059 [03:43<10:59:08,  1.61it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 411/64059 [03:44<10:59:08,  1.61it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 412/64059 [03:44<11:07:28,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 412/64059 [03:45<11:07:28,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 413/64059 [03:45<11:08:57,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 413/64059 [03:45<11:08:57,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 414/64059 [03:45<11:10:08,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 414/64059 [03:46<11:10:08,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 415/64059 [03:46<11:17:59,  1.56it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 415/64059 [03:46<11:17:59,  1.56it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 416/64059 [03:46<11:09:49,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 416/64059 [03:47<11:09:49,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 417/64059 [03:47<11:08:47,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 417/64059 [03:48<11:08:47,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 418/64059 [03:48<11:20:18,  1.56it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 418/64059 [03:48<11:20:18,  1.56it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 419/64059 [03:48<11:11:50,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 419/64059 [03:49<11:11:50,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 420/64059 [03:49<11:05:14,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 420/64059 [03:50<11:05:14,  1.59it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 421/64059 [03:50<11:12:16,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 421/64059 [03:50<11:12:16,  1.58it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 422/64059 [03:50<11:04:47,  1.60it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 422/64059 [03:51<11:04:47,  1.60it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 423/64059 [03:51<10:37:59,  1.66it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 423/64059 [03:51<10:37:59,  1.66it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 424/64059 [03:51<10:27:56,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 424/64059 [03:52<10:27:56,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 425/64059 [03:52<10:28:31,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 425/64059 [03:53<10:28:31,  1.69it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 426/64059 [03:53<10:15:13,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 426/64059 [03:53<10:15:13,  1.72it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 427/64059 [03:53<10:06:50,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 427/64059 [03:54<10:06:50,  1.75it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 428/64059 [03:54<10:09:57,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 428/64059 [03:54<10:09:57,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 429/64059 [03:54<10:07:51,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 429/64059 [03:55<10:07:51,  1.74it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 430/64059 [03:55<10:00:56,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 430/64059 [03:55<10:00:56,  1.76it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 431/64059 [03:55<9:51:45,  1.79it/s, loss=6.94, lr=1e-5] Epoch 1/300:   1%|          | 431/64059 [03:56<9:51:45,  1.79it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 432/64059 [03:56<9:24:28,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 432/64059 [03:56<9:24:28,  1.88it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 433/64059 [03:56<9:25:39,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 433/64059 [03:57<9:25:39,  1.87it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 434/64059 [03:57<9:32:20,  1.85it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 434/64059 [03:57<9:32:20,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 435/64059 [03:57<9:47:11,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 435/64059 [03:58<9:47:11,  1.81it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 436/64059 [03:58<9:57:37,  1.77it/s, loss=6.94, lr=1e-5]Epoch 1/300:   1%|          | 436/64059 [03:59<9:57:37,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 437/64059 [03:59<9:37:20,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 437/64059 [03:59<9:37:20,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 438/64059 [03:59<9:20:19,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 438/64059 [04:00<9:20:19,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 439/64059 [04:00<9:15:25,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 439/64059 [04:00<9:15:25,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 440/64059 [04:00<9:06:55,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 440/64059 [04:01<9:06:55,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 441/64059 [04:01<9:03:18,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 441/64059 [04:01<9:03:18,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 442/64059 [04:01<9:01:18,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 442/64059 [04:02<9:01:18,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 443/64059 [04:02<9:03:27,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 443/64059 [04:02<9:03:27,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 444/64059 [04:02<9:09:04,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 444/64059 [04:03<9:09:04,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 445/64059 [04:03<9:21:05,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 445/64059 [04:03<9:21:05,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 446/64059 [04:03<9:30:35,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 446/64059 [04:04<9:30:35,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 447/64059 [04:04<9:41:55,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 447/64059 [04:04<9:41:55,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 448/64059 [04:04<9:33:55,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 448/64059 [04:05<9:33:55,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 449/64059 [04:05<9:25:21,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 449/64059 [04:05<9:25:21,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 450/64059 [04:05<9:22:25,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 450/64059 [04:06<9:22:25,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 451/64059 [04:06<9:29:42,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 451/64059 [04:06<9:29:42,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 452/64059 [04:06<9:34:32,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 452/64059 [04:07<9:34:32,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 453/64059 [04:07<9:31:59,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 453/64059 [04:08<9:31:59,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 454/64059 [04:08<9:14:00,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 454/64059 [04:08<9:14:00,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 455/64059 [04:08<9:04:22,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 455/64059 [04:08<9:04:22,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 456/64059 [04:08<8:49:17,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 456/64059 [04:09<8:49:17,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 457/64059 [04:09<8:52:06,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 457/64059 [04:10<8:52:06,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 458/64059 [04:10<9:04:56,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 458/64059 [04:10<9:04:56,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 459/64059 [04:10<9:13:30,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 459/64059 [04:11<9:13:30,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 460/64059 [04:11<9:52:38,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 460/64059 [04:11<9:52:38,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 461/64059 [04:11<10:14:05,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 461/64059 [04:12<10:14:05,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 462/64059 [04:12<10:26:23,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 462/64059 [04:13<10:26:23,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 463/64059 [04:13<10:42:48,  1.65it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 463/64059 [04:13<10:42:48,  1.65it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 464/64059 [04:13<11:00:16,  1.61it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 464/64059 [04:14<11:00:16,  1.61it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 465/64059 [04:14<10:25:06,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 465/64059 [04:14<10:25:06,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 466/64059 [04:14<10:17:00,  1.72it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 466/64059 [04:15<10:17:00,  1.72it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 467/64059 [04:15<10:03:19,  1.76it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 467/64059 [04:15<10:03:19,  1.76it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 468/64059 [04:15<10:02:37,  1.76it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 468/64059 [04:16<10:02:37,  1.76it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 469/64059 [04:16<9:56:54,  1.78it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 469/64059 [04:17<9:56:54,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 470/64059 [04:17<9:57:57,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 470/64059 [04:17<9:57:57,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 471/64059 [04:17<9:51:03,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 471/64059 [04:18<9:51:03,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 472/64059 [04:18<9:44:09,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 472/64059 [04:18<9:44:09,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 473/64059 [04:18<9:35:43,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 473/64059 [04:19<9:35:43,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 474/64059 [04:19<9:29:31,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 474/64059 [04:19<9:29:31,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 475/64059 [04:19<9:36:11,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 475/64059 [04:20<9:36:11,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 476/64059 [04:20<9:40:56,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 476/64059 [04:20<9:40:56,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 477/64059 [04:20<9:39:30,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 477/64059 [04:21<9:39:30,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 478/64059 [04:21<9:30:44,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 478/64059 [04:21<9:30:44,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 479/64059 [04:21<9:20:18,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 479/64059 [04:22<9:20:18,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 480/64059 [04:22<9:33:01,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 480/64059 [04:23<9:33:01,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 481/64059 [04:23<10:12:04,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 481/64059 [04:23<10:12:04,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 482/64059 [04:23<10:29:07,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 482/64059 [04:24<10:29:07,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 483/64059 [04:24<10:41:24,  1.65it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 483/64059 [04:25<10:41:24,  1.65it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 484/64059 [04:25<10:54:22,  1.62it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 484/64059 [04:25<10:54:22,  1.62it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 485/64059 [04:25<10:57:15,  1.61it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 485/64059 [04:26<10:57:15,  1.61it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 486/64059 [04:26<10:51:33,  1.63it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 486/64059 [04:26<10:51:33,  1.63it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 487/64059 [04:26<10:22:25,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 487/64059 [04:27<10:22:25,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 488/64059 [04:27<9:54:42,  1.78it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 488/64059 [04:27<9:54:42,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 489/64059 [04:27<9:54:59,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 489/64059 [04:28<9:54:59,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 490/64059 [04:28<9:53:59,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 490/64059 [04:28<9:53:59,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 491/64059 [04:28<9:55:13,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 491/64059 [04:29<9:55:13,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 492/64059 [04:29<9:47:07,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 492/64059 [04:29<9:47:07,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 493/64059 [04:29<9:30:53,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 493/64059 [04:30<9:30:53,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 494/64059 [04:30<9:16:38,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 494/64059 [04:30<9:16:38,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 495/64059 [04:30<9:03:35,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 495/64059 [04:31<9:03:35,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 496/64059 [04:31<8:49:59,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 496/64059 [04:31<8:49:59,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 497/64059 [04:31<9:08:54,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 497/64059 [04:32<9:08:54,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 498/64059 [04:32<9:22:44,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 498/64059 [04:33<9:22:44,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 499/64059 [04:33<9:28:31,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 499/64059 [04:33<9:28:31,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 500/64059 [04:33<9:27:06,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 500/64059 [04:34<9:27:06,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 501/64059 [04:34<9:30:11,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 501/64059 [04:34<9:30:11,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 502/64059 [04:34<9:38:43,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 502/64059 [04:35<9:38:43,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 503/64059 [04:35<9:39:13,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 503/64059 [04:35<9:39:13,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 504/64059 [04:35<9:36:44,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 504/64059 [04:36<9:36:44,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 505/64059 [04:36<9:57:10,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 505/64059 [04:37<9:57:10,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 506/64059 [04:37<10:28:45,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 506/64059 [04:37<10:28:45,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 507/64059 [04:37<9:58:22,  1.77it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 507/64059 [04:38<9:58:22,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 508/64059 [04:38<10:06:17,  1.75it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 508/64059 [04:38<10:06:17,  1.75it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 509/64059 [04:38<9:58:35,  1.77it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 509/64059 [04:39<9:58:35,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 510/64059 [04:39<10:07:30,  1.74it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 510/64059 [04:39<10:07:30,  1.74it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 511/64059 [04:39<9:50:18,  1.79it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 511/64059 [04:40<9:50:18,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 512/64059 [04:40<9:33:41,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 512/64059 [04:40<9:33:41,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 513/64059 [04:40<9:29:05,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 513/64059 [04:41<9:29:05,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 514/64059 [04:41<9:27:29,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 514/64059 [04:41<9:27:29,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 515/64059 [04:41<9:17:36,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 515/64059 [04:42<9:17:36,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 516/64059 [04:42<9:17:31,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 516/64059 [04:42<9:17:31,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 517/64059 [04:42<9:09:42,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 517/64059 [04:43<9:09:42,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 518/64059 [04:43<9:03:00,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 518/64059 [04:43<9:03:00,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 519/64059 [04:43<9:00:05,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 519/64059 [04:44<9:00:05,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 520/64059 [04:44<8:55:45,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 520/64059 [04:44<8:55:45,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 521/64059 [04:44<8:55:07,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 521/64059 [04:45<8:55:07,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 522/64059 [04:45<8:55:01,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 522/64059 [04:45<8:55:01,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 523/64059 [04:45<8:49:30,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 523/64059 [04:46<8:49:30,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 524/64059 [04:46<8:51:12,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 524/64059 [04:46<8:51:12,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 525/64059 [04:46<8:48:37,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 525/64059 [04:47<8:48:37,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 526/64059 [04:47<8:46:32,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 526/64059 [04:47<8:46:32,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 527/64059 [04:47<8:39:13,  2.04it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 527/64059 [04:48<8:39:13,  2.04it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 528/64059 [04:48<8:32:19,  2.07it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 528/64059 [04:48<8:32:19,  2.07it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 529/64059 [04:48<8:31:55,  2.07it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 529/64059 [04:49<8:31:55,  2.07it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 530/64059 [04:49<8:36:23,  2.05it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 530/64059 [04:49<8:36:23,  2.05it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 531/64059 [04:49<8:53:26,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 531/64059 [04:50<8:53:26,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 532/64059 [04:50<9:15:09,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 532/64059 [04:51<9:15:09,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 533/64059 [04:51<9:21:21,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 533/64059 [04:51<9:21:21,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 534/64059 [04:51<9:19:30,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 534/64059 [04:52<9:19:30,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 535/64059 [04:52<9:30:49,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 535/64059 [04:52<9:30:49,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 536/64059 [04:52<9:23:54,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 536/64059 [04:53<9:23:54,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 537/64059 [04:53<9:12:58,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 537/64059 [04:53<9:12:58,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 538/64059 [04:53<8:59:13,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 538/64059 [04:54<8:59:13,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 539/64059 [04:54<8:47:29,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 539/64059 [04:54<8:47:29,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 540/64059 [04:54<9:32:40,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 540/64059 [04:55<9:32:40,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 541/64059 [04:55<9:36:27,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 541/64059 [04:55<9:36:27,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 542/64059 [04:55<9:41:55,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 542/64059 [04:56<9:41:55,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 543/64059 [04:56<9:39:09,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 543/64059 [04:56<9:39:09,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 544/64059 [04:56<10:01:23,  1.76it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 544/64059 [04:57<10:01:23,  1.76it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 545/64059 [04:57<10:23:40,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 545/64059 [04:58<10:23:40,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 546/64059 [04:58<10:26:24,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 546/64059 [04:58<10:26:24,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 547/64059 [04:58<10:11:07,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 547/64059 [04:59<10:11:07,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 548/64059 [04:59<9:51:54,  1.79it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 548/64059 [04:59<9:51:54,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 549/64059 [04:59<9:23:43,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 549/64059 [05:00<9:23:43,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 550/64059 [05:00<9:02:21,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 550/64059 [05:00<9:02:21,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 551/64059 [05:00<8:49:23,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 551/64059 [05:01<8:49:23,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 552/64059 [05:01<9:26:12,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 552/64059 [05:01<9:26:12,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 553/64059 [05:01<9:17:44,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 553/64059 [05:02<9:17:44,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 554/64059 [05:02<9:26:32,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 554/64059 [05:02<9:26:32,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 555/64059 [05:02<9:54:28,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 555/64059 [05:03<9:54:28,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 556/64059 [05:03<9:52:49,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 556/64059 [05:04<9:52:49,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 557/64059 [05:04<9:33:00,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 557/64059 [05:04<9:33:00,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 558/64059 [05:04<9:38:25,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 558/64059 [05:05<9:38:25,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 559/64059 [05:05<9:36:39,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 559/64059 [05:05<9:36:39,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 560/64059 [05:05<9:27:50,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 560/64059 [05:06<9:27:50,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 561/64059 [05:06<9:13:58,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 561/64059 [05:06<9:13:58,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 562/64059 [05:06<9:03:42,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 562/64059 [05:07<9:03:42,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 563/64059 [05:07<8:48:25,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 563/64059 [05:07<8:48:25,  2.00it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 564/64059 [05:07<9:15:17,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 564/64059 [05:08<9:15:17,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 565/64059 [05:08<9:47:42,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 565/64059 [05:08<9:47:42,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 566/64059 [05:08<10:12:46,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 566/64059 [05:09<10:12:46,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 567/64059 [05:09<9:52:38,  1.79it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 567/64059 [05:09<9:52:38,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 568/64059 [05:09<9:35:55,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 568/64059 [05:10<9:35:55,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 569/64059 [05:10<9:39:43,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 569/64059 [05:11<9:39:43,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 570/64059 [05:11<9:31:11,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 570/64059 [05:11<9:31:11,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 571/64059 [05:11<9:28:00,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 571/64059 [05:12<9:28:00,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 572/64059 [05:12<9:29:49,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 572/64059 [05:12<9:29:49,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 573/64059 [05:12<9:37:05,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 573/64059 [05:13<9:37:05,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 574/64059 [05:13<9:28:40,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 574/64059 [05:13<9:28:40,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 575/64059 [05:13<9:12:46,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 575/64059 [05:14<9:12:46,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 576/64059 [05:14<9:01:33,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 576/64059 [05:14<9:01:33,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 577/64059 [05:14<8:51:30,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 577/64059 [05:15<8:51:30,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 578/64059 [05:15<8:52:43,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 578/64059 [05:15<8:52:43,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 579/64059 [05:15<8:55:38,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 579/64059 [05:16<8:55:38,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 580/64059 [05:16<9:14:16,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 580/64059 [05:16<9:14:16,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 581/64059 [05:16<9:09:12,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 581/64059 [05:17<9:09:12,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 582/64059 [05:17<9:12:21,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 582/64059 [05:17<9:12:21,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 583/64059 [05:17<9:13:13,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 583/64059 [05:18<9:13:13,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 584/64059 [05:18<9:21:09,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 584/64059 [05:18<9:21:09,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 585/64059 [05:18<9:21:26,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 585/64059 [05:19<9:21:26,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 586/64059 [05:19<9:27:54,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 586/64059 [05:19<9:27:54,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 587/64059 [05:19<9:25:07,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 587/64059 [05:20<9:25:07,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 588/64059 [05:20<9:31:42,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 588/64059 [05:21<9:31:42,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 589/64059 [05:21<9:18:49,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 589/64059 [05:21<9:18:49,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 590/64059 [05:21<9:14:23,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 590/64059 [05:22<9:14:23,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 591/64059 [05:22<9:21:53,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 591/64059 [05:22<9:21:53,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 592/64059 [05:22<10:08:11,  1.74it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 592/64059 [05:23<10:08:11,  1.74it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 593/64059 [05:23<10:27:36,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 593/64059 [05:24<10:27:36,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 594/64059 [05:24<10:35:31,  1.66it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 594/64059 [05:24<10:35:31,  1.66it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 595/64059 [05:24<10:44:04,  1.64it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 595/64059 [05:25<10:44:04,  1.64it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 596/64059 [05:25<11:02:05,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 596/64059 [05:25<11:02:05,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 597/64059 [05:25<10:48:35,  1.63it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 597/64059 [05:26<10:48:35,  1.63it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 598/64059 [05:26<10:33:44,  1.67it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 598/64059 [05:27<10:33:44,  1.67it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 599/64059 [05:27<10:38:23,  1.66it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 599/64059 [05:27<10:38:23,  1.66it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 600/64059 [05:27<10:14:14,  1.72it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 600/64059 [05:28<10:14:14,  1.72it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 601/64059 [05:28<9:38:19,  1.83it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 601/64059 [05:28<9:38:19,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 602/64059 [05:28<9:13:11,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 602/64059 [05:29<9:13:11,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 603/64059 [05:29<9:32:34,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 603/64059 [05:29<9:32:34,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 604/64059 [05:29<9:38:16,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 604/64059 [05:30<9:38:16,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 605/64059 [05:30<9:36:27,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 605/64059 [05:30<9:36:27,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 606/64059 [05:30<9:16:58,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 606/64059 [05:31<9:16:58,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 607/64059 [05:31<9:12:24,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 607/64059 [05:31<9:12:24,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 608/64059 [05:31<8:54:28,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 608/64059 [05:32<8:54:28,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 609/64059 [05:32<9:05:53,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 609/64059 [05:32<9:05:53,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 610/64059 [05:32<9:23:00,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 610/64059 [05:33<9:23:00,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 611/64059 [05:33<9:17:52,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 611/64059 [05:33<9:17:52,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 612/64059 [05:33<8:59:51,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 612/64059 [05:34<8:59:51,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 613/64059 [05:34<8:45:08,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 613/64059 [05:34<8:45:08,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 614/64059 [05:34<8:36:36,  2.05it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 614/64059 [05:35<8:36:36,  2.05it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 615/64059 [05:35<9:04:28,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 615/64059 [05:35<9:04:28,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 616/64059 [05:35<9:01:12,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 616/64059 [05:36<9:01:12,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 617/64059 [05:36<9:10:43,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 617/64059 [05:36<9:10:43,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 618/64059 [05:36<9:13:01,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 618/64059 [05:37<9:13:01,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 619/64059 [05:37<9:27:48,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 619/64059 [05:37<9:27:48,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 620/64059 [05:37<9:29:23,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 620/64059 [05:38<9:29:23,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 621/64059 [05:38<9:37:26,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 621/64059 [05:39<9:37:26,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 622/64059 [05:39<9:38:04,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 622/64059 [05:39<9:38:04,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 623/64059 [05:39<9:30:01,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 623/64059 [05:40<9:30:01,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 624/64059 [05:40<9:33:52,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 624/64059 [05:40<9:33:52,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 625/64059 [05:40<9:48:24,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 625/64059 [05:41<9:48:24,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 626/64059 [05:41<9:45:58,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 626/64059 [05:41<9:45:58,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 627/64059 [05:41<9:49:37,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 627/64059 [05:42<9:49:37,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 628/64059 [05:42<9:26:41,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 628/64059 [05:42<9:26:41,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 629/64059 [05:42<9:14:15,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 629/64059 [05:43<9:14:15,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 630/64059 [05:43<8:56:18,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 630/64059 [05:43<8:56:18,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 631/64059 [05:43<9:04:30,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 631/64059 [05:44<9:04:30,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 632/64059 [05:44<9:39:58,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 632/64059 [05:45<9:39:58,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 633/64059 [05:45<9:44:48,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 633/64059 [05:45<9:44:48,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 634/64059 [05:45<9:36:17,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 634/64059 [05:46<9:36:17,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 635/64059 [05:46<9:32:29,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 635/64059 [05:46<9:32:29,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 636/64059 [05:46<9:42:07,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 636/64059 [05:47<9:42:07,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 637/64059 [05:47<9:40:38,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 637/64059 [05:47<9:40:38,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 638/64059 [05:47<9:41:30,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 638/64059 [05:48<9:41:30,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 639/64059 [05:48<9:31:23,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 639/64059 [05:48<9:31:23,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 640/64059 [05:48<9:28:16,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 640/64059 [05:49<9:28:16,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 641/64059 [05:49<9:27:29,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 641/64059 [05:49<9:27:29,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 642/64059 [05:49<9:36:08,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 642/64059 [05:50<9:36:08,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 643/64059 [05:50<9:32:36,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 643/64059 [05:51<9:32:36,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 644/64059 [05:51<9:37:52,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 644/64059 [05:51<9:37:52,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 645/64059 [05:51<9:33:34,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 645/64059 [05:52<9:33:34,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 646/64059 [05:52<9:20:32,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 646/64059 [05:52<9:20:32,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 647/64059 [05:52<9:07:26,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 647/64059 [05:53<9:07:26,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 648/64059 [05:53<8:51:15,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 648/64059 [05:53<8:51:15,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 649/64059 [05:53<8:42:25,  2.02it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 649/64059 [05:53<8:42:25,  2.02it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 650/64059 [05:53<8:42:10,  2.02it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 650/64059 [05:54<8:42:10,  2.02it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 651/64059 [05:54<8:56:27,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 651/64059 [05:55<8:56:27,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 652/64059 [05:55<9:10:50,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 652/64059 [05:55<9:10:50,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 653/64059 [05:55<9:19:08,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 653/64059 [05:56<9:19:08,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 654/64059 [05:56<9:21:35,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 654/64059 [05:56<9:21:35,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 655/64059 [05:56<9:05:39,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 655/64059 [05:57<9:05:39,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 656/64059 [05:57<8:58:19,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 656/64059 [05:57<8:58:19,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 657/64059 [05:57<8:46:39,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 657/64059 [05:58<8:46:39,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 658/64059 [05:58<8:56:13,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 658/64059 [05:58<8:56:13,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 659/64059 [05:58<9:07:00,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 659/64059 [05:59<9:07:00,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 660/64059 [05:59<9:23:20,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 660/64059 [05:59<9:23:20,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 661/64059 [05:59<9:19:05,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 661/64059 [06:00<9:19:05,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 662/64059 [06:00<9:20:46,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 662/64059 [06:00<9:20:46,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 663/64059 [06:00<9:06:26,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 663/64059 [06:01<9:06:26,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 664/64059 [06:01<9:00:34,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 664/64059 [06:01<9:00:34,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 665/64059 [06:01<8:44:25,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 665/64059 [06:02<8:44:25,  2.01it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 666/64059 [06:02<9:18:15,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 666/64059 [06:02<9:18:15,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 667/64059 [06:02<9:32:05,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 667/64059 [06:03<9:32:05,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 668/64059 [06:03<9:55:20,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 668/64059 [06:04<9:55:20,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 669/64059 [06:04<10:25:58,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 669/64059 [06:04<10:25:58,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 670/64059 [06:04<10:43:00,  1.64it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 670/64059 [06:05<10:43:00,  1.64it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 671/64059 [06:05<10:42:59,  1.64it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 671/64059 [06:06<10:42:59,  1.64it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 672/64059 [06:06<10:55:39,  1.61it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 672/64059 [06:06<10:55:39,  1.61it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 673/64059 [06:06<11:13:36,  1.57it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 673/64059 [06:07<11:13:36,  1.57it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 674/64059 [06:07<10:36:23,  1.66it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 674/64059 [06:07<10:36:23,  1.66it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 675/64059 [06:07<10:26:56,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 675/64059 [06:08<10:26:56,  1.69it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 676/64059 [06:08<10:28:39,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 676/64059 [06:09<10:28:39,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 677/64059 [06:09<10:30:22,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 677/64059 [06:09<10:30:22,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 678/64059 [06:09<10:40:14,  1.65it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 678/64059 [06:10<10:40:14,  1.65it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 679/64059 [06:10<10:40:09,  1.65it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 679/64059 [06:10<10:40:09,  1.65it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 680/64059 [06:10<10:04:19,  1.75it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 680/64059 [06:11<10:04:19,  1.75it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 681/64059 [06:11<10:06:22,  1.74it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 681/64059 [06:11<10:06:22,  1.74it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 682/64059 [06:11<9:48:16,  1.80it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 682/64059 [06:12<9:48:16,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 683/64059 [06:12<9:45:12,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 683/64059 [06:12<9:45:12,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 684/64059 [06:12<9:43:45,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 684/64059 [06:13<9:43:45,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 685/64059 [06:13<9:47:41,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 685/64059 [06:14<9:47:41,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 686/64059 [06:14<9:45:37,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 686/64059 [06:14<9:45:37,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 687/64059 [06:14<9:40:52,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 687/64059 [06:15<9:40:52,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 688/64059 [06:15<10:14:02,  1.72it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 688/64059 [06:15<10:14:02,  1.72it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 689/64059 [06:15<9:55:20,  1.77it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 689/64059 [06:16<9:55:20,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 690/64059 [06:16<9:55:55,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 690/64059 [06:16<9:55:55,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 691/64059 [06:16<9:53:09,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 691/64059 [06:17<9:53:09,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 692/64059 [06:17<9:44:23,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 692/64059 [06:17<9:44:23,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 693/64059 [06:17<9:34:31,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 693/64059 [06:18<9:34:31,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 694/64059 [06:18<9:29:34,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 694/64059 [06:19<9:29:34,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 695/64059 [06:19<9:32:31,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 695/64059 [06:19<9:32:31,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 696/64059 [06:19<9:35:59,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 696/64059 [06:20<9:35:59,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 697/64059 [06:20<9:18:29,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 697/64059 [06:20<9:18:29,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 698/64059 [06:20<9:22:52,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 698/64059 [06:21<9:22:52,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 699/64059 [06:21<9:36:18,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 699/64059 [06:21<9:36:18,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 700/64059 [06:21<9:22:52,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 700/64059 [06:22<9:22:52,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 701/64059 [06:22<9:12:24,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 701/64059 [06:22<9:12:24,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 702/64059 [06:22<9:08:33,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 702/64059 [06:23<9:08:33,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 703/64059 [06:23<9:03:57,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 703/64059 [06:23<9:03:57,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 704/64059 [06:23<9:03:04,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 704/64059 [06:24<9:03:04,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 705/64059 [06:24<9:05:59,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 705/64059 [06:24<9:05:59,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 706/64059 [06:24<9:08:53,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 706/64059 [06:25<9:08:53,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 707/64059 [06:25<9:18:03,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 707/64059 [06:25<9:18:03,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 708/64059 [06:25<9:04:49,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 708/64059 [06:26<9:04:49,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 709/64059 [06:26<9:05:43,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 709/64059 [06:26<9:05:43,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 710/64059 [06:26<9:11:20,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 710/64059 [06:27<9:11:20,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 711/64059 [06:27<9:23:43,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 711/64059 [06:27<9:23:43,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 712/64059 [06:27<9:26:26,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 712/64059 [06:28<9:26:26,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 713/64059 [06:28<9:36:21,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 713/64059 [06:29<9:36:21,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 714/64059 [06:29<9:38:35,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 714/64059 [06:29<9:38:35,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 715/64059 [06:29<9:48:29,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 715/64059 [06:30<9:48:29,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 716/64059 [06:30<9:46:38,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 716/64059 [06:30<9:46:38,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 717/64059 [06:30<9:43:17,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 717/64059 [06:31<9:43:17,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 718/64059 [06:31<9:26:37,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 718/64059 [06:31<9:26:37,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 719/64059 [06:31<9:22:27,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 719/64059 [06:32<9:22:27,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 720/64059 [06:32<9:05:32,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 720/64059 [06:32<9:05:32,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 721/64059 [06:32<9:03:40,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 721/64059 [06:33<9:03:40,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 722/64059 [06:33<9:09:42,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 722/64059 [06:33<9:09:42,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 723/64059 [06:33<9:09:50,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 723/64059 [06:34<9:09:50,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 724/64059 [06:34<9:17:38,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 724/64059 [06:34<9:17:38,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 725/64059 [06:34<9:28:29,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 725/64059 [06:35<9:28:29,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 726/64059 [06:35<9:23:18,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 726/64059 [06:36<9:23:18,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 727/64059 [06:36<9:23:07,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 727/64059 [06:36<9:23:07,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 728/64059 [06:36<9:25:50,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 728/64059 [06:37<9:25:50,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 729/64059 [06:37<9:34:21,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 729/64059 [06:37<9:34:21,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 730/64059 [06:37<10:07:08,  1.74it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 730/64059 [06:38<10:07:08,  1.74it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 731/64059 [06:38<9:50:07,  1.79it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|          | 731/64059 [06:38<9:50:07,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 732/64059 [06:38<9:55:52,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 732/64059 [06:39<9:55:52,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 733/64059 [06:39<9:54:58,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 733/64059 [06:39<9:54:58,  1.77it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 734/64059 [06:39<9:40:52,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 734/64059 [06:40<9:40:52,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 735/64059 [06:40<9:14:47,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 735/64059 [06:40<9:14:47,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 736/64059 [06:40<9:09:27,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 736/64059 [06:41<9:09:27,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 737/64059 [06:41<9:06:53,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 737/64059 [06:41<9:06:53,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 738/64059 [06:41<9:02:31,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 738/64059 [06:42<9:02:31,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 739/64059 [06:42<8:59:40,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 739/64059 [06:42<8:59:40,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 740/64059 [06:42<9:01:33,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 740/64059 [06:43<9:01:33,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 741/64059 [06:43<9:03:01,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 741/64059 [06:43<9:03:01,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 742/64059 [06:43<8:57:12,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 742/64059 [06:44<8:57:12,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 743/64059 [06:44<8:55:22,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 743/64059 [06:44<8:55:22,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 744/64059 [06:44<8:53:16,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 744/64059 [06:45<8:53:16,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 745/64059 [06:45<9:07:28,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 745/64059 [06:46<9:07:28,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 746/64059 [06:46<9:27:00,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 746/64059 [06:46<9:27:00,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 747/64059 [06:46<9:18:39,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 747/64059 [06:47<9:18:39,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 748/64059 [06:47<9:04:38,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 748/64059 [06:47<9:04:38,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 749/64059 [06:47<8:50:57,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 749/64059 [06:48<8:50:57,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 750/64059 [06:48<8:40:27,  2.03it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 750/64059 [06:48<8:40:27,  2.03it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 751/64059 [06:48<8:33:03,  2.06it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 751/64059 [06:49<8:33:03,  2.06it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 752/64059 [06:49<8:42:35,  2.02it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 752/64059 [06:49<8:42:35,  2.02it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 753/64059 [06:49<8:49:18,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 753/64059 [06:50<8:49:18,  1.99it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 754/64059 [06:50<8:59:29,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 754/64059 [06:50<8:59:29,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 755/64059 [06:50<9:11:14,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 755/64059 [06:51<9:11:14,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 756/64059 [06:51<9:19:30,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 756/64059 [06:51<9:19:30,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 757/64059 [06:51<9:24:46,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 757/64059 [06:52<9:24:46,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 758/64059 [06:52<9:27:10,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 758/64059 [06:52<9:27:10,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 759/64059 [06:52<9:27:40,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 759/64059 [06:53<9:27:40,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 760/64059 [06:53<9:23:50,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 760/64059 [06:53<9:23:50,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 761/64059 [06:53<9:24:40,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 761/64059 [06:54<9:24:40,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 762/64059 [06:54<9:36:38,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 762/64059 [06:55<9:36:38,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 763/64059 [06:55<9:39:16,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 763/64059 [06:55<9:39:16,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 764/64059 [06:55<9:41:02,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 764/64059 [06:56<9:41:02,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 765/64059 [06:56<9:30:25,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 765/64059 [06:56<9:30:25,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 766/64059 [06:56<9:26:50,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 766/64059 [06:57<9:26:50,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 767/64059 [06:57<9:24:26,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 767/64059 [06:57<9:24:26,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 768/64059 [06:57<9:26:14,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 768/64059 [06:58<9:26:14,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 769/64059 [06:58<9:26:30,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 769/64059 [06:58<9:26:30,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 770/64059 [06:58<9:36:11,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 770/64059 [06:59<9:36:11,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 771/64059 [06:59<9:36:05,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 771/64059 [06:59<9:36:05,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 772/64059 [06:59<9:41:05,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 772/64059 [07:00<9:41:05,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 773/64059 [07:00<9:37:54,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 773/64059 [07:00<9:37:54,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 774/64059 [07:00<9:35:36,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 774/64059 [07:01<9:35:36,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 775/64059 [07:01<9:34:00,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 775/64059 [07:02<9:34:00,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 776/64059 [07:02<9:28:21,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 776/64059 [07:02<9:28:21,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 777/64059 [07:02<9:26:50,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 777/64059 [07:03<9:26:50,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 778/64059 [07:03<9:32:37,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 778/64059 [07:03<9:32:37,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 779/64059 [07:03<9:32:48,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 779/64059 [07:04<9:32:48,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 780/64059 [07:04<9:36:01,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 780/64059 [07:04<9:36:01,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 781/64059 [07:04<9:33:10,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 781/64059 [07:05<9:33:10,  1.84it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 782/64059 [07:05<9:44:25,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 782/64059 [07:05<9:44:25,  1.80it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 783/64059 [07:05<9:42:49,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 783/64059 [07:06<9:42:49,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 784/64059 [07:06<9:41:11,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 784/64059 [07:06<9:41:11,  1.81it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 785/64059 [07:06<9:35:26,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 785/64059 [07:07<9:35:26,  1.83it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 786/64059 [07:07<9:27:01,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 786/64059 [07:08<9:27:01,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 787/64059 [07:08<9:19:12,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 787/64059 [07:08<9:19:12,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 788/64059 [07:08<9:16:54,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 788/64059 [07:09<9:16:54,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 789/64059 [07:09<9:15:20,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 789/64059 [07:09<9:15:20,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 790/64059 [07:09<9:27:07,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 790/64059 [07:10<9:27:07,  1.86it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 791/64059 [07:10<9:21:05,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 791/64059 [07:10<9:21:05,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 792/64059 [07:10<9:18:02,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 792/64059 [07:11<9:18:02,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 793/64059 [07:11<9:16:57,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 793/64059 [07:11<9:16:57,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 794/64059 [07:11<9:25:03,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 794/64059 [07:12<9:25:03,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 795/64059 [07:12<9:17:21,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 795/64059 [07:12<9:17:21,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 796/64059 [07:12<9:16:16,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 796/64059 [07:13<9:16:16,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 797/64059 [07:13<9:51:30,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 797/64059 [07:14<9:51:30,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 798/64059 [07:14<10:09:24,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 798/64059 [07:14<10:09:24,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 799/64059 [07:14<10:18:59,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 799/64059 [07:15<10:18:59,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 800/64059 [07:15<10:31:48,  1.67it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|          | 800/64059 [07:15<10:31:48,  1.67it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 801/64059 [07:15<10:58:40,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 801/64059 [07:16<10:58:40,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 802/64059 [07:16<10:50:43,  1.62it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 802/64059 [07:17<10:50:43,  1.62it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 803/64059 [07:17<10:49:06,  1.62it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 803/64059 [07:17<10:49:06,  1.62it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 804/64059 [07:17<10:59:10,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 804/64059 [07:18<10:59:10,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 805/64059 [07:18<11:05:36,  1.58it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 805/64059 [07:19<11:05:36,  1.58it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 806/64059 [07:19<10:59:32,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 806/64059 [07:19<10:59:32,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 807/64059 [07:19<10:55:47,  1.61it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 807/64059 [07:20<10:55:47,  1.61it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 808/64059 [07:20<10:58:07,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 808/64059 [07:20<10:58:07,  1.60it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 809/64059 [07:20<10:43:59,  1.64it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 809/64059 [07:21<10:43:59,  1.64it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 810/64059 [07:21<10:28:06,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 810/64059 [07:21<10:28:06,  1.68it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 811/64059 [07:21<10:09:42,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 811/64059 [07:22<10:09:42,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 812/64059 [07:22<10:01:55,  1.75it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 812/64059 [07:23<10:01:55,  1.75it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 813/64059 [07:23<9:39:02,  1.82it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|▏         | 813/64059 [07:23<9:39:02,  1.82it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 814/64059 [07:23<9:20:49,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 814/64059 [07:24<9:20:49,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 815/64059 [07:24<9:02:02,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 815/64059 [07:24<9:02:02,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 816/64059 [07:24<8:52:29,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 816/64059 [07:25<8:52:29,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 817/64059 [07:25<9:08:43,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 817/64059 [07:25<9:08:43,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 818/64059 [07:25<9:23:18,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 818/64059 [07:26<9:23:18,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 819/64059 [07:26<9:09:23,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 819/64059 [07:26<9:09:23,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 820/64059 [07:26<9:03:47,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 820/64059 [07:27<9:03:47,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 821/64059 [07:27<9:00:09,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 821/64059 [07:27<9:00:09,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 822/64059 [07:27<8:55:33,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 822/64059 [07:28<8:55:33,  1.97it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 823/64059 [07:28<8:57:22,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 823/64059 [07:28<8:57:22,  1.96it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 824/64059 [07:28<9:07:56,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 824/64059 [07:29<9:07:56,  1.92it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 825/64059 [07:29<9:21:03,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 825/64059 [07:29<9:21:03,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 826/64059 [07:29<9:01:49,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 826/64059 [07:30<9:01:49,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 827/64059 [07:30<8:51:22,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 827/64059 [07:30<8:51:22,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 828/64059 [07:30<8:37:15,  2.04it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 828/64059 [07:31<8:37:15,  2.04it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 829/64059 [07:31<8:51:43,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 829/64059 [07:31<8:51:43,  1.98it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 830/64059 [07:31<9:00:33,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 830/64059 [07:32<9:00:33,  1.95it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 831/64059 [07:32<9:11:47,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 831/64059 [07:32<9:11:47,  1.91it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 832/64059 [07:32<9:02:11,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 832/64059 [07:33<9:02:11,  1.94it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 833/64059 [07:33<9:04:36,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 833/64059 [07:33<9:04:36,  1.93it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 834/64059 [07:33<9:16:01,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 834/64059 [07:34<9:16:01,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 835/64059 [07:34<9:18:42,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 835/64059 [07:34<9:18:42,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 836/64059 [07:34<9:16:28,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 836/64059 [07:35<9:16:28,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 837/64059 [07:35<9:17:26,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 837/64059 [07:35<9:17:26,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 838/64059 [07:35<9:16:01,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 838/64059 [07:36<9:16:01,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 839/64059 [07:36<9:17:47,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 839/64059 [07:37<9:17:47,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 840/64059 [07:37<9:18:24,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 840/64059 [07:37<9:18:24,  1.89it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 841/64059 [07:37<9:19:57,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 841/64059 [07:38<9:19:57,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 842/64059 [07:38<9:22:14,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 842/64059 [07:38<9:22:14,  1.87it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 843/64059 [07:38<9:28:46,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 843/64059 [07:39<9:28:46,  1.85it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 844/64059 [07:39<9:19:37,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 844/64059 [07:39<9:19:37,  1.88it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 845/64059 [07:39<9:14:43,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 845/64059 [07:40<9:14:43,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 846/64059 [07:40<9:14:32,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 846/64059 [07:40<9:14:32,  1.90it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 847/64059 [07:40<9:57:19,  1.76it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 847/64059 [07:41<9:57:19,  1.76it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 848/64059 [07:41<10:08:58,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 848/64059 [07:42<10:08:58,  1.73it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 849/64059 [07:42<10:16:31,  1.71it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 849/64059 [07:42<10:16:31,  1.71it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 850/64059 [07:42<10:30:15,  1.67it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 850/64059 [07:43<10:30:15,  1.67it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 851/64059 [07:43<10:51:39,  1.62it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 851/64059 [07:43<10:51:39,  1.62it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 852/64059 [07:43<10:20:24,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 852/64059 [07:44<10:20:24,  1.70it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 853/64059 [07:44<10:14:53,  1.71it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 853/64059 [07:44<10:14:53,  1.71it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 854/64059 [07:44<10:01:08,  1.75it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 854/64059 [07:45<10:01:08,  1.75it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 855/64059 [07:45<9:52:44,  1.78it/s, loss=6.93, lr=1e-5] Epoch 1/300:   1%|▏         | 855/64059 [07:46<9:52:44,  1.78it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 856/64059 [07:46<9:49:07,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 856/64059 [07:46<9:49:07,  1.79it/s, loss=6.93, lr=1e-5]Epoch 1/300:   1%|▏         | 857/64059 [07:46<9:33:52,  1.84it/s, loss=6.93, lr=1e-5]

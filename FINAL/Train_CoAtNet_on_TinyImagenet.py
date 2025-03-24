@@ -20,14 +20,12 @@ import glob
 from torchvision.io import read_image, ImageReadMode
 from torchvision.transforms.functional import to_pil_image as ToPILImage
 from PIL import Image, ImageFile
-from einops import rearrange
-from einops.layers.torch import Rearrange
 import warnings
 warnings.filterwarnings("ignore")
 #endregion
 
 #region Setup device
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 torch.manual_seed(42)
@@ -831,13 +829,12 @@ class ModelEMA:
 #region 9. FUNGSI TRAINING
 def train_model():    
     # Get model using coatnet_3 function
-
     image_size = (3, 224, 224)
     config=f'coatnet-3'
     model = CoAtNet(image_size[1], image_size[2], image_size[0], config=config, num_classes=num_classes)
-    
+
     # Disable if start from scratch
-    # checkpoint = torch.load("/home/tasi2425111/for_hpc/baru/ti_co/7_continue_fr_6/best_model.pth", map_location=device)
+    # checkpoint = torch.load("/home/tasi2425111/for_hpc/baru/ti_mf/11_continue_fr_10/best_model.pth", map_location=device)
     # model.load_state_dict(checkpoint["state_dict"])
 
     model = model.to(device)
@@ -880,14 +877,19 @@ def train_model():
         for batch_idx, (inputs, targets) in enumerate(progress_bar):
             inputs, targets = inputs.to(device), targets.to(device)
             
-            # Apply mixup if enabled
+            # Apply mixup if enabled and batch size is even
             if mixup_fn is not None:
-                inputs, targets = mixup_fn(inputs, targets)
+                # Check if batch size is even before applying mixup
+                if len(inputs) % 2 == 0:
+                    inputs, targets = mixup_fn(inputs, targets)
+                else:
+                    # Skip mixup for this batch or you can log a warning
+                    print(f"Skipping mixup for batch {batch_idx} with odd size {len(inputs)}")
             
             # Forward pass with mixed precision
-            with autocast():
-                outputs = model(inputs)
-                loss = criterion(outputs, targets)
+            # with autocast():
+            outputs = model(inputs)
+            loss = criterion(outputs, targets)
             
             # Backward and optimize
             optimizer.zero_grad()

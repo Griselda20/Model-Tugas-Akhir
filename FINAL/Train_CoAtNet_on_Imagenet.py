@@ -375,7 +375,7 @@ val_transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
-class TrainTinyImageNetDataset(Dataset):
+class TrainImageNetDataset(Dataset):
     def __init__(self, transform=None):
         self.filenames = glob.glob("/home/tasi2425111/resized_imagenet/train/*/*.JPEG")
         self.transform = transform
@@ -402,7 +402,7 @@ class TrainTinyImageNetDataset(Dataset):
             image = self.transform(image)
         return image, label
 
-class ValTinyImageNetDataset(Dataset):
+class ValImageNetDataset(Dataset):
     def __init__(self, transform=None):
         self.filenames = glob.glob("/home/tasi2425111/resized_imagenet/val/*.JPEG")
         self.transform = transform
@@ -434,10 +434,10 @@ class ValTinyImageNetDataset(Dataset):
             image = self.transform(image)
         return image, label
 
-train_dataset = TrainTinyImageNetDataset(transform = train_transform)
+train_dataset = TrainImageNetDataset(transform = train_transform)
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=CONFIG["train_batch_size"], shuffle=True, num_workers=num_workers, pin_memory=True)
 
-val_dataset = ValTinyImageNetDataset(transform=val_transform)
+val_dataset = ValImageNetDataset(transform=val_transform)
 val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=CONFIG["train_batch_size"], shuffle=False, num_workers=num_workers, pin_memory=True)
 
 #endregion

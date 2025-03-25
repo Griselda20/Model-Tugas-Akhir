@@ -64,80 +64,14 @@ CONFIG = {
 }
 #endregion
 
-#region 2. DEFINISI ARSITEKTUR MODEL (Modification)
+#@title 2. DEFINISI ARSITEKTUR MODEL (Modifikasi)
+#region 2. DEFINISI ARSITEKTUR MODEL (Modifikasi)
 
-from einops import rearrange
-from einops.layers.torch import Rearrange
-
-class PreNorm(nn.Module):
-    def __init__(self, dim, fn, norm):
-        super().__init__()
-        self.norm = norm(dim)
-        self.fn = fn
-
-    def forward(self, x, **kwargs):
-        return self.fn(self.norm(x), **kwargs)
-    
-
-class Attention(nn.Module):
-    def __init__(self, inp, oup, image_size, heads=8, dim_head=32, dropout=0.):
-        super().__init__()
-        inner_dim = dim_head * heads
-        project_out = not (heads == 1 and dim_head == inp)
-
-        self.ih, self.iw = image_size
-
-        self.heads = heads
-        self.scale = dim_head ** -0.5
-
-        # parameter table of relative position bias
-        self.relative_bias_table = nn.Parameter(
-            torch.zeros((2 * self.ih - 1) * (2 * self.iw - 1), heads))
-
-        coords = torch.meshgrid((torch.arange(self.ih), torch.arange(self.iw)))
-        coords = torch.flatten(torch.stack(coords), 1)
-        relative_coords = coords[:, :, None] - coords[:, None, :]
-
-        relative_coords[0] += self.ih - 1
-        relative_coords[1] += self.iw - 1
-        relative_coords[0] *= 2 * self.iw - 1
-        relative_coords = rearrange(relative_coords, 'c h w -> h w c')
-        relative_index = relative_coords.sum(-1).flatten().unsqueeze(1)
-        self.register_buffer("relative_index", relative_index)
-
-        self.attend = nn.Softmax(dim=-1)
-        self.to_qkv = nn.Linear(inp, inner_dim * 3, bias=False)
-
-        self.to_out = nn.Sequential(
-            nn.Linear(inner_dim, oup),
-            nn.Dropout(dropout)
-        ) if project_out else nn.Identity()
-
-    def forward(self, x):
-        qkv = self.to_qkv(x).chunk(3, dim=-1)
-        q, k, v = map(lambda t: rearrange(
-            t, 'b n (h d) -> b h n d', h=self.heads), qkv)
-
-        dots = torch.matmul(q, k.transpose(-1, -2)) * self.scale
-
-        # Use "gather" for more efficiency on GPUs
-        relative_bias = self.relative_bias_table.gather(
-            0, self.relative_index.repeat(1, self.heads))
-        relative_bias = rearrange(
-            relative_bias, '(h w) c -> 1 c h w', h=self.ih*self.iw, w=self.ih*self.iw)
-        dots = dots + relative_bias
-
-        attn = self.attend(dots)
-        out = torch.matmul(attn, v)
-        out = rearrange(out, 'b h n d -> b n (h d)')
-        out = self.to_out(out)
-        return out
-
-""" Dna blocks used for Mobile-Former
+""" Dna blocks used for Modification
 
 A PyTorch impl of Dna blocks
 
-Paper: Mobile-Former: Bridging MobileNet and Transformer (CVPR 2022)
+Paper: Modification: Bridging MobileNet and Transformer (CVPR 2022)
        https://arxiv.org/abs/2108.05895 
 
 """
@@ -433,18 +367,98 @@ class Local2Global(nn.Module):
 
         return tokens, attn
 
+#---------------------------------------------------------------------------------------------------------------
+
+class RelativeAttention(nn.Module):
+    def __init__(self, inp_h, inp_w, in_channels, n_head, d_k, d_v, out_channels, attn_dropout=0.1, ff_dropout=0.1, attn_bias=False):
+        super().__init__()
+        self.inp_h = inp_h
+        self.inp_w = inp_w
+        self.n_head = n_head
+        self.d_k = d_k
+        self.d_v = d_v
+        self.Q = nn.Linear(in_channels, n_head * d_k, bias=attn_bias)
+        self.K = nn.Linear(in_channels, n_head * d_k, bias=attn_bias)
+        self.V = nn.Linear(in_channels, n_head * d_v, bias=attn_bias)
+        self.ff = nn.Linear(n_head * d_v, out_channels)
+        self.attn_dropout = nn.Dropout2d(attn_dropout)
+        self.ff_dropout = nn.Dropout(ff_dropout)
+        self.relative_bias = nn.Parameter(
+            torch.randn(n_head, ((inp_h << 1) - 1) * ((inp_w << 1) - 1)),
+            requires_grad=True
+        )
+        self.register_buffer('relative_indices', self._get_relative_indices(inp_h, inp_w))
+
+    def _get_relative_indices(self, height, width):
+        ticks_y, ticks_x = torch.arange(height), torch.arange(width)
+        grid_y, grid_x = torch.meshgrid(ticks_y, ticks_x)
+        area = height * width
+        out = torch.empty(area, area).fill_(float('nan'))
+        for idx_y in range(height):
+            for idx_x in range(width):
+                rel_indices_y = grid_y - idx_y + height
+                rel_indices_x = grid_x - idx_x + width
+                flatten_indices = (rel_indices_y * width + rel_indices_x).view(-1)
+                out[idx_y * width + idx_x] = flatten_indices
+        assert not out.isnan().any(), '`relative_indices` have blank indices'
+        assert (out >= 0).all(), '`relative_indices` have negative indices'
+        return out.long()
+
+    def _interpolate_relative_bias(self, height, width):
+        relative_bias = self.relative_bias.view(1, self.n_head, (self.inp_h << 1) - 1, -1)
+        relative_bias = F.interpolate(relative_bias, size=((height << 1) - 1, (width << 1) - 1), mode='bilinear', align_corners=True)
+        return relative_bias.view(self.n_head, -1)
+
+    def update_relative_bias_and_indices(self, height, width):
+        self.relative_indices = self._get_relative_indices(height, width)
+        self.relative_bias = self._interpolate_relative_bias(height, width)
+
+    def forward(self, x):
+        b, c, H, W, h = *x.shape, self.n_head
+    
+        len_x = H * W
+        x = x.view(b, c, len_x).transpose(-1, -2)
+        q = self.Q(x).view(b, len_x, self.n_head, self.d_k).transpose(1, 2)
+        k = self.K(x).view(b, len_x, self.n_head, self.d_k).transpose(1, 2)
+        v = self.V(x).view(b, len_x, self.n_head, self.d_v).transpose(1, 2)
+
+        if H == self.inp_h and W == self.inp_w:
+            relative_indices = self.relative_indices
+            relative_bias = self.relative_bias
+        else:
+            relative_indices = self._get_relative_indices(H, W).to(x.device)
+            relative_bias = self._interpolate_relative_bias(H, W)
+
+        relative_indices = relative_indices.view(1, 1, *relative_indices.size()).expand(b, h, -1, -1)
+        relative_bias = relative_bias.view(1, relative_bias.size(0), 1, relative_bias.size(1)).expand(b, -1, len_x, -1)
+        relative_biases = relative_bias.gather(dim=-1, index=relative_indices)
+
+        similarity = torch.matmul(q, k.transpose(-1, -2)) + relative_biases
+        similarity = similarity.softmax(dim=-1)
+        similarity = self.attn_dropout(similarity)
+        
+        out = torch.matmul(similarity, v)
+        out = out.transpose(1, 2).contiguous().view(b, -1, self.n_head * self.d_v)
+        out = self.ff(out)
+        out = self.ff_dropout(out)
+        out = out.transpose(-1, -2).view(b, -1, H, W)
+        return out
+
+
 class GlobalBlock(nn.Module):
     def __init__(
         self,
         block_type='mlp',
         token_dim=128,
-        token_num=6,
+        token_h=2,
+        token_w=3,
         mlp_token_exp=4,
         attn_num_heads=4,
         use_dynamic=False,
         use_ffn=False,
         norm_pos='post',
-        drop_path_rate=0.
+        drop_path_rate=0.,
+        token_num=6  # Add token_num as a parameter
     ):
         super(GlobalBlock, self).__init__()
 
@@ -452,35 +466,14 @@ class GlobalBlock(nn.Module):
 
         self.block = block_type
         self.num_heads = attn_num_heads
-        self.token_num = token_num
+        self.token_h = token_h
+        self.token_w = token_w
         self.norm_pos = norm_pos
         self.use_dynamic = use_dynamic
         self.use_ffn = use_ffn
         self.ffn_exp = 2
+        self.token_num = token_num  # Assign token_num to self.token_num
 
-        # Modified CoAtNet Attention for 1D tokens
-        self.attn = Attention(
-            inp=token_dim,
-            oup=token_dim,
-            image_size=(token_num, 1),  # Treat as 1D sequence
-            heads=attn_num_heads,
-            dim_head=token_dim // attn_num_heads
-        )
-        #The incorrect rearrangement is replaced by proper reshaping within forward()
-        self.attn = PreNorm(token_dim, self.attn, nn.LayerNorm) #Corrected line
-
-        # Original MLP-based token mixing
-        if 'mlp' in self.block:
-            self.token_mlp = nn.Sequential(
-                nn.Linear(token_num, token_num * mlp_token_exp),
-                nn.GELU(),
-                nn.Linear(token_num * mlp_token_exp, token_num),
-            )
-
-        self.channel_mlp = nn.Linear(token_dim, token_dim)
-        self.layer_norm = nn.LayerNorm(token_dim)
-        self.drop_path = DropPath(drop_path_rate)
-        
         if self.use_ffn:
             print('use ffn')
             self.ffn = nn.Sequential(
@@ -490,31 +483,69 @@ class GlobalBlock(nn.Module):
             )
             self.ffn_norm = nn.LayerNorm(token_dim)
 
-    def forward(self, x):
-        tokens = x  # Shape: [T, bs, C]
+        if self.use_dynamic:
+            self.alpha_scale = 2.0
+            self.alpha = nn.Sequential(
+                nn.Linear(token_dim, token_dim),
+                h_sigmoid(),
+            )
 
-        # Apply Relative Attention
-        #Reshape to add dummy spatial dimension and then reshape back to original
-        # attn_out = self.attn(tokens.permute(1, 2, 0).unsqueeze(-1)).squeeze(-1).permute(2, 0, 1) #Corrected line
-        attn_out = self.attn(tokens.permute(1, 0, 2)).permute(1, 0, 2) #changed
-
-        # MLP-based token mixing (original logic)
         if 'mlp' in self.block:
-            t_mlp = self.token_mlp(tokens.permute(1, 2, 0))  # [bs, C, T]
-            t_mlp = t_mlp.permute(2, 0, 1)  # [T, bs, C]
-            attn_out = attn_out + t_mlp
+            self.token_mlp = nn.Sequential(
+                nn.Linear(token_h * token_w, token_h * token_w * mlp_token_exp),
+                nn.GELU(),
+                nn.Linear(token_h * token_w * mlp_token_exp, token_h * token_w),
+            )
 
-        # Residual connection + normalization
-        tokens = tokens + self.drop_path(attn_out)
+        if 'attn' in self.block:
+            self.relative_attn = RelativeAttention(
+                inp_h=token_h,
+                inp_w=token_w,
+                in_channels=token_dim,
+                n_head=attn_num_heads,
+                d_k=token_dim // attn_num_heads,
+                d_v=token_dim // attn_num_heads,
+                out_channels=token_dim,
+                attn_dropout=0.1,
+                ff_dropout=0.1,
+                attn_bias=False
+            )
+
+        self.channel_mlp = nn.Linear(token_dim, token_dim)
+        self.layer_norm = nn.LayerNorm(token_dim)
+        self.drop_path = DropPath(drop_path_rate)
+
+    def forward(self, x):
+        tokens = x
+        T, bs, C = tokens.shape
+
+        if 'mlp' in self.block:
+            t = self.token_mlp(tokens.permute(1, 2, 0))  # bs x channel x token_num
+            t_sum = t.permute(2, 0, 1)                    # token_num x bs x channel
+
+        if 'attn' in self.block:
+            tokens_reshaped = tokens.permute(1, 2, 0).view(bs, C, self.token_h, self.token_w)  # bs x C x H x W
+            attn_out = self.relative_attn(tokens_reshaped)  # Apply RelativeAttention
+            attn_out = attn_out.reshape(T, bs, C)  # Reshape back to (T, bs, C)
+            t_sum = attn_out + t_sum if 'mlp' in self.block else attn_out
+
+        if self.use_dynamic:
+            alp = self.alpha(tokens) * self.alpha_scale
+            t_sum = t_sum * alp
+
+        t_sum = self.channel_mlp(t_sum)  # token_num x bs x channel
+        tokens = tokens + self.drop_path(t_sum)
         tokens = self.layer_norm(tokens)
 
-        # FFN (if enabled)
         if self.use_ffn:
             t_ffn = self.ffn(tokens)
             tokens = tokens + t_ffn
             tokens = self.ffn_norm(tokens)
 
         return tokens
+
+
+#---------------------------------------------------------------------------------------------------------------
 
 class Global2Local(nn.Module):
     def __init__(
@@ -1789,11 +1820,11 @@ def is_model_pretrained(model_name):
     return model_name in _model_has_pretrained
 
 
-"""Mobile-Former V1
+"""Modification V1
 
-A PyTorch impl of MobileFromer-V1.
+A PyTorch impl of Modification-V1.
  
-Paper: Mobile-Former: Bridging MobileNet and Transformer (CVPR 2022)
+Paper: Modification: Bridging MobileNet and Transformer (CVPR 2022)
        https://arxiv.org/abs/2108.05895
 
 """
@@ -1805,7 +1836,7 @@ import math
 
 from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD, IMAGENET_INCEPTION_MEAN, IMAGENET_INCEPTION_STD
 
-__all__ = ['MobileFormer']
+__all__ = ['Modification']
   
 def _cfg(url='', **kwargs):
     return {
@@ -1820,7 +1851,7 @@ default_cfgs = {
     'default': _cfg(url=''),
 }
 
-class MobileFormer(nn.Module):
+class Modification(nn.Module):
     def __init__(
         self,
         block_args,
@@ -1856,7 +1887,7 @@ class MobileFormer(nn.Module):
         remove_proj_local=True,
         ):
 
-        super(MobileFormer, self).__init__()
+        super(Modification, self).__init__()
 
         cnn_drop_path_rate = drop_path_rate
         mdiv = 8 if width_mult > 1.01 else 4
@@ -1980,20 +2011,18 @@ class MobileFormer(nn.Module):
         self._initialize_weights()
 
     def _initialize_weights(self):
-        for n, m in self.named_modules():
+        for m in self.modules():
             if isinstance(m, nn.Conv2d):
-                fan_out = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
-                fan_out //= m.groups
-                m.weight.data.normal_(0, math.sqrt(2.0 / fan_out))
-                if m.bias is not None:  # Check if bias is not None
+                n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
+                m.weight.data.normal_(0, math.sqrt(2. / n))
+                if m.bias is not None:
                     m.bias.data.zero_()
             elif isinstance(m, nn.BatchNorm2d):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
             elif isinstance(m, nn.Linear):
                 n = m.weight.size(1)
-                m.weight.data.normal_(0, 0.01)
-                if m.bias is not None:  # Check if bias is not None
+                if m.bias is not None: 
                     m.bias.data.zero_()
 
 
@@ -2012,9 +2041,9 @@ class MobileFormer(nn.Module):
 
         return y
 
-def _create_mobile_former(variant, pretrained=False, **kwargs):
+def _create_modification(variant, pretrained=False, **kwargs):
     model = build_model_with_cfg(
-        MobileFormer, 
+        Modification, 
         variant, 
         pretrained,
         default_cfg=default_cfgs['default'],
@@ -2041,7 +2070,7 @@ common_model_kwargs = dict(
 )
 
 
-def mobile_former_508m(pretrained=False, **kwargs):
+def modification_508m(pretrained=False, **kwargs):
 
     #stem = 24
     dna_blocks = [ 
@@ -2075,11 +2104,11 @@ def mobile_former_508m(pretrained=False, **kwargs):
         **common_model_kwargs,
         **kwargs,   
     )
-    model = _create_mobile_former("mobile_former_508m", pretrained, **model_kwargs)
+    model = _create_modification("modification_508m", pretrained, **model_kwargs)
     return model
 
 
-def mobile_former_294m(pretrained=False, **kwargs):
+def modification_294m(pretrained=False, **kwargs):
 
     #stem = 16
     dna_blocks = [ 
@@ -2113,11 +2142,11 @@ def mobile_former_294m(pretrained=False, **kwargs):
         **common_model_kwargs,
         **kwargs,   
     )
-    model = _create_mobile_former("mobile_former_294m", pretrained, **model_kwargs)
+    model = _create_modification("modification_294m", pretrained, **model_kwargs)
     return model
 
 
-def mobile_former_214m(pretrained=False, **kwargs):
+def modification_214m(pretrained=False, **kwargs):
 
     #stem = 12
     dna_blocks = [ 
@@ -2152,11 +2181,11 @@ def mobile_former_214m(pretrained=False, **kwargs):
         **common_model_kwargs,
         **kwargs,   
     )
-    model = _create_mobile_former("mobile_former_214m", pretrained, **model_kwargs)
+    model = _create_modification("modification_214m", pretrained, **model_kwargs)
     return model
 
 
-def mobile_former_151m(pretrained=False, **kwargs):
+def modification_151m(pretrained=False, **kwargs):
 
     #stem = 12
     dna_blocks = [ 
@@ -2190,11 +2219,11 @@ def mobile_former_151m(pretrained=False, **kwargs):
         **common_model_kwargs,
         **kwargs,   
     )
-    model = _create_mobile_former("mobile_former_151m", pretrained, **model_kwargs)
+    model = _create_modification("modification_151m", pretrained, **model_kwargs)
     return model
 
 
-def mobile_former_96m(pretrained=False, **kwargs):
+def modification_96m(pretrained=False, **kwargs):
 
     #stem = 12
     dna_blocks = [ 
@@ -2226,11 +2255,11 @@ def mobile_former_96m(pretrained=False, **kwargs):
         **common_model_kwargs,
         **kwargs,   
     )
-    model = _create_mobile_former("mobile_former_96m", pretrained, **model_kwargs)
+    model = _create_modification("modification_96m", pretrained, **model_kwargs)
     return model
 
 
-def mobile_former_52m(pretrained=False, **kwargs):
+def modification_52m(pretrained=False, **kwargs):
 
     #stem = 8
     dna_blocks = [ 
@@ -2261,11 +2290,11 @@ def mobile_former_52m(pretrained=False, **kwargs):
         **common_model_kwargs,
         **kwargs,   
     )
-    model = _create_mobile_former("mobile_former_52m", pretrained, **model_kwargs)
+    model = _create_modification("modification_52m", pretrained, **model_kwargs)
     return model
 
 
-def mobile_former_26m(pretrained=False, **kwargs):
+def modification_26m(pretrained=False, **kwargs):
 
     #stem = 8
     dna_blocks = [ 
@@ -2296,8 +2325,9 @@ def mobile_former_26m(pretrained=False, **kwargs):
         **common_model_kwargs,
         **kwargs,   
     )
-    model = _create_mobile_former("mobile_former_26m", pretrained, **model_kwargs)
+    model = _create_modification("modification_26m", pretrained, **model_kwargs)
     return model
+
 
 #endregion
 
@@ -2471,8 +2501,13 @@ class ModelEMA:
 
 #region 9. FUNGSI TRAINING
 def train_model():    
-    # Get model using mobile_former_294m function
-    model = mobile_former_294m() 
+    # Get model using modification_294m function
+    model = modification_294m() 
+
+    # Disable if start from scratch
+    # checkpoint = torch.load("/home/tasi2425111/for_hpc/baru/ti_mf/11_continue_fr_10/best_model.pth", map_location=device)
+    # model.load_state_dict(checkpoint["state_dict"])
+
     model = model.to(device)
     
     mixup_fn = get_mixup_fn()

@@ -1,3 +1,7 @@
+import warnings
+warnings.filterwarnings("ignore")
+num_classes=1000
+
 #@title 2. DEFINISI ARSITEKTUR MODEL (Modifikasi)
 #region 2. DEFINISI ARSITEKTUR MODEL (Modifikasi)
 
@@ -2264,3 +2268,20 @@ def modification_26m(pretrained=False, **kwargs):
 
 
 #endregion
+
+#@title variable
+import torch
+from fvcore.nn import parameter_count, FlopCountAnalysis
+
+image_size = (3, 224, 224)
+model = modification_294m()
+model.to('cuda:0')
+model.eval()
+random_image = torch.randint(0, 256, size=(1, *image_size)).float() / 255
+with torch.no_grad():
+    flops = FlopCountAnalysis(model, random_image.to('cuda:0'))
+total_flops = flops.total()
+total_params = sum(p.numel() for p in model.parameters())
+
+print(f'Approx FLOPs count: {total_flops}')
+print(f"Total number of parameters: {total_params}")

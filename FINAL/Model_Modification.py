@@ -1,3 +1,5 @@
+#@title 2. DEFINISI ARSITEKTUR MODEL (Modifikasi)
+#region 2. DEFINISI ARSITEKTUR MODEL (Modifikasi)
 
 """ Dna blocks used for Mobile-Former
 
@@ -389,7 +391,8 @@ class GlobalBlock(nn.Module):
         use_dynamic=False,
         use_ffn=False,
         norm_pos='post',
-        drop_path_rate=0.
+        drop_path_rate=0.,
+        token_num=6  # Add token_num as a parameter
     ):
         super(GlobalBlock, self).__init__()
 
@@ -403,6 +406,7 @@ class GlobalBlock(nn.Module):
         self.use_dynamic = use_dynamic
         self.use_ffn = use_ffn
         self.ffn_exp = 2
+        self.token_num = token_num  # Assign token_num to self.token_num
 
         if self.use_ffn:
             print('use ffn')
@@ -456,7 +460,7 @@ class GlobalBlock(nn.Module):
         if 'attn' in self.block:
             tokens_reshaped = tokens.permute(1, 2, 0).view(bs, C, self.token_h, self.token_w)  # bs x C x H x W
             attn_out = self.relative_attn(tokens_reshaped)  # Apply RelativeAttention
-            attn_out = attn_out.view(T, bs, C)  # Reshape back to (T, bs, C)
+            attn_out = attn_out.reshape(T, bs, C)  # Reshape back to (T, bs, C)
             t_sum = attn_out + t_sum if 'mlp' in self.block else attn_out
 
         if self.use_dynamic:
@@ -1952,8 +1956,8 @@ class MobileFormer(nn.Module):
                 m.bias.data.zero_()
             elif isinstance(m, nn.Linear):
                 n = m.weight.size(1)
-                m.weight.data.normal_(0, 0.01)
-                m.bias.data.zero_()
+                if m.bias is not None: 
+                    m.bias.data.zero_()
 
 
     def forward(self, x):
@@ -2258,3 +2262,5 @@ def mobile_former_26m(pretrained=False, **kwargs):
     model = _create_mobile_former("mobile_former_26m", pretrained, **model_kwargs)
     return model
 
+
+#endregion

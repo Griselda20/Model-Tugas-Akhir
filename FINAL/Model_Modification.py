@@ -474,54 +474,54 @@ class GlobalBlock(nn.Module):
         # Normalisasi final setelah skip-connection
         self.layer_norm = nn.LayerNorm(token_dim)
 
-def forward(self, x):
-    """
-    x: Tensor berukuran (T, B, C)
-       T = jumlah token, B = batch size, C = dimensi token
-    """
-    tokens = x
-    T, B, C = tokens.shape
+    def forward(self, x):
+        """
+        x: Tensor berukuran (T, B, C)
+          T = jumlah token, B = batch size, C = dimensi token
+        """
+        tokens = x
+        T, B, C = tokens.shape
 
-    # Pastikan T = self.token_num; jika berbeda, maka RelativeAttention akan gagal
-    if T != self.token_num:
-        raise ValueError(f"Jumlah token (T={T}) tidak sama dengan token_num={self.token_num}.")
+        # Pastikan T = self.token_num; jika berbeda, maka RelativeAttention akan gagal
+        if T != self.token_num:
+            raise ValueError(f"Jumlah token (T={T}) tidak sama dengan token_num={self.token_num}.")
 
-    # (1) (Opsional) MLP berbasis token
-    if 'mlp' in self.block:
-        t_mlp = tokens.permute(1, 2, 0)   # => (B, C, T)
-        t_mlp = self.token_mlp(t_mlp)    # => (B, C, T)
-        t_mlp = t_mlp.permute(2, 0, 1)   # => (T, B, C)
-        tokens = tokens + self.drop_path_fn(t_mlp)
+        # (1) (Opsional) MLP berbasis token
+        if 'mlp' in self.block:
+            t_mlp = tokens.permute(1, 2, 0)   # => (B, C, T)
+            t_mlp = self.token_mlp(t_mlp)    # => (B, C, T)
+            t_mlp = t_mlp.permute(2, 0, 1)   # => (T, B, C)
+            tokens = tokens + self.drop_path_fn(t_mlp)
 
-    # (2) RelativeAttention
-    if 'attn' in self.block:
-        # Ubah dari (T, B, C) -> (B, C, 1, T)
-        attn_in = tokens.permute(1, 2, 0).unsqueeze(2)   # => (B, C, 1, T)
-        attn_out = self.relative_attn(attn_in)           # => (B, C, 1, T)
-        # Kembali ke (T, B, C)
-        attn_out = attn_out.squeeze(2).permute(2, 0, 1)   # => (T, B, C)
+        # (2) RelativeAttention
+        if 'attn' in self.block:
+            # Ubah dari (T, B, C) -> (B, C, 1, T)
+            attn_in = tokens.permute(1, 2, 0).unsqueeze(2)   # => (B, C, 1, T)
+            attn_out = self.relative_attn(attn_in)           # => (B, C, 1, T)
+            # Kembali ke (T, B, C)
+            attn_out = attn_out.squeeze(2).permute(2, 0, 1)   # => (T, B, C)
 
-        tokens = tokens + self.drop_path_fn(attn_out)
+            tokens = tokens + self.drop_path_fn(attn_out)
 
-    # (3) Dynamic alpha (opsional)
-    if self.use_dynamic:
-        alp = self.alpha(tokens) * self.alpha_scale
-        tokens = tokens * alp
+        # (3) Dynamic alpha (opsional)
+        if self.use_dynamic:
+            alp = self.alpha(tokens) * self.alpha_scale
+            tokens = tokens * alp
 
-    # (4) (Opsional) FFN
-    if self.use_ffn:
-        tokens_ = tokens.permute(1, 0, 2)   # => (B, T, C)
-        tokens_ = self.ffn_norm(tokens_)
-        tokens_ = self.ffn(tokens_)
-        tokens_ = tokens_.permute(1, 0, 2) # => (T, B, C)
-        tokens = tokens + self.drop_path_fn(tokens_)
+        # (4) (Opsional) FFN
+        if self.use_ffn:
+            tokens_ = tokens.permute(1, 0, 2)   # => (B, T, C)
+            tokens_ = self.ffn_norm(tokens_)
+            tokens_ = self.ffn(tokens_)
+            tokens_ = tokens_.permute(1, 0, 2) # => (T, B, C)
+            tokens = tokens + self.drop_path_fn(tokens_)
 
-    # Normalisasi akhir (bisa di sini atau di tempat lain tergantung norm_pos)
-    tokens = tokens.permute(1, 0, 2)           # => (B, T, C)
-    tokens = self.layer_norm(tokens)
-    tokens = tokens.permute(1, 0, 2).contiguous()  # => (T, B, C)
+        # Normalisasi akhir (bisa di sini atau di tempat lain tergantung norm_pos)
+        tokens = tokens.permute(1, 0, 2)           # => (B, T, C)
+        tokens = self.layer_norm(tokens)
+        tokens = tokens.permute(1, 0, 2).contiguous()  # => (T, B, C)
 
-    return tokens
+        return tokens
 # -------------------------------------------------------------------------
 
 class Global2Local(nn.Module):

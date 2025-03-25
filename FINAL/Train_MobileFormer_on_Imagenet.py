@@ -2462,9 +2462,14 @@ def train_model():
         for batch_idx, (inputs, targets) in enumerate(progress_bar):
             inputs, targets = inputs.to(device), targets.to(device)
             
-            # Apply mixup if enabled
+            # Apply mixup if enabled and batch size is even
             if mixup_fn is not None:
-                inputs, targets = mixup_fn(inputs, targets)
+                # Check if batch size is even before applying mixup
+                if len(inputs) % 2 == 0:
+                    inputs, targets = mixup_fn(inputs, targets)
+                else:
+                    # Skip mixup for this batch or you can log a warning
+                    print(f"Skipping mixup for batch {batch_idx} with odd size {len(inputs)}")
             
             # Forward pass with mixed precision
             with autocast():

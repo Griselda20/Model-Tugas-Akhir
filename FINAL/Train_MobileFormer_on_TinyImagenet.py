@@ -2419,7 +2419,7 @@ def train_model():
     model = mobile_former_294m() 
 
     # Disable if start from scratch
-    checkpoint = torch.load("/home/tasi2425111/for_hpc/baru/ti_mf/11_continue_fr_10/best_model.pth", map_location=device)
+    checkpoint = torch.load("/home/tasi2425111/for_hpc/baru/ti_mf/12_test_continue_after_overfitting/best_model.pth", map_location=device)
     model.load_state_dict(checkpoint["state_dict"])
 
     model = model.to(device)

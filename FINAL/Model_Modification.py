@@ -1,71 +1,4 @@
 
-from einops import rearrange
-from einops.layers.torch import Rearrange
-
-class PreNorm(nn.Module):
-    def __init__(self, dim, fn, norm):
-        super().__init__()
-        self.norm = norm(dim)
-        self.fn = fn
-
-    def forward(self, x, **kwargs):
-        return self.fn(self.norm(x), **kwargs)
-    
-
-class Attention(nn.Module):
-    def __init__(self, inp, oup, image_size, heads=8, dim_head=32, dropout=0.):
-        super().__init__()
-        inner_dim = dim_head * heads
-        project_out = not (heads == 1 and dim_head == inp)
-
-        self.ih, self.iw = image_size
-
-        self.heads = heads
-        self.scale = dim_head ** -0.5
-
-        # parameter table of relative position bias
-        self.relative_bias_table = nn.Parameter(
-            torch.zeros((2 * self.ih - 1) * (2 * self.iw - 1), heads))
-
-        coords = torch.meshgrid((torch.arange(self.ih), torch.arange(self.iw)))
-        coords = torch.flatten(torch.stack(coords), 1)
-        relative_coords = coords[:, :, None] - coords[:, None, :]
-
-        relative_coords[0] += self.ih - 1
-        relative_coords[1] += self.iw - 1
-        relative_coords[0] *= 2 * self.iw - 1
-        relative_coords = rearrange(relative_coords, 'c h w -> h w c')
-        relative_index = relative_coords.sum(-1).flatten().unsqueeze(1)
-        self.register_buffer("relative_index", relative_index)
-
-        self.attend = nn.Softmax(dim=-1)
-        self.to_qkv = nn.Linear(inp, inner_dim * 3, bias=False)
-
-        self.to_out = nn.Sequential(
-            nn.Linear(inner_dim, oup),
-            nn.Dropout(dropout)
-        ) if project_out else nn.Identity()
-
-    def forward(self, x):
-        qkv = self.to_qkv(x).chunk(3, dim=-1)
-        q, k, v = map(lambda t: rearrange(
-            t, 'b n (h d) -> b h n d', h=self.heads), qkv)
-
-        dots = torch.matmul(q, k.transpose(-1, -2)) * self.scale
-
-        # Use "gather" for more efficiency on GPUs
-        relative_bias = self.relative_bias_table.gather(
-            0, self.relative_index.repeat(1, self.heads))
-        relative_bias = rearrange(
-            relative_bias, '(h w) c -> 1 c h w', h=self.ih*self.iw, w=self.ih*self.iw)
-        dots = dots + relative_bias
-
-        attn = self.attend(dots)
-        out = torch.matmul(attn, v)
-        out = rearrange(out, 'b h n d -> b n (h d)')
-        out = self.to_out(out)
-        return out
-
 """ Dna blocks used for Mobile-Former
 
 A PyTorch impl of Dna blocks
@@ -391,29 +324,6 @@ class GlobalBlock(nn.Module):
         self.use_ffn = use_ffn
         self.ffn_exp = 2
 
-        # Modified CoAtNet Attention for 1D tokens
-        self.attn = Attention(
-            inp=token_dim,
-            oup=token_dim,
-            image_size=(token_num, 1),  # Treat as 1D sequence
-            heads=attn_num_heads,
-            dim_head=token_dim // attn_num_heads
-        )
-        #The incorrect rearrangement is replaced by proper reshaping within forward()
-        self.attn = PreNorm(token_dim, self.attn, nn.LayerNorm) #Corrected line
-
-        # Original MLP-based token mixing
-        if 'mlp' in self.block:
-            self.token_mlp = nn.Sequential(
-                nn.Linear(token_num, token_num * mlp_token_exp),
-                nn.GELU(),
-                nn.Linear(token_num * mlp_token_exp, token_num),
-            )
-
-        self.channel_mlp = nn.Linear(token_dim, token_dim)
-        self.layer_norm = nn.LayerNorm(token_dim)
-        self.drop_path = DropPath(drop_path_rate)
-        
         if self.use_ffn:
             print('use ffn')
             self.ffn = nn.Sequential(
@@ -422,31 +332,68 @@ class GlobalBlock(nn.Module):
                 nn.Linear(token_dim * self.ffn_exp, token_dim)
             )
             self.ffn_norm = nn.LayerNorm(token_dim)
+            
+
+        if self.use_dynamic:
+            self.alpha_scale = 2.0
+            self.alpha = nn.Sequential(
+                nn.Linear(token_dim, token_dim),
+                h_sigmoid(),
+            )
+
+        
+        if 'mlp' in self.block:
+            self.token_mlp = nn.Sequential(
+                nn.Linear(token_num, token_num*mlp_token_exp),
+                nn.GELU(),
+                nn.Linear(token_num*mlp_token_exp, token_num),
+            )
+
+        if 'attn' in self.block:
+            self.scale = (token_dim // attn_num_heads) ** -0.5
+            self.q = nn.Linear(token_dim, token_dim)
+
+        self.channel_mlp = nn.Linear(token_dim, token_dim)
+        self.layer_norm = nn.LayerNorm(token_dim)
+        self.drop_path = DropPath(drop_path_rate)
 
     def forward(self, x):
-        tokens = x  # Shape: [T, bs, C]
+        tokens = x
 
-        # Apply Relative Attention
-        #Reshape to add dummy spatial dimension and then reshape back to original
-        # attn_out = self.attn(tokens.permute(1, 2, 0).unsqueeze(-1)).squeeze(-1).permute(2, 0, 1) #Corrected line
-        attn_out = self.attn(tokens.permute(1, 0, 2)).permute(1, 0, 2) #changed
+        T, bs, C = tokens.shape
 
-        # MLP-based token mixing (original logic)
         if 'mlp' in self.block:
-            t_mlp = self.token_mlp(tokens.permute(1, 2, 0))  # [bs, C, T]
-            t_mlp = t_mlp.permute(2, 0, 1)  # [T, bs, C]
-            attn_out = attn_out + t_mlp
+            # use post norm, token.shape: token_num x bs x channel
+            t = self.token_mlp(tokens.permute(1, 2, 0)) # bs x channel x token_num
+            t_sum = t.permute(2, 0, 1)                  # token_num x bs x channel
 
-        # Residual connection + normalization
-        tokens = tokens + self.drop_path(attn_out)
+        if 'attn' in self.block:
+            t = self.q(tokens).view(T, bs, self.num_heads, -1).permute(1, 2, 0, 3)  # from T x bs x Ct to bs x N x T x Ct/N
+            k = tokens.permute(1, 2, 0).view(bs, self.num_heads, -1, T)             # from T x bs x Ct -> bs x Ct x T -> bs x N x Ct/N x T
+            attn = (t @ k) * self.scale                                             # bs x N x T x T
+
+            attn_out = attn.softmax(dim=-1)                 # bs x N x T x T
+            attn_out = (attn_out @ k.transpose(-1, -2))     # bs x N x T x C/N (k: bs x N x Ct/N x T)
+                                                            # note here: k=v without transform
+            t_a = attn_out.permute(2, 0, 1, 3)              # T x bs x N x C/N
+            t_a = t_a.reshape(T, bs, -1)
+
+            t_sum = t_sum + t_a if 'mlp' in self.block else t_a
+
+        if self.use_dynamic:
+            alp = self.alpha(tokens) * self.alpha_scale
+            t_sum = t_sum * alp
+
+        t_sum = self.channel_mlp(t_sum)  # token_num x bs x channel
+        tokens = tokens + self.drop_path(t_sum)
         tokens = self.layer_norm(tokens)
 
-        # FFN (if enabled)
         if self.use_ffn:
             t_ffn = self.ffn(tokens)
             tokens = tokens + t_ffn
             tokens = self.ffn_norm(tokens)
 
+ 
         return tokens
 
 class Global2Local(nn.Module):
@@ -1913,12 +1860,11 @@ class MobileFormer(nn.Module):
         self._initialize_weights()
 
     def _initialize_weights(self):
-        for n, m in self.named_modules():
+        for m in self.modules():
             if isinstance(m, nn.Conv2d):
-                fan_out = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
-                fan_out //= m.groups
-                m.weight.data.normal_(0, math.sqrt(2.0 / fan_out))
-                if m.bias is not None:  # Check if bias is not None
+                n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
+                m.weight.data.normal_(0, math.sqrt(2. / n))
+                if m.bias is not None:
                     m.bias.data.zero_()
             elif isinstance(m, nn.BatchNorm2d):
                 m.weight.data.fill_(1)
@@ -1926,8 +1872,7 @@ class MobileFormer(nn.Module):
             elif isinstance(m, nn.Linear):
                 n = m.weight.size(1)
                 m.weight.data.normal_(0, 0.01)
-                if m.bias is not None:  # Check if bias is not None
-                    m.bias.data.zero_()
+                m.bias.data.zero_()
 
 
     def forward(self, x):
@@ -2231,5 +2176,4 @@ def mobile_former_26m(pretrained=False, **kwargs):
     )
     model = _create_mobile_former("mobile_former_26m", pretrained, **model_kwargs)
     return model
-
 

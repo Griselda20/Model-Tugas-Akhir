@@ -1,4 +1,6 @@
 
+#region Model Modification
+#@title region Model Modification
 """ Dna blocks used for Mobile-Former
 
 A PyTorch impl of Dna blocks
@@ -2300,3 +2302,5 @@ def mobile_former_26m(pretrained=False, **kwargs):
     model = _create_mobile_former("mobile_former_26m", pretrained, **model_kwargs)
     return model
 
+
+#endregion

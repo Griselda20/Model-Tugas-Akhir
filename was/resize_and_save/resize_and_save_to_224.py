@@ -99,40 +99,16 @@ def resize_and_overwrite_images(dataset):
         image = transform(image)
         image.save(img_path)
 
+trainset = TrainTinyImageNetDataset(id=id_dict, transform=transforms.ToTensor())
+testset = TestTinyImageNetDataset(id=id_dict, transform=transforms.ToTensor())
+realtestset = RealTestTinyImageNetDataset(id=id_dict, transform=transforms.ToTensor())
 # Resize dan timpa gambar pada dataset train
-trainset = TrainTinyImageNetDataset(id=id_dict)
 resize_and_overwrite_images(trainset)
 
 # Resize dan timpa gambar pada dataset test
-testset = TestTinyImageNetDataset(id=id_dict)
 resize_and_overwrite_images(testset)
 
-# Setelah resize, Anda dapat membuat dataset baru dengan transformasi yang diinginkan
-trainset = TrainTinyImageNetDataset(id=id_dict, transform=transforms.ToTensor())
-testset = TestTinyImageNetDataset(id=id_dict, transform=transforms.ToTensor())
-
-class RealTestTinyImageNetDataset(Dataset):
-    def __init__(self, id, transform=None):
-        self.filenames = glob.glob("/content/tiny-imagenet-200/test/images/*.JPEG")  # Ubah path ke folder test
-        self.transform = transform
-        self.id_dict = id
-
-    def __len__(self):
-        return len(self.filenames)
-
-    def __getitem__(self, idx):
-        img_path = self.filenames[idx]
-        image = read_image(img_path)
-        if image.shape[0] == 1:
-            image = read_image(img_path, ImageReadMode.RGB)
-        # Karena tidak ada label di folder test, kita bisa mengembalikan -1 atau None
-        label = -1  # Atau None jika tidak ada label
-        if self.transform:
-            image = self.transform(image.type(torch.FloatTensor))
-        return image, label
-
 # Resize dan timpa gambar pada dataset test
-realtestset = RealTestTinyImageNetDataset(id=id_dict)
 resize_and_overwrite_images(realtestset)
 
 import shutil
@@ -141,7 +117,7 @@ import shutil
 folder_to_zip = '/content/tiny-imagenet-200'
 
 # Nama file zip yang akan dibuat
-zip_filename = '/content/jawaterbaru.zip'
+zip_filename = '/content/resized-tiny-imagenet-200.zip'
 
 # Membuat file zip
 shutil.make_archive(zip_filename.replace('.zip', ''), 'zip', folder_to_zip)

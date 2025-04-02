@@ -1,0 +1,1232 @@
+nohup: ignoring input
+/home/tasi2425111/venvmaestro/lib/python3.8/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/tasi2425111/venvmaestro/lib/python3.8/site-packages/timm/models/features.py:4: FutureWarning: Importing from timm.models.features is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/tasi2425111/venvmaestro/lib/python3.8/site-packages/timm/models/hub.py:4: FutureWarning: Importing from timm.models.hub is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+Training with a single process on 1 device (cuda:0).
+Model mobile_former_294m created, param count:11422648
+Data processing configuration for current model + dataset:
+	input_size: (3, 224, 224)
+	interpolation: bicubic
+	mean: (0.485, 0.456, 0.406)
+	std: (0.229, 0.224, 0.225)
+	crop_pct: 0.875
+	crop_mode: center
+Created AdamW (AdamW) optimizer: lr: 0.001, betas: (0.9, 0.999), eps: 1e-08, weight_decay: 0.05, amsgrad: False, foreach: None, maximize: False, capturable: False
+AMP not enabled. Training in torch.float32.
+Scheduled epochs: 300 (epochs + cooldown_epochs). Warmup within epochs when warmup_prefix=False. LR stepped per epoch.
+block: 12544, cnn-drop 0.0000, mlp-drop 0.0000
+block: 12544, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 16, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 24, token: 192
+block: 3136, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 24, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 24, token: 192
+block: 3136, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 24, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 48, token: 192
+block: 784, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 48, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 48, token: 192
+block: 784, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 48, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 96, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 96, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 96, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 96, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 128, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 128, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 128, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 128, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 192, token: 192
+block: 49, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 192, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 192, token: 192
+block: 49, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 192, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 192, token: 192
+L2G: 2 heads, inp: 192, token: 192
+MobileFormer(
+  (tokens): Embedding(6, 192)
+  (stem): Sequential(
+    (0): Conv2d(3, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU6(inplace=True)
+  )
+  (features): Sequential(
+    (0): DnaBlock3(
+      (conv): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+        (3): Sequential()
+        (4): Conv2d(32, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (5): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(16, 96, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(24, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=24, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=16, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=16, bias=True)
+        (proj): Linear(in_features=16, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=192, out_features=24, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (2): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(24, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(96, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=96, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=24, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=24, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=192, out_features=24, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (3): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(24, 144, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=24, bias=False)
+        (1): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=288, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(144, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(48, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=384, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=24, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=24, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=192, out_features=48, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (4): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(48, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=384, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=192, bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=384, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=48, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=192, out_features=48, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (5): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(48, 288, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=576, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(288, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(96, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=96, bias=False)
+        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=768, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=48, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=192, out_features=96, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (6): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(96, 384, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=768, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=384, bias=False)
+        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=768, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=96, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=96, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=192, out_features=96, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (7): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(96, 576, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1152, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=576, bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1152, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(576, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=96, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=96, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=192, out_features=128, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (8): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(128, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=768, bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(768, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=128, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=128, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=192, out_features=128, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (9): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(128, 768, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=128, bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(768, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(192, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=192, bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(768, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=128, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=128, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (10): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(1152, 1152, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1152, bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(1152, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=192, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (11): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(1152, 1152, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1152, bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(1152, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=192, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+  )
+  (local_global): Local2Global(
+    (alpha): Sequential(
+      (0): Linear(in_features=192, out_features=192, bias=True)
+      (1): h_sigmoid(
+        (relu): ReLU6(inplace=True)
+      )
+    )
+    (q): Linear(in_features=192, out_features=192, bias=True)
+    (proj): Linear(in_features=192, out_features=192, bias=True)
+    (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+    (drop_path): DropPath(drop_prob=0.000)
+  )
+  (classifier): MergeClassifier(
+    (conv): Sequential(
+      (0): Sequential()
+      (1): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (2): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (act): DyReLU(
+      (act): ReLU6(inplace=True)
+    )
+    (hyper): Sequential()
+    (avgpool): Sequential(
+      (0): AdaptiveAvgPool2d(output_size=(1, 1))
+      (1): h_swish(
+        (sigmoid): h_sigmoid(
+          (relu): ReLU6(inplace=True)
+        )
+      )
+    )
+    (fc): Sequential(
+      (0): Linear(in_features=1344, out_features=1920, bias=True)
+      (1): BatchNorm1d(1920, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): h_swish(
+        (sigmoid): h_sigmoid(
+          (relu): ReLU6(inplace=True)
+        )
+      )
+    )
+    (classifier): Sequential(
+      (0): Dropout(p=0.0, inplace=False)
+      (1): Linear(in_features=1920, out_features=1000, bias=True)
+    )
+  )
+)
+Train: 0 [   0/64058 (  0%)]  Loss: 6.97 (6.97)  Time: 1.745s,   11.46/s  (1.745s,   11.46/s)  LR: 1.000e-05  Data: 0.414 (0.414)  Elapsed/ETA: 1.7s / 111765.7s
+Train: 0 [  50/64058 (  0%)]  Loss: 6.96 (6.95)  Time: 0.316s,   63.33/s  (0.346s,   57.83/s)  LR: 1.000e-05  Data: 0.004 (0.012)  Elapsed/ETA: 17.6s / 22136.5s
+Train: 0 [ 100/64058 (  0%)]  Loss: 6.89 (6.94)  Time: 0.316s,   63.27/s  (0.332s,   60.21/s)  LR: 1.000e-05  Data: 0.004 (0.008)  Elapsed/ETA: 33.6s / 21245.1s
+Train: 0 [ 150/64058 (  0%)]  Loss: 7.02 (6.94)  Time: 0.316s,   63.22/s  (0.326s,   61.38/s)  LR: 1.000e-05  Data: 0.003 (0.007)  Elapsed/ETA: 49.2s / 20824.5s
+Train: 0 [ 200/64058 (  0%)]  Loss: 6.93 (6.94)  Time: 0.317s,   63.12/s  (0.324s,   61.74/s)  LR: 1.000e-05  Data: 0.004 (0.006)  Elapsed/ETA: 65.1s / 20685.9s
+Train: 0 [ 250/64058 (  0%)]  Loss: 6.89 (6.94)  Time: 0.318s,   62.97/s  (0.323s,   61.96/s)  LR: 1.000e-05  Data: 0.004 (0.006)  Elapsed/ETA: 81.0s / 20595.0s
+Train: 0 [ 300/64058 (  0%)]  Loss: 6.94 (6.94)  Time: 0.316s,   63.21/s  (0.322s,   62.17/s)  LR: 1.000e-05  Data: 0.004 (0.005)  Elapsed/ETA: 96.8s / 20510.1s
+Train: 0 [ 350/64058 (  1%)]  Loss: 7.02 (6.94)  Time: 0.307s,   65.18/s  (0.321s,   62.30/s)  LR: 1.000e-05  Data: 0.004 (0.005)  Elapsed/ETA: 112.7s / 20452.6s
+Train: 0 [ 400/64058 (  1%)]  Loss: 6.90 (6.93)  Time: 0.320s,   62.41/s  (0.321s,   62.40/s)  LR: 1.000e-05  Data: 0.004 (0.005)  Elapsed/ETA: 128.5s / 20403.2s
+Train: 0 [ 450/64058 (  1%)]  Loss: 6.86 (6.93)  Time: 0.230s,   86.96/s  (0.317s,   63.05/s)  LR: 1.000e-05  Data: 0.004 (0.005)  Elapsed/ETA: 143.0s / 20175.1s
+Train: 0 [ 500/64058 (  1%)]  Loss: 6.88 (6.93)  Time: 0.240s,   83.20/s  (0.309s,   64.69/s)  LR: 1.000e-05  Data: 0.005 (0.005)  Elapsed/ETA: 154.9s / 19649.2s
+Train: 0 [ 550/64058 (  1%)]  Loss: 6.95 (6.93)  Time: 0.235s,   84.99/s  (0.303s,   66.07/s)  LR: 1.000e-05  Data: 0.004 (0.005)  Elapsed/ETA: 166.8s / 19225.2s
+Train: 0 [ 600/64058 (  1%)]  Loss: 6.93 (6.93)  Time: 0.238s,   83.88/s  (0.297s,   67.25/s)  LR: 1.000e-05  Data: 0.005 (0.005)  Elapsed/ETA: 178.7s / 18872.4s
+Train: 0 [ 650/64058 (  1%)]  Loss: 6.98 (6.93)  Time: 0.237s,   84.22/s  (0.293s,   68.29/s)  LR: 1.000e-05  Data: 0.005 (0.005)  Elapsed/ETA: 190.6s / 18568.8s
+Train: 0 [ 700/64058 (  1%)]  Loss: 6.89 (6.93)  Time: 0.232s,   86.03/s  (0.289s,   69.20/s)  LR: 1.000e-05  Data: 0.004 (0.005)  Elapsed/ETA: 202.6s / 18310.4s
+Train: 0 [ 750/64058 (  1%)]  Loss: 6.92 (6.93)  Time: 0.305s,   65.48/s  (0.287s,   69.72/s)  LR: 1.000e-05  Data: 0.003 (0.005)  Elapsed/ETA: 215.4s / 18160.7s
+Train: 0 [ 800/64058 (  1%)]  Loss: 6.92 (6.93)  Time: 0.229s,   87.38/s  (0.285s,   70.19/s)  LR: 1.000e-05  Data: 0.004 (0.005)  Elapsed/ETA: 228.2s / 18025.0s
+Train: 0 [ 850/64058 (  1%)]  Loss: 6.93 (6.93)  Time: 0.216s,   92.70/s  (0.281s,   71.21/s)  LR: 1.000e-05  Data: 0.003 (0.005)  Elapsed/ETA: 239.0s / 17751.5s
+Train: 0 [ 900/64058 (  1%)]  Loss: 7.04 (6.93)  Time: 0.214s,   93.43/s  (0.277s,   72.16/s)  LR: 1.000e-05  Data: 0.003 (0.005)  Elapsed/ETA: 249.7s / 17504.0s
+Train: 0 [ 950/64058 (  1%)]  Loss: 6.80 (6.93)  Time: 0.196s,  101.94/s  (0.274s,   73.07/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 260.3s / 17272.9s
+Train: 0 [1000/64058 (  2%)]  Loss: 6.87 (6.93)  Time: 0.217s,   92.02/s  (0.271s,   73.85/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 271.1s / 17077.4s
+Train: 0 [1050/64058 (  2%)]  Loss: 6.86 (6.93)  Time: 0.202s,   99.11/s  (0.268s,   74.66/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 281.5s / 16878.2s
+Train: 0 [1100/64058 (  2%)]  Loss: 6.90 (6.92)  Time: 0.215s,   93.05/s  (0.265s,   75.42/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 292.0s / 16695.9s
+Train: 0 [1150/64058 (  2%)]  Loss: 6.88 (6.92)  Time: 0.212s,   94.51/s  (0.263s,   76.03/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 302.8s / 16548.9s
+Train: 0 [1200/64058 (  2%)]  Loss: 6.89 (6.92)  Time: 0.214s,   93.59/s  (0.261s,   76.65/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 313.4s / 16402.0s
+Train: 0 [1250/64058 (  2%)]  Loss: 6.94 (6.92)  Time: 0.209s,   95.52/s  (0.259s,   77.28/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 323.8s / 16254.2s
+Train: 0 [1300/64058 (  2%)]  Loss: 6.88 (6.92)  Time: 0.209s,   95.69/s  (0.257s,   77.78/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 334.5s / 16136.1s
+Train: 0 [1350/64058 (  2%)]  Loss: 6.94 (6.92)  Time: 0.221s,   90.35/s  (0.256s,   78.23/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 345.4s / 16031.2s
+Train: 0 [1400/64058 (  2%)]  Loss: 6.88 (6.92)  Time: 0.231s,   86.56/s  (0.255s,   78.57/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 356.6s / 15949.1s
+Train: 0 [1450/64058 (  2%)]  Loss: 6.90 (6.92)  Time: 0.217s,   92.28/s  (0.254s,   78.87/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 368.0s / 15876.5s
+Train: 0 [1500/64058 (  2%)]  Loss: 6.76 (6.92)  Time: 0.235s,   84.93/s  (0.253s,   79.17/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 379.2s / 15803.4s
+Train: 0 [1550/64058 (  2%)]  Loss: 6.87 (6.92)  Time: 0.154s,  130.19/s  (0.250s,   80.01/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 387.7s / 15623.9s
+Train: 0 [1600/64058 (  2%)]  Loss: 6.77 (6.92)  Time: 0.166s,  120.77/s  (0.247s,   80.81/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 396.2s / 15457.9s
+Train: 0 [1650/64058 (  3%)]  Loss: 6.84 (6.92)  Time: 0.149s,  134.45/s  (0.246s,   81.33/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 406.0s / 15346.3s
+Train: 0 [1700/64058 (  3%)]  Loss: 6.84 (6.91)  Time: 0.131s,  153.23/s  (0.243s,   82.17/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 414.0s / 15177.2s
+Train: 0 [1750/64058 (  3%)]  Loss: 6.92 (6.91)  Time: 0.168s,  119.21/s  (0.241s,   82.86/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 422.7s / 15039.8s
+Train: 0 [1800/64058 (  3%)]  Loss: 6.87 (6.91)  Time: 0.190s,  105.06/s  (0.240s,   83.45/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 431.6s / 14920.6s
+Train: 0 [1850/64058 (  3%)]  Loss: 6.79 (6.91)  Time: 0.196s,  102.02/s  (0.238s,   84.11/s)  LR: 1.000e-05  Data: 0.006 (0.004)  Elapsed/ETA: 440.2s / 14792.5s
+Train: 0 [1900/64058 (  3%)]  Loss: 6.97 (6.91)  Time: 0.128s,  156.35/s  (0.236s,   84.75/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 448.6s / 14667.7s
+Train: 0 [1950/64058 (  3%)]  Loss: 6.90 (6.91)  Time: 0.174s,  114.87/s  (0.234s,   85.42/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 456.8s / 14541.1s
+Train: 0 [2000/64058 (  3%)]  Loss: 6.91 (6.91)  Time: 0.136s,  146.95/s  (0.232s,   86.05/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 465.1s / 14422.7s
+Train: 0 [2050/64058 (  3%)]  Loss: 6.81 (6.91)  Time: 0.166s,  120.33/s  (0.231s,   86.59/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 473.7s / 14321.8s
+Train: 0 [2100/64058 (  3%)]  Loss: 6.85 (6.91)  Time: 0.194s,  103.12/s  (0.230s,   87.04/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 482.8s / 14236.4s
+Train: 0 [2150/64058 (  3%)]  Loss: 6.84 (6.91)  Time: 0.172s,  116.02/s  (0.228s,   87.59/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 491.1s / 14135.4s
+Train: 0 [2200/64058 (  3%)]  Loss: 6.76 (6.91)  Time: 0.174s,  115.09/s  (0.227s,   87.98/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 500.3s / 14060.8s
+Train: 0 [2250/64058 (  4%)]  Loss: 6.81 (6.91)  Time: 0.189s,  105.73/s  (0.226s,   88.47/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 508.9s / 13973.1s
+Train: 0 [2300/64058 (  4%)]  Loss: 6.97 (6.91)  Time: 0.133s,  150.03/s  (0.225s,   89.06/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 516.7s / 13868.9s
+Train: 0 [2350/64058 (  4%)]  Loss: 6.89 (6.90)  Time: 0.195s,  102.35/s  (0.223s,   89.50/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 525.4s / 13789.2s
+Train: 0 [2400/64058 (  4%)]  Loss: 6.91 (6.90)  Time: 0.138s,  145.40/s  (0.223s,   89.86/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 534.4s / 13722.8s
+Train: 0 [2450/64058 (  4%)]  Loss: 6.89 (6.90)  Time: 0.142s,  140.96/s  (0.222s,   90.27/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 543.0s / 13649.1s
+Train: 0 [2500/64058 (  4%)]  Loss: 6.79 (6.90)  Time: 0.179s,  112.02/s  (0.220s,   90.75/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 551.2s / 13565.6s
+Train: 0 [2550/64058 (  4%)]  Loss: 6.90 (6.90)  Time: 0.150s,  133.49/s  (0.219s,   91.24/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 559.2s / 13482.1s
+Train: 0 [2600/64058 (  4%)]  Loss: 6.81 (6.90)  Time: 0.181s,  110.74/s  (0.218s,   91.58/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 568.0s / 13421.7s
+Train: 0 [2650/64058 (  4%)]  Loss: 6.88 (6.90)  Time: 0.209s,   95.81/s  (0.218s,   91.95/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 576.6s / 13356.7s
+Train: 0 [2700/64058 (  4%)]  Loss: 6.80 (6.90)  Time: 0.181s,  110.62/s  (0.217s,   92.03/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 587.0s / 13334.1s
+Train: 0 [2750/64058 (  4%)]  Loss: 6.84 (6.90)  Time: 0.221s,   90.41/s  (0.217s,   92.07/s)  LR: 1.000e-05  Data: 0.006 (0.004)  Elapsed/ETA: 597.6s / 13317.5s
+Train: 0 [2800/64058 (  4%)]  Loss: 6.87 (6.90)  Time: 0.203s,   98.33/s  (0.217s,   92.28/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 607.1s / 13276.7s
+Train: 0 [2850/64058 (  4%)]  Loss: 6.98 (6.90)  Time: 0.197s,  101.44/s  (0.216s,   92.39/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 617.2s / 13249.6s
+Train: 0 [2900/64058 (  5%)]  Loss: 6.91 (6.90)  Time: 0.202s,   99.13/s  (0.217s,   92.35/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 628.3s / 13245.0s
+Train: 0 [2950/64058 (  5%)]  Loss: 6.93 (6.90)  Time: 0.230s,   87.04/s  (0.217s,   92.33/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 639.2s / 13236.3s
+Train: 0 [3000/64058 (  5%)]  Loss: 6.97 (6.90)  Time: 0.206s,   97.23/s  (0.217s,   92.30/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 650.3s / 13230.0s
+Train: 0 [3050/64058 (  5%)]  Loss: 6.93 (6.89)  Time: 0.227s,   88.07/s  (0.217s,   92.36/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 660.7s / 13210.8s
+Train: 0 [3100/64058 (  5%)]  Loss: 6.73 (6.89)  Time: 0.199s,  100.39/s  (0.216s,   92.55/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 670.1s / 13172.5s
+Train: 0 [3150/64058 (  5%)]  Loss: 6.91 (6.89)  Time: 0.191s,  104.90/s  (0.216s,   92.66/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 680.1s / 13146.0s
+Train: 0 [3200/64058 (  5%)]  Loss: 6.73 (6.89)  Time: 0.156s,  128.10/s  (0.215s,   92.98/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 688.5s / 13089.7s
+Train: 0 [3250/64058 (  5%)]  Loss: 6.84 (6.89)  Time: 0.176s,  113.55/s  (0.214s,   93.38/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 696.3s / 13024.2s
+Train: 0 [3300/64058 (  5%)]  Loss: 6.77 (6.89)  Time: 0.185s,  108.18/s  (0.214s,   93.62/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 705.2s / 12979.3s
+Train: 0 [3350/64058 (  5%)]  Loss: 6.85 (6.89)  Time: 0.230s,   86.98/s  (0.213s,   93.74/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 715.0s / 12952.4s
+Train: 0 [3400/64058 (  5%)]  Loss: 6.89 (6.89)  Time: 0.232s,   86.29/s  (0.214s,   93.62/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 726.5s / 12957.8s
+Train: 0 [3450/64058 (  5%)]  Loss: 6.90 (6.89)  Time: 0.232s,   86.34/s  (0.214s,   93.51/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 738.1s / 12962.3s
+Train: 0 [3500/64058 (  5%)]  Loss: 6.71 (6.89)  Time: 0.230s,   87.09/s  (0.214s,   93.40/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 749.6s / 12966.6s
+Train: 0 [3550/64058 (  6%)]  Loss: 6.83 (6.89)  Time: 0.226s,   88.46/s  (0.214s,   93.31/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 761.1s / 12968.9s
+Train: 0 [3600/64058 (  6%)]  Loss: 6.76 (6.89)  Time: 0.229s,   87.15/s  (0.215s,   93.23/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 772.5s / 12969.6s
+Train: 0 [3650/64058 (  6%)]  Loss: 6.74 (6.89)  Time: 0.227s,   87.95/s  (0.215s,   93.14/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 784.0s / 12971.8s
+Train: 0 [3700/64058 (  6%)]  Loss: 6.85 (6.89)  Time: 0.234s,   85.47/s  (0.215s,   93.04/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 795.6s / 12974.1s
+Train: 0 [3750/64058 (  6%)]  Loss: 6.70 (6.88)  Time: 0.215s,   92.84/s  (0.215s,   92.96/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 807.0s / 12974.3s
+Train: 0 [3800/64058 (  6%)]  Loss: 6.89 (6.88)  Time: 0.194s,  102.90/s  (0.215s,   92.94/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 817.9s / 12966.5s
+Train: 0 [3850/64058 (  6%)]  Loss: 6.73 (6.88)  Time: 0.195s,  102.61/s  (0.215s,   92.91/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 829.0s / 12960.9s
+Train: 0 [3900/64058 (  6%)]  Loss: 6.88 (6.88)  Time: 0.229s,   87.19/s  (0.215s,   92.87/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 840.1s / 12954.6s
+Train: 0 [3950/64058 (  6%)]  Loss: 6.76 (6.88)  Time: 0.208s,   96.29/s  (0.215s,   92.88/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 850.7s / 12942.3s
+Train: 0 [4000/64058 (  6%)]  Loss: 6.81 (6.88)  Time: 0.231s,   86.61/s  (0.216s,   92.81/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 862.2s / 12942.3s
+Train: 0 [4050/64058 (  6%)]  Loss: 6.82 (6.88)  Time: 0.221s,   90.34/s  (0.216s,   92.78/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 873.3s / 12935.4s
+Train: 0 [4100/64058 (  6%)]  Loss: 6.80 (6.88)  Time: 0.232s,   86.38/s  (0.216s,   92.73/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 884.5s / 12931.4s
+Train: 0 [4150/64058 (  6%)]  Loss: 6.65 (6.88)  Time: 0.236s,   84.61/s  (0.216s,   92.69/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 895.6s / 12926.0s
+Train: 0 [4200/64058 (  7%)]  Loss: 6.84 (6.88)  Time: 0.229s,   87.15/s  (0.216s,   92.64/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 906.9s / 12922.4s
+Train: 0 [4250/64058 (  7%)]  Loss: 6.73 (6.88)  Time: 0.235s,   85.20/s  (0.216s,   92.58/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 918.4s / 12920.4s
+Train: 0 [4300/64058 (  7%)]  Loss: 6.82 (6.88)  Time: 0.227s,   88.30/s  (0.216s,   92.55/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 929.4s / 12912.9s
+Train: 0 [4350/64058 (  7%)]  Loss: 6.72 (6.88)  Time: 0.226s,   88.44/s  (0.216s,   92.50/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 940.8s / 12910.2s
+Train: 0 [4400/64058 (  7%)]  Loss: 6.72 (6.88)  Time: 0.236s,   84.59/s  (0.216s,   92.45/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 952.1s / 12905.4s
+Train: 0 [4450/64058 (  7%)]  Loss: 6.91 (6.88)  Time: 0.232s,   86.23/s  (0.216s,   92.40/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 963.4s / 12901.9s
+Train: 0 [4500/64058 (  7%)]  Loss: 6.87 (6.87)  Time: 0.231s,   86.65/s  (0.217s,   92.34/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 974.9s / 12899.7s
+Train: 0 [4550/64058 (  7%)]  Loss: 6.70 (6.87)  Time: 0.227s,   87.94/s  (0.217s,   92.33/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 985.8s / 12890.1s
+Train: 0 [4600/64058 (  7%)]  Loss: 6.76 (6.87)  Time: 0.123s,  162.13/s  (0.216s,   92.52/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 994.6s / 12852.5s
+Train: 0 [4650/64058 (  7%)]  Loss: 6.75 (6.87)  Time: 0.202s,   99.09/s  (0.216s,   92.68/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1003.7s / 12820.3s
+Train: 0 [4700/64058 (  7%)]  Loss: 6.82 (6.87)  Time: 0.122s,  164.51/s  (0.215s,   92.84/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1012.7s / 12786.9s
+Train: 0 [4750/64058 (  7%)]  Loss: 6.74 (6.87)  Time: 0.210s,   95.38/s  (0.215s,   93.06/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1021.1s / 12746.4s
+Train: 0 [4800/64058 (  7%)]  Loss: 6.89 (6.87)  Time: 0.185s,  108.02/s  (0.215s,   93.22/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1030.1s / 12713.8s
+Train: 0 [4850/64058 (  8%)]  Loss: 6.77 (6.87)  Time: 0.221s,   90.35/s  (0.215s,   93.17/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1041.4s / 12710.0s
+Train: 0 [4900/64058 (  8%)]  Loss: 6.98 (6.87)  Time: 0.230s,   87.14/s  (0.215s,   93.11/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1052.8s / 12707.6s
+Train: 0 [4950/64058 (  8%)]  Loss: 6.92 (6.87)  Time: 0.231s,   86.53/s  (0.215s,   93.04/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1064.3s / 12705.5s
+Train: 0 [5000/64058 (  8%)]  Loss: 6.88 (6.87)  Time: 0.232s,   86.29/s  (0.215s,   92.98/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1075.7s / 12702.6s
+Train: 0 [5050/64058 (  8%)]  Loss: 6.68 (6.87)  Time: 0.196s,  102.25/s  (0.215s,   92.93/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1087.0s / 12698.9s
+Train: 0 [5100/64058 (  8%)]  Loss: 6.86 (6.87)  Time: 0.231s,   86.57/s  (0.215s,   92.89/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1098.2s / 12693.3s
+Train: 0 [5150/64058 (  8%)]  Loss: 6.86 (6.87)  Time: 0.225s,   88.92/s  (0.215s,   92.87/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1109.3s / 12686.5s
+Train: 0 [5200/64058 (  8%)]  Loss: 6.79 (6.87)  Time: 0.212s,   94.15/s  (0.215s,   92.82/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1120.6s / 12681.6s
+Train: 0 [5250/64058 (  8%)]  Loss: 6.90 (6.86)  Time: 0.231s,   86.40/s  (0.216s,   92.77/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1132.1s / 12678.5s
+Train: 0 [5300/64058 (  8%)]  Loss: 6.69 (6.86)  Time: 0.218s,   91.74/s  (0.216s,   92.74/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1143.2s / 12671.4s
+Train: 0 [5350/64058 (  8%)]  Loss: 6.66 (6.86)  Time: 0.228s,   87.62/s  (0.216s,   92.69/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1154.6s / 12667.8s
+Train: 0 [5400/64058 (  8%)]  Loss: 6.73 (6.86)  Time: 0.230s,   87.00/s  (0.216s,   92.63/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1166.1s / 12664.7s
+Train: 0 [5450/64058 (  9%)]  Loss: 7.04 (6.86)  Time: 0.218s,   91.75/s  (0.216s,   92.60/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1177.4s / 12658.6s
+Train: 0 [5500/64058 (  9%)]  Loss: 6.93 (6.86)  Time: 0.192s,  104.29/s  (0.216s,   92.69/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1187.0s / 12635.5s
+Train: 0 [5550/64058 (  9%)]  Loss: 6.81 (6.86)  Time: 0.168s,  119.36/s  (0.215s,   92.89/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1195.1s / 12596.7s
+Train: 0 [5600/64058 (  9%)]  Loss: 6.76 (6.86)  Time: 0.230s,   86.96/s  (0.215s,   93.06/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1203.7s / 12563.0s
+Train: 0 [5650/64058 (  9%)]  Loss: 6.69 (6.86)  Time: 0.151s,  132.26/s  (0.214s,   93.27/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1211.8s / 12524.4s
+Train: 0 [5700/64058 (  9%)]  Loss: 6.84 (6.86)  Time: 0.146s,  137.09/s  (0.214s,   93.52/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1219.2s / 12479.6s
+Train: 0 [5750/64058 (  9%)]  Loss: 6.74 (6.86)  Time: 0.175s,  114.05/s  (0.214s,   93.64/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1228.3s / 12453.0s
+Train: 0 [5800/64058 (  9%)]  Loss: 6.81 (6.86)  Time: 0.206s,   96.94/s  (0.213s,   93.76/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1237.5s / 12427.5s
+Train: 0 [5850/64058 (  9%)]  Loss: 6.69 (6.86)  Time: 0.178s,  112.34/s  (0.213s,   93.85/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1246.8s / 12403.9s
+Train: 0 [5900/64058 (  9%)]  Loss: 6.80 (6.86)  Time: 0.230s,   86.82/s  (0.213s,   93.81/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1258.0s / 12398.5s
+Train: 0 [5950/64058 (  9%)]  Loss: 6.77 (6.86)  Time: 0.231s,   86.54/s  (0.213s,   93.75/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1269.5s / 12395.9s
+Train: 0 [6000/64058 (  9%)]  Loss: 6.73 (6.86)  Time: 0.231s,   86.49/s  (0.213s,   93.69/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1281.1s / 12393.6s
+Train: 0 [6050/64058 (  9%)]  Loss: 6.75 (6.85)  Time: 0.232s,   86.36/s  (0.214s,   93.63/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1292.5s / 12390.8s
+Train: 0 [6100/64058 ( 10%)]  Loss: 6.92 (6.85)  Time: 0.231s,   86.57/s  (0.214s,   93.57/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1304.0s / 12387.4s
+Train: 0 [6150/64058 ( 10%)]  Loss: 6.77 (6.85)  Time: 0.230s,   87.13/s  (0.214s,   93.52/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1315.5s / 12384.0s
+Train: 0 [6200/64058 ( 10%)]  Loss: 6.73 (6.85)  Time: 0.230s,   86.78/s  (0.214s,   93.47/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1326.9s / 12380.3s
+Train: 0 [6250/64058 ( 10%)]  Loss: 6.80 (6.85)  Time: 0.230s,   86.90/s  (0.214s,   93.42/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1338.3s / 12376.1s
+Train: 0 [6300/64058 ( 10%)]  Loss: 6.82 (6.85)  Time: 0.231s,   86.68/s  (0.214s,   93.37/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1349.7s / 12372.1s
+Train: 0 [6350/64058 ( 10%)]  Loss: 6.76 (6.85)  Time: 0.225s,   88.86/s  (0.214s,   93.32/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1361.1s / 12367.7s
+Train: 0 [6400/64058 ( 10%)]  Loss: 6.80 (6.85)  Time: 0.223s,   89.52/s  (0.214s,   93.27/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1372.6s / 12363.3s
+Train: 0 [6450/64058 ( 10%)]  Loss: 6.91 (6.85)  Time: 0.230s,   87.06/s  (0.215s,   93.23/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1383.8s / 12357.5s
+Train: 0 [6500/64058 ( 10%)]  Loss: 6.77 (6.85)  Time: 0.230s,   87.10/s  (0.215s,   93.18/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1395.3s / 12353.5s
+Train: 0 [6550/64058 ( 10%)]  Loss: 6.95 (6.85)  Time: 0.234s,   85.47/s  (0.215s,   93.13/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1406.8s / 12349.6s
+Train: 0 [6600/64058 ( 10%)]  Loss: 6.79 (6.85)  Time: 0.229s,   87.38/s  (0.215s,   93.08/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1418.3s / 12345.3s
+Train: 0 [6650/64058 ( 10%)]  Loss: 6.75 (6.85)  Time: 0.234s,   85.59/s  (0.215s,   93.04/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1429.8s / 12340.9s
+Train: 0 [6700/64058 ( 10%)]  Loss: 6.82 (6.85)  Time: 0.230s,   86.96/s  (0.215s,   92.99/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1441.3s / 12336.4s
+Train: 0 [6750/64058 ( 11%)]  Loss: 6.77 (6.85)  Time: 0.227s,   88.15/s  (0.215s,   92.95/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1452.6s / 12330.9s
+Train: 0 [6800/64058 ( 11%)]  Loss: 6.83 (6.85)  Time: 0.230s,   87.13/s  (0.215s,   92.91/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1464.1s / 12325.8s
+Train: 0 [6850/64058 ( 11%)]  Loss: 6.77 (6.85)  Time: 0.226s,   88.53/s  (0.215s,   92.86/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1475.5s / 12320.7s
+Train: 0 [6900/64058 ( 11%)]  Loss: 6.70 (6.85)  Time: 0.227s,   88.11/s  (0.215s,   92.88/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1486.0s / 12308.1s
+Train: 0 [6950/64058 ( 11%)]  Loss: 6.78 (6.84)  Time: 0.175s,  113.98/s  (0.215s,   92.87/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1496.9s / 12298.0s
+Train: 0 [7000/64058 ( 11%)]  Loss: 6.89 (6.84)  Time: 0.140s,  143.33/s  (0.215s,   92.97/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1506.0s / 12273.8s
+Train: 0 [7050/64058 ( 11%)]  Loss: 6.65 (6.84)  Time: 0.153s,  130.80/s  (0.215s,   93.12/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1514.5s / 12244.4s
+Train: 0 [7100/64058 ( 11%)]  Loss: 6.68 (6.84)  Time: 0.179s,  111.78/s  (0.215s,   93.18/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1524.1s / 12224.8s
+Train: 0 [7150/64058 ( 11%)]  Loss: 6.65 (6.84)  Time: 0.187s,  107.09/s  (0.214s,   93.27/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1533.4s / 12202.4s
+Train: 0 [7200/64058 ( 11%)]  Loss: 6.81 (6.84)  Time: 0.164s,  122.15/s  (0.214s,   93.34/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1543.0s / 12183.1s
+Train: 0 [7250/64058 ( 11%)]  Loss: 6.89 (6.84)  Time: 0.180s,  110.96/s  (0.214s,   93.46/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1551.8s / 12157.1s
+Train: 0 [7300/64058 ( 11%)]  Loss: 6.69 (6.84)  Time: 0.222s,   90.15/s  (0.214s,   93.56/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1560.7s / 12132.7s
+Train: 0 [7350/64058 ( 11%)]  Loss: 6.67 (6.84)  Time: 0.200s,  100.02/s  (0.214s,   93.66/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1569.8s / 12109.4s
+Train: 0 [7400/64058 ( 12%)]  Loss: 6.70 (6.84)  Time: 0.133s,  149.98/s  (0.213s,   93.80/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1578.1s / 12080.5s
+Train: 0 [7450/64058 ( 12%)]  Loss: 6.88 (6.84)  Time: 0.168s,  118.73/s  (0.213s,   93.92/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1586.7s / 12054.3s
+Train: 0 [7500/64058 ( 12%)]  Loss: 6.71 (6.84)  Time: 0.169s,  118.13/s  (0.213s,   94.03/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1595.4s / 12029.5s
+Train: 0 [7550/64058 ( 12%)]  Loss: 6.63 (6.84)  Time: 0.160s,  125.14/s  (0.213s,   94.10/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1604.9s / 12010.2s
+Train: 0 [7600/64058 ( 12%)]  Loss: 6.87 (6.84)  Time: 0.216s,   92.78/s  (0.212s,   94.13/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1615.0s / 11995.7s
+Train: 0 [7650/64058 ( 12%)]  Loss: 6.70 (6.84)  Time: 0.158s,  126.90/s  (0.212s,   94.22/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1624.1s / 11973.3s
+Train: 0 [7700/64058 ( 12%)]  Loss: 6.77 (6.84)  Time: 0.159s,  125.75/s  (0.212s,   94.29/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1633.5s / 11954.2s
+Train: 0 [7750/64058 ( 12%)]  Loss: 6.74 (6.84)  Time: 0.139s,  143.64/s  (0.212s,   94.42/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1641.8s / 11927.1s
+Train: 0 [7800/64058 ( 12%)]  Loss: 6.78 (6.84)  Time: 0.201s,   99.30/s  (0.212s,   94.51/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1650.8s / 11904.8s
+Train: 0 [7850/64058 ( 12%)]  Loss: 6.80 (6.83)  Time: 0.233s,   86.02/s  (0.211s,   94.58/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1660.3s / 11886.1s
+Train: 0 [7900/64058 ( 12%)]  Loss: 6.73 (6.83)  Time: 0.219s,   91.40/s  (0.211s,   94.57/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1670.9s / 11876.0s
+Train: 0 [7950/64058 ( 12%)]  Loss: 6.62 (6.83)  Time: 0.231s,   86.54/s  (0.211s,   94.62/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1680.7s / 11860.0s
+Train: 0 [8000/64058 ( 12%)]  Loss: 6.77 (6.83)  Time: 0.217s,   92.29/s  (0.211s,   94.62/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1691.3s / 11849.4s
+Train: 0 [8050/64058 ( 13%)]  Loss: 6.67 (6.83)  Time: 0.229s,   87.32/s  (0.211s,   94.58/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1702.5s / 11843.7s
+Train: 0 [8100/64058 ( 13%)]  Loss: 6.66 (6.83)  Time: 0.230s,   86.96/s  (0.212s,   94.54/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1713.7s / 11837.2s
+Train: 0 [8150/64058 ( 13%)]  Loss: 6.78 (6.83)  Time: 0.126s,  158.38/s  (0.211s,   94.66/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1722.2s / 11812.3s
+Train: 0 [8200/64058 ( 13%)]  Loss: 6.71 (6.83)  Time: 0.130s,  153.89/s  (0.211s,   94.86/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1729.0s / 11776.3s
+Train: 0 [8250/64058 ( 13%)]  Loss: 6.73 (6.83)  Time: 0.213s,   93.93/s  (0.211s,   94.93/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1738.4s / 11757.9s
+Train: 0 [8300/64058 ( 13%)]  Loss: 6.97 (6.83)  Time: 0.218s,   91.60/s  (0.211s,   94.92/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1749.1s / 11748.8s
+Train: 0 [8350/64058 ( 13%)]  Loss: 6.90 (6.83)  Time: 0.215s,   92.97/s  (0.211s,   94.90/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1759.9s / 11739.7s
+Train: 0 [8400/64058 ( 13%)]  Loss: 6.90 (6.83)  Time: 0.217s,   91.96/s  (0.211s,   94.89/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1770.6s / 11730.5s
+Train: 0 [8450/64058 ( 13%)]  Loss: 6.55 (6.83)  Time: 0.215s,   93.06/s  (0.211s,   94.88/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1781.4s / 11721.4s
+Train: 0 [8500/64058 ( 13%)]  Loss: 6.68 (6.83)  Time: 0.133s,  150.59/s  (0.210s,   95.02/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1789.4s / 11694.3s
+Train: 0 [8550/64058 ( 13%)]  Loss: 6.81 (6.83)  Time: 0.128s,  155.90/s  (0.210s,   95.22/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1796.1s / 11658.9s
+Train: 0 [8600/64058 ( 13%)]  Loss: 6.84 (6.83)  Time: 0.126s,  158.51/s  (0.210s,   95.43/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1802.6s / 11622.9s
+Train: 0 [8650/64058 ( 14%)]  Loss: 6.90 (6.83)  Time: 0.139s,  143.90/s  (0.209s,   95.63/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1809.2s / 11587.3s
+Train: 0 [8700/64058 ( 14%)]  Loss: 6.58 (6.83)  Time: 0.129s,  155.62/s  (0.209s,   95.85/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1815.6s / 11550.9s
+Train: 0 [8750/64058 ( 14%)]  Loss: 6.99 (6.83)  Time: 0.125s,  159.39/s  (0.208s,   96.05/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1822.2s / 11516.4s
+Train: 0 [8800/64058 ( 14%)]  Loss: 6.60 (6.83)  Time: 0.126s,  158.65/s  (0.208s,   96.25/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1828.9s / 11482.6s
+Train: 0 [8850/64058 ( 14%)]  Loss: 6.78 (6.83)  Time: 0.214s,   93.60/s  (0.207s,   96.40/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1836.2s / 11453.2s
+Train: 0 [8900/64058 ( 14%)]  Loss: 6.76 (6.83)  Time: 0.216s,   92.77/s  (0.208s,   96.38/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1847.0s / 11445.2s
+Train: 0 [8950/64058 ( 14%)]  Loss: 6.87 (6.83)  Time: 0.213s,   93.76/s  (0.208s,   96.37/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1857.7s / 11437.0s
+Train: 0 [9000/64058 ( 14%)]  Loss: 6.69 (6.82)  Time: 0.218s,   91.93/s  (0.208s,   96.35/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1868.5s / 11429.1s
+Train: 0 [9050/64058 ( 14%)]  Loss: 6.76 (6.82)  Time: 0.213s,   94.07/s  (0.208s,   96.33/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1879.3s / 11421.1s
+Train: 0 [9100/64058 ( 14%)]  Loss: 6.73 (6.82)  Time: 0.215s,   93.14/s  (0.208s,   96.31/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1890.0s / 11412.9s
+Train: 0 [9150/64058 ( 14%)]  Loss: 6.78 (6.82)  Time: 0.124s,  161.74/s  (0.208s,   96.33/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1899.9s / 11399.4s
+Train: 0 [9200/64058 ( 14%)]  Loss: 6.72 (6.82)  Time: 0.146s,  137.12/s  (0.207s,   96.51/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 1906.7s / 11367.7s
+Train: 0 [9250/64058 ( 14%)]  Loss: 6.86 (6.82)  Time: 0.188s,  106.29/s  (0.207s,   96.55/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1916.4s / 11353.5s
+Train: 0 [9300/64058 ( 15%)]  Loss: 6.91 (6.82)  Time: 0.224s,   89.48/s  (0.207s,   96.50/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1927.7s / 11348.5s
+Train: 0 [9350/64058 ( 15%)]  Loss: 6.73 (6.82)  Time: 0.226s,   88.47/s  (0.207s,   96.44/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1939.2s / 11345.1s
+Train: 0 [9400/64058 ( 15%)]  Loss: 6.65 (6.82)  Time: 0.240s,   83.31/s  (0.207s,   96.42/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1950.0s / 11337.4s
+Train: 0 [9450/64058 ( 15%)]  Loss: 6.89 (6.82)  Time: 0.225s,   88.77/s  (0.208s,   96.37/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1961.4s / 11333.1s
+Train: 0 [9500/64058 ( 15%)]  Loss: 6.96 (6.82)  Time: 0.240s,   83.19/s  (0.208s,   96.31/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1973.1s / 11330.0s
+Train: 0 [9550/64058 ( 15%)]  Loss: 6.73 (6.82)  Time: 0.230s,   87.07/s  (0.208s,   96.24/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 1984.9s / 11327.8s
+Train: 0 [9600/64058 ( 15%)]  Loss: 6.87 (6.82)  Time: 0.242s,   82.52/s  (0.208s,   96.17/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 1996.6s / 11324.7s
+Train: 0 [9650/64058 ( 15%)]  Loss: 6.73 (6.82)  Time: 0.233s,   85.78/s  (0.208s,   96.12/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2008.1s / 11320.4s
+Train: 0 [9700/64058 ( 15%)]  Loss: 6.75 (6.82)  Time: 0.237s,   84.31/s  (0.208s,   96.06/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 2019.8s / 11317.2s
+Train: 0 [9750/64058 ( 15%)]  Loss: 6.87 (6.82)  Time: 0.230s,   87.03/s  (0.208s,   96.00/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2031.4s / 11313.6s
+Train: 0 [9800/64058 ( 15%)]  Loss: 6.80 (6.82)  Time: 0.227s,   88.24/s  (0.208s,   95.96/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2042.8s / 11308.7s
+Train: 0 [9850/64058 ( 15%)]  Loss: 6.70 (6.82)  Time: 0.230s,   87.12/s  (0.209s,   95.91/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2054.3s / 11303.9s
+Train: 0 [9900/64058 ( 15%)]  Loss: 6.76 (6.82)  Time: 0.225s,   88.74/s  (0.209s,   95.87/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2065.4s / 11297.6s
+Train: 0 [9950/64058 ( 16%)]  Loss: 6.68 (6.82)  Time: 0.242s,   82.51/s  (0.209s,   95.84/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2076.5s / 11290.9s
+Train: 0 [10000/64058 ( 16%)]  Loss: 6.82 (6.82)  Time: 0.211s,   94.90/s  (0.209s,   95.81/s)  LR: 1.000e-05  Data: 0.002 (0.004)  Elapsed/ETA: 2087.6s / 11283.7s
+Train: 0 [10050/64058 ( 16%)]  Loss: 6.64 (6.82)  Time: 0.221s,   90.31/s  (0.209s,   95.79/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2098.5s / 11275.9s
+Train: 0 [10100/64058 ( 16%)]  Loss: 6.81 (6.81)  Time: 0.225s,   89.08/s  (0.209s,   95.77/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 2109.5s / 11268.6s
+Train: 0 [10150/64058 ( 16%)]  Loss: 6.97 (6.81)  Time: 0.226s,   88.53/s  (0.209s,   95.73/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 2120.8s / 11262.4s
+Train: 0 [10200/64058 ( 16%)]  Loss: 6.86 (6.81)  Time: 0.226s,   88.58/s  (0.209s,   95.70/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2131.9s / 11255.3s
+Train: 0 [10250/64058 ( 16%)]  Loss: 6.83 (6.81)  Time: 0.240s,   83.34/s  (0.209s,   95.66/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 2143.1s / 11249.1s
+Train: 0 [10300/64058 ( 16%)]  Loss: 6.59 (6.81)  Time: 0.240s,   83.18/s  (0.209s,   95.61/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 2154.9s / 11245.6s
+Train: 0 [10350/64058 ( 16%)]  Loss: 6.78 (6.81)  Time: 0.238s,   83.97/s  (0.209s,   95.55/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 2166.7s / 11241.9s
+Train: 0 [10400/64058 ( 16%)]  Loss: 6.80 (6.81)  Time: 0.235s,   85.06/s  (0.209s,   95.51/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 2178.1s / 11236.2s
+Train: 0 [10450/64058 ( 16%)]  Loss: 6.71 (6.81)  Time: 0.232s,   86.32/s  (0.210s,   95.44/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2190.0s / 11233.2s
+Train: 0 [10500/64058 ( 16%)]  Loss: 6.55 (6.81)  Time: 0.214s,   93.46/s  (0.210s,   95.43/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2200.8s / 11224.4s
+Train: 0 [10550/64058 ( 16%)]  Loss: 6.75 (6.81)  Time: 0.217s,   92.12/s  (0.210s,   95.43/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 2211.2s / 11213.5s
+Train: 0 [10600/64058 ( 17%)]  Loss: 6.97 (6.81)  Time: 0.233s,   86.00/s  (0.210s,   95.39/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2222.7s / 11208.4s
+Train: 0 [10650/64058 ( 17%)]  Loss: 6.87 (6.81)  Time: 0.234s,   85.62/s  (0.210s,   95.34/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2234.2s / 11203.1s
+Train: 0 [10700/64058 ( 17%)]  Loss: 6.86 (6.81)  Time: 0.229s,   87.36/s  (0.210s,   95.30/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2245.8s / 11198.0s
+Train: 0 [10750/64058 ( 17%)]  Loss: 6.50 (6.81)  Time: 0.236s,   84.68/s  (0.210s,   95.25/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2257.5s / 11193.5s
+Train: 0 [10800/64058 ( 17%)]  Loss: 6.76 (6.81)  Time: 0.237s,   84.53/s  (0.210s,   95.19/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2269.4s / 11189.7s
+Train: 0 [10850/64058 ( 17%)]  Loss: 6.82 (6.81)  Time: 0.239s,   83.80/s  (0.210s,   95.15/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 2280.7s / 11183.4s
+Train: 0 [10900/64058 ( 17%)]  Loss: 6.64 (6.81)  Time: 0.234s,   85.54/s  (0.210s,   95.10/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2292.4s / 11178.7s
+Train: 0 [10950/64058 ( 17%)]  Loss: 6.65 (6.81)  Time: 0.225s,   88.87/s  (0.210s,   95.05/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2304.2s / 11174.2s
+Train: 0 [11000/64058 ( 17%)]  Loss: 6.92 (6.81)  Time: 0.227s,   88.09/s  (0.210s,   95.01/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2315.6s / 11168.2s
+Train: 0 [11050/64058 ( 17%)]  Loss: 6.79 (6.81)  Time: 0.240s,   83.22/s  (0.211s,   94.97/s)  LR: 1.000e-05  Data: 0.005 (0.004)  Elapsed/ETA: 2327.3s / 11163.1s
+Train: 0 [11100/64058 ( 17%)]  Loss: 6.82 (6.81)  Time: 0.212s,   94.41/s  (0.211s,   94.97/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 2337.8s / 11152.6s
+Train: 0 [11150/64058 ( 17%)]  Loss: 6.65 (6.81)  Time: 0.190s,  105.36/s  (0.211s,   94.98/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 2348.0s / 11140.3s
+Train: 0 [11200/64058 ( 17%)]  Loss: 6.66 (6.81)  Time: 0.212s,   94.14/s  (0.211s,   94.99/s)  LR: 1.000e-05  Data: 0.003 (0.004)  Elapsed/ETA: 2358.4s / 11129.3s
+Train: 0 [11250/64058 ( 18%)]  Loss: 6.58 (6.81)  Time: 0.237s,   84.38/s  (0.211s,   94.99/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2369.0s / 11119.0s
+Train: 0 [11300/64058 ( 18%)]  Loss: 6.74 (6.81)  Time: 0.228s,   87.65/s  (0.211s,   94.94/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2380.6s / 11113.4s
+Train: 0 [11350/64058 ( 18%)]  Loss: 6.68 (6.81)  Time: 0.230s,   86.79/s  (0.211s,   94.90/s)  LR: 1.000e-05  Data: 0.004 (0.004)  Elapsed/ETA: 2392.2s / 11107.9s

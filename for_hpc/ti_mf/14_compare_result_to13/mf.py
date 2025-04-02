@@ -2262,14 +2262,20 @@ _logger = logging.getLogger('train')
 
 class Args:
     ### CUSTOM ###
+    # Load this checkpoint as if they were the pretrained weights (with adaptation) (default: None).
+    pretrained_path = '/home/tasi2425111/for_hpc/baru/ti_mf/14_compare_result_to13/output/train/20250331-191156-mobile_former_294m-224/checkpoint-119.pth.tar'
+    # Resume full model and optimizer state from checkpoint (default: '')
+    resume = '/home/tasi2425111/for_hpc/baru/ti_mf/14_compare_result_to13/output/train/20250331-191156-mobile_former_294m-224/checkpoint-119.pth.tar'
     # path to dataset (root dir)
-    data_dir = '/home/tasi2425111/restructured-resized-tiny-imagenet-200/'  #Disesuaikan dengan kebutuhan
+    data_dir = '/home/tasi2425111/restructured-resized-tiny-imagenet-200'  #Disesuaikan dengan kebutuhan
     # number of label classes (Model default if None)
     num_classes = 200  #Disesuaikan dengan kebutuhan
     # Name of model to train (default: "resnet50")
     model = 'mobile_former_294m'  #Disesuaikan dengan kebutuhan
+    # Device (accelerator) to use.
+    device = 'cuda:0'
     # Input image center crop percent (for validation only)
-    crop_pct = None ## Tidak diikutkan karena sudah diresize 
+    crop_pct = None ## Tidak diikutkan karena sudah diresize
     # Use AutoAugment policy. "v0" or "original". (default: None)
     aa = 'rand-m15-n2' ## Operation = 2 , Magnitude = 15
     # mixup alpha, mixup enabled if > 0. (default: 0.)
@@ -2299,6 +2305,12 @@ class Args:
     clip_grad = 1.0
     # Decay factor for model weights moving average (default: 0.9998)
     model_ema_decay = None
+    # Input all image dimensions (d h w, e.g. --input-size 3 224 224), uses model default if empty
+    input_size = (3, 224, 224)
+    # Override mean pixel value of dataset
+    mean = (0.485, 0.456, 0.406)
+    # Override std deviation of dataset
+    std = (0.229, 0.224, 0.225)
 
 
     ### DEFAULT ###
@@ -2328,12 +2340,8 @@ class Args:
     dataset_trust_remote_code = False
     # Start with pretrained version of specified network (if avail)
     pretrained = False
-    # Load this checkpoint as if they were the pretrained weights (with adaptation).
-    pretrained_path = None
     # Load this checkpoint into model after initialization (default: none)
     initial_checkpoint = ''
-    # Resume full model and optimizer state from checkpoint (default: none)
-    resume = ''
     # prevent resume of optimizer state when resuming model
     no_resume_opt = False
     # Global pool type, one of (fast, avg, max, avgmax, avgmaxc). Model default if None.
@@ -2342,12 +2350,6 @@ class Args:
     img_size = None
     # Image input channels (default: None => 3)
     in_chans = None
-    # Input all image dimensions (d h w, e.g. --input-size 3 224 224), uses model default if empty
-    input_size = None
-    # Override mean pixel value of dataset
-    mean = None
-    # Override std deviation of dataset
-    std = None
     # Image resize interpolation type (overrides model)
     interpolation = ''
     # Use channels_last memory layout
@@ -2372,8 +2374,6 @@ class Args:
     torchscript = False
     # Enable compilation w/ specified backend (default: inductor). const='inductor'
     torchcompile = None
-    # Device (accelerator) to use.
-    device = 'cuda:0'
     # use NVIDIA Apex AMP or Native AMP for mixed precision training
     amp = False
     # lower precision AMP dtype (default: float16)
@@ -3136,7 +3136,7 @@ def train_one_epoch(
         model_ema=None,
         mixup_fn=None,
         num_updates_total=None,
-):
+  ):
     if args.mixup_off_epoch and epoch >= args.mixup_off_epoch:
         if args.prefetcher and loader.mixup_enabled:
             loader.mixup_enabled = False
@@ -3151,9 +3151,12 @@ def train_one_epoch(
 
     model.train()
 
+    # -- Tambahan: rekam waktu mulai epoch
+    epoch_start_time = time.time()
+
     accum_steps = args.grad_accum_steps
     last_accum_steps = len(loader) % accum_steps
-    updates_per_epoch = (len(loader) + accum_steps - 1) // accum_steps
+    updates_per_epoch = (len(loader) + accum_steps - 1) // args.grad_accum_steps
     num_updates = epoch * updates_per_epoch
     last_batch_idx = len(loader) - 1
     last_batch_idx_to_accum = len(loader) - last_accum_steps
@@ -3161,6 +3164,7 @@ def train_one_epoch(
     data_start_time = update_start_time = time.time()
     optimizer.zero_grad()
     update_sample_count = 0
+
     for batch_idx, (input, target) in enumerate(loader):
         last_batch = batch_idx == last_batch_idx
         need_update = last_batch or (batch_idx + 1) % accum_steps == 0
@@ -3233,10 +3237,12 @@ def train_one_epoch(
                 torch.cuda.synchronize()
             elif device.type == 'npu':
                 torch.npu.synchronize()
+
         time_now = time.time()
-        update_time_m.update(time.time() - update_start_time)
+        update_time_m.update(time_now - update_start_time)
         update_start_time = time_now
 
+        # -- Log progress, termasuk estimasi waktu
         if update_idx % args.log_interval == 0:
             lrl = [param_group['lr'] for param_group in optimizer.param_groups]
             lr = sum(lrl) / len(lrl)
@@ -3248,6 +3254,15 @@ def train_one_epoch(
                 loss_now = utils.reduce_tensor(loss.new([loss_now]), args.world_size).item()
                 update_sample_count *= args.world_size
 
+            # -- Hitung waktu yang telah berjalan & sisa waktu (ETA)
+            waktu_terpakai = time.time() - epoch_start_time
+            progress = (update_idx + 1) / updates_per_epoch  # 0.0 - 1.0
+            if progress > 0:
+                estimasi_total = waktu_terpakai / progress
+                estimasi_sisa = estimasi_total - waktu_terpakai
+            else:
+                estimasi_sisa = 0.0
+
             if utils.is_primary(args):
                 _logger.info(
                     f'Train: {epoch} [{update_idx:>4d}/{updates_per_epoch} '
@@ -3256,13 +3271,14 @@ def train_one_epoch(
                     f'Time: {update_time_m.val:.3f}s, {update_sample_count / update_time_m.val:>7.2f}/s  '
                     f'({update_time_m.avg:.3f}s, {update_sample_count / update_time_m.avg:>7.2f}/s)  '
                     f'LR: {lr:.3e}  '
-                    f'Data: {data_time_m.val:.3f} ({data_time_m.avg:.3f})'
+                    f'Data: {data_time_m.val:.3f} ({data_time_m.avg:.3f})  '
+                    f'Elapsed/ETA: {waktu_terpakai:.1f}s / {estimasi_sisa:.1f}s'
                 )
 
                 if args.save_images and output_dir:
                     torchvision.utils.save_image(
                         input,
-                        os.path.join(output_dir, 'train-batch-%d.jpg' % batch_idx),
+                        os.path.join(output_dir, f'train-batch-{batch_idx}.jpg'),
                         padding=0,
                         normalize=True
                     )
@@ -3276,7 +3292,6 @@ def train_one_epoch(
 
         update_sample_count = 0
         data_start_time = time.time()
-        # end for
 
     if hasattr(optimizer, 'sync_lookahead'):
         optimizer.sync_lookahead()
@@ -3286,6 +3301,7 @@ def train_one_epoch(
         # synchronize avg loss, each process keeps its own running avg
         loss_avg = torch.tensor([loss_avg], device=device, dtype=torch.float32)
         loss_avg = utils.reduce_tensor(loss_avg, args.world_size).item()
+
     return OrderedDict([('loss', loss_avg)])
 
 
@@ -3364,10 +3380,8 @@ def validate(
     return metrics
 
 
-
 main()
 #endregion
-
 
 
 

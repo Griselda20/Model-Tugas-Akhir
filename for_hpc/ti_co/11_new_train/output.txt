@@ -1,0 +1,59 @@
+nohup: ignoring input
+/home/tasi2425111/venvmaestro/lib/python3.8/site-packages/torch/functional.py:478: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2895.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Training with a single process on 1 device (cuda:0).
+Model coatnet_3 created, param count:170198280
+Data processing configuration for current model + dataset:
+	input_size: (3, 224, 224)
+	interpolation: bicubic
+	mean: (0.485, 0.456, 0.406)
+	std: (0.229, 0.224, 0.225)
+	crop_pct: 0.875
+	crop_mode: center
+Created AdamW (AdamW) optimizer: lr: 0.001, betas: (0.9, 0.999), eps: 1e-08, weight_decay: 0.05, amsgrad: False, foreach: None, maximize: False, capturable: False
+AMP not enabled. Training in torch.float32.
+Scheduled epochs: 300 (epochs + cooldown_epochs). Warmup within epochs when warmup_prefix=False. LR stepped per epoch.
+co.py:39: DeprecationWarning: 'saved_variables' is deprecated; use 'saved_tensors'
+  i = ctx.saved_variables[0]
+Train: 0 [   0/5000 (  0%)]  Loss: 5.45 (5.45)  Time: 9.818s,    2.04/s  (9.818s,    2.04/s)  LR: 1.000e-05  Data: 0.570 (0.570)  Elapsed/ETA: 9.8s / 49078.4s
+Train: 0 [  50/5000 (  1%)]  Loss: 5.37 (5.45)  Time: 2.937s,    6.81/s  (2.986s,    6.70/s)  LR: 1.000e-05  Data: 0.012 (0.022)  Elapsed/ETA: 152.3s / 14775.3s
+Train: 0 [ 100/5000 (  2%)]  Loss: 5.41 (5.43)  Time: 2.895s,    6.91/s  (2.941s,    6.80/s)  LR: 1.000e-05  Data: 0.010 (0.017)  Elapsed/ETA: 297.0s / 14407.3s
+Train: 0 [ 150/5000 (  3%)]  Loss: 5.33 (5.40)  Time: 1.761s,   11.36/s  (2.556s,    7.82/s)  LR: 1.000e-05  Data: 0.009 (0.015)  Elapsed/ETA: 386.0s / 12394.7s
+Train: 0 [ 200/5000 (  4%)]  Loss: 5.32 (5.39)  Time: 1.761s,   11.35/s  (2.358s,    8.48/s)  LR: 1.000e-05  Data: 0.009 (0.013)  Elapsed/ETA: 474.0s / 11318.0s
+Train: 0 [ 250/5000 (  5%)]  Loss: 5.36 (5.39)  Time: 1.761s,   11.36/s  (2.239s,    8.93/s)  LR: 1.000e-05  Data: 0.010 (0.013)  Elapsed/ETA: 562.1s / 10635.1s
+Train: 0 [ 300/5000 (  6%)]  Loss: 5.34 (5.37)  Time: 1.761s,   11.36/s  (2.160s,    9.26/s)  LR: 1.000e-05  Data: 0.010 (0.012)  Elapsed/ETA: 650.2s / 10150.5s
+Train: 0 [ 350/5000 (  7%)]  Loss: 5.38 (5.37)  Time: 1.761s,   11.36/s  (2.103s,    9.51/s)  LR: 1.000e-05  Data: 0.009 (0.012)  Elapsed/ETA: 738.3s / 9778.9s
+Train: 0 [ 400/5000 (  8%)]  Loss: 5.37 (5.36)  Time: 1.761s,   11.36/s  (2.063s,    9.70/s)  LR: 1.000e-05  Data: 0.009 (0.013)  Elapsed/ETA: 827.2s / 9487.4s
+Train: 0 [ 450/5000 (  9%)]  Loss: 5.18 (5.35)  Time: 1.761s,   11.36/s  (2.030s,    9.85/s)  LR: 1.000e-05  Data: 0.009 (0.012)  Elapsed/ETA: 915.4s / 9233.1s
+Train: 0 [ 500/5000 ( 10%)]  Loss: 5.30 (5.35)  Time: 1.762s,   11.35/s  (2.003s,    9.99/s)  LR: 1.000e-05  Data: 0.010 (0.012)  Elapsed/ETA: 1003.5s / 9011.2s
+Train: 0 [ 550/5000 ( 11%)]  Loss: 5.36 (5.35)  Time: 1.765s,   11.33/s  (1.981s,   10.10/s)  LR: 1.000e-05  Data: 0.012 (0.012)  Elapsed/ETA: 1091.6s / 8813.7s
+Train: 0 [ 600/5000 ( 12%)]  Loss: 5.24 (5.34)  Time: 1.762s,   11.35/s  (1.963s,   10.19/s)  LR: 1.000e-05  Data: 0.011 (0.012)  Elapsed/ETA: 1179.6s / 8634.4s
+Train: 0 [ 650/5000 ( 13%)]  Loss: 5.32 (5.34)  Time: 1.763s,   11.35/s  (1.947s,   10.27/s)  LR: 1.000e-05  Data: 0.010 (0.012)  Elapsed/ETA: 1267.7s / 8469.0s
+Train: 0 [ 700/5000 ( 14%)]  Loss: 5.19 (5.33)  Time: 1.761s,   11.36/s  (1.934s,   10.34/s)  LR: 1.000e-05  Data: 0.010 (0.012)  Elapsed/ETA: 1355.8s / 8314.6s
+Train: 0 [ 750/5000 ( 15%)]  Loss: 5.26 (5.33)  Time: 1.762s,   11.35/s  (1.923s,   10.40/s)  LR: 1.000e-05  Data: 0.011 (0.011)  Elapsed/ETA: 1443.9s / 8169.0s
+Train: 0 [ 800/5000 ( 16%)]  Loss: 5.23 (5.33)  Time: 1.761s,   11.36/s  (1.913s,   10.46/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 1531.9s / 8030.7s
+Train: 0 [ 850/5000 ( 17%)]  Loss: 5.36 (5.32)  Time: 1.762s,   11.35/s  (1.904s,   10.51/s)  LR: 1.000e-05  Data: 0.011 (0.011)  Elapsed/ETA: 1620.0s / 7898.2s
+Train: 0 [ 900/5000 ( 18%)]  Loss: 5.19 (5.32)  Time: 1.761s,   11.36/s  (1.896s,   10.55/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 1708.0s / 7770.6s
+Train: 0 [ 950/5000 ( 19%)]  Loss: 5.25 (5.32)  Time: 1.761s,   11.36/s  (1.889s,   10.59/s)  LR: 1.000e-05  Data: 0.009 (0.011)  Elapsed/ETA: 1796.1s / 7647.1s
+Train: 0 [1000/5000 ( 20%)]  Loss: 5.29 (5.31)  Time: 1.761s,   11.35/s  (1.882s,   10.63/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 1884.1s / 7527.1s
+Train: 0 [1050/5000 ( 21%)]  Loss: 5.31 (5.31)  Time: 1.761s,   11.36/s  (1.876s,   10.66/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 1972.2s / 7410.3s
+Train: 0 [1100/5000 ( 22%)]  Loss: 5.10 (5.31)  Time: 1.762s,   11.35/s  (1.871s,   10.69/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 2060.2s / 7296.0s
+Train: 0 [1150/5000 ( 23%)]  Loss: 5.03 (5.31)  Time: 1.760s,   11.36/s  (1.866s,   10.72/s)  LR: 1.000e-05  Data: 0.009 (0.011)  Elapsed/ETA: 2148.3s / 7184.0s
+Train: 0 [1200/5000 ( 24%)]  Loss: 5.21 (5.30)  Time: 1.760s,   11.36/s  (1.862s,   10.74/s)  LR: 1.000e-05  Data: 0.009 (0.011)  Elapsed/ETA: 2236.3s / 7074.0s
+Train: 0 [1250/5000 ( 25%)]  Loss: 5.41 (5.30)  Time: 1.760s,   11.36/s  (1.858s,   10.76/s)  LR: 1.000e-05  Data: 0.009 (0.011)  Elapsed/ETA: 2324.4s / 6965.7s
+Train: 0 [1300/5000 ( 26%)]  Loss: 5.19 (5.30)  Time: 1.760s,   11.36/s  (1.854s,   10.79/s)  LR: 1.000e-05  Data: 0.009 (0.011)  Elapsed/ETA: 2412.4s / 6859.0s
+Train: 0 [1350/5000 ( 27%)]  Loss: 5.31 (5.30)  Time: 1.760s,   11.36/s  (1.851s,   10.81/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 2500.5s / 6753.7s
+Train: 0 [1400/5000 ( 28%)]  Loss: 5.33 (5.29)  Time: 1.761s,   11.36/s  (1.848s,   10.82/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 2588.5s / 6649.6s
+Train: 0 [1450/5000 ( 29%)]  Loss: 5.31 (5.29)  Time: 1.762s,   11.35/s  (1.845s,   10.84/s)  LR: 1.000e-05  Data: 0.011 (0.011)  Elapsed/ETA: 2676.6s / 6546.6s
+Train: 0 [1500/5000 ( 30%)]  Loss: 5.15 (5.29)  Time: 1.760s,   11.36/s  (1.842s,   10.86/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 2764.6s / 6444.7s
+Train: 0 [1550/5000 ( 31%)]  Loss: 5.23 (5.29)  Time: 1.760s,   11.36/s  (1.839s,   10.87/s)  LR: 1.000e-05  Data: 0.009 (0.011)  Elapsed/ETA: 2852.7s / 6343.6s
+Train: 0 [1600/5000 ( 32%)]  Loss: 5.34 (5.29)  Time: 1.761s,   11.36/s  (1.837s,   10.89/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 2940.7s / 6243.3s
+Train: 0 [1650/5000 ( 33%)]  Loss: 5.25 (5.29)  Time: 1.800s,   11.11/s  (1.835s,   10.90/s)  LR: 1.000e-05  Data: 0.026 (0.011)  Elapsed/ETA: 3029.7s / 6145.7s
+Train: 0 [1700/5000 ( 34%)]  Loss: 5.09 (5.28)  Time: 1.761s,   11.36/s  (1.833s,   10.91/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 3118.2s / 6047.6s
+Train: 0 [1750/5000 ( 35%)]  Loss: 5.27 (5.28)  Time: 1.760s,   11.36/s  (1.831s,   10.92/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 3206.3s / 5949.2s
+Train: 0 [1800/5000 ( 36%)]  Loss: 5.06 (5.28)  Time: 1.761s,   11.36/s  (1.829s,   10.93/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 3294.3s / 5851.4s
+Train: 0 [1850/5000 ( 37%)]  Loss: 5.16 (5.28)  Time: 1.762s,   11.35/s  (1.827s,   10.95/s)  LR: 1.000e-05  Data: 0.011 (0.011)  Elapsed/ETA: 3382.3s / 5754.1s
+Train: 0 [1900/5000 ( 38%)]  Loss: 5.26 (5.28)  Time: 1.760s,   11.37/s  (1.826s,   10.96/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 3470.3s / 5657.3s
+Train: 0 [1950/5000 ( 39%)]  Loss: 5.03 (5.27)  Time: 1.762s,   11.35/s  (1.824s,   10.97/s)  LR: 1.000e-05  Data: 0.011 (0.011)  Elapsed/ETA: 3558.4s / 5561.0s
+Train: 0 [2000/5000 ( 40%)]  Loss: 5.37 (5.27)  Time: 1.760s,   11.36/s  (1.822s,   10.98/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 3646.5s / 5465.1s
+Train: 0 [2050/5000 ( 41%)]  Loss: 5.24 (5.27)  Time: 1.761s,   11.36/s  (1.821s,   10.98/s)  LR: 1.000e-05  Data: 0.010 (0.011)  Elapsed/ETA: 3734.6s / 5369.7s

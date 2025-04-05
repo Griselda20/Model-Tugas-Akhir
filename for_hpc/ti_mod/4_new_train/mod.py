@@ -2359,7 +2359,7 @@ class Args:
     # Name of model to train (default: "resnet50")
     model = 'modification_294m'  #Disesuaikan dengan kebutuhan
     # Device (accelerator) to use.
-    device = 'cuda:0'
+    device = 'cuda:1'
     # Input image center crop percent (for validation only)
     crop_pct = None ## Tidak diikutkan karena sudah diresize
     # Use AutoAugment policy. "v0" or "original". (default: None)

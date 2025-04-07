@@ -2349,9 +2349,9 @@ _logger = logging.getLogger('train')
 class Args:
     ### CUSTOM ###
     # Load this checkpoint as if they were the pretrained weights (with adaptation) (default: None).
-    pretrained_path = None
+    pretrained_path = '/home/tasi2425111/for_hpc/baru/i_mod/3_new_train/output/train/20250404-095658-modification_294m-224/checkpoint-6.pth.tar'
     # Resume full model and optimizer state from checkpoint (default: '')
-    resume = ''
+    resume = '/home/tasi2425111/for_hpc/baru/i_mod/3_new_train/output/train/20250404-095658-modification_294m-224/checkpoint-6.pth.tar'
     # path to dataset (root dir)
     data_dir = '/home/tasi2425111/restructured_resized_imagenet'  #Disesuaikan dengan kebutuhan
     # number of label classes (Model default if None)

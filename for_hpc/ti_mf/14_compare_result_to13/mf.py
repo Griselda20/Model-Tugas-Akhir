@@ -2263,9 +2263,9 @@ _logger = logging.getLogger('train')
 class Args:
     ### CUSTOM ###
     # Load this checkpoint as if they were the pretrained weights (with adaptation) (default: None).
-    pretrained_path = '/home/tasi2425111/for_hpc/baru/ti_mf/14_compare_result_to13/output/train/20250331-191156-mobile_former_294m-224/checkpoint-119.pth.tar'
+    pretrained_path = '/home/tasi2425111/for_hpc/baru/ti_mf/14_compare_result_to13/output/train/20250402-150309-mobile_former_294m-224/model_best.pth.tar'
     # Resume full model and optimizer state from checkpoint (default: '')
-    resume = '/home/tasi2425111/for_hpc/baru/ti_mf/14_compare_result_to13/output/train/20250331-191156-mobile_former_294m-224/checkpoint-119.pth.tar'
+    resume = '/home/tasi2425111/for_hpc/baru/ti_mf/14_compare_result_to13/output/train/20250402-150309-mobile_former_294m-224/model_best.pth.tar'
     # path to dataset (root dir)
     data_dir = '/home/tasi2425111/restructured-resized-tiny-imagenet-200'  #Disesuaikan dengan kebutuhan
     # number of label classes (Model default if None)
@@ -2284,7 +2284,7 @@ class Args:
     # Label smoothing (default: 0.1)
     smoothing = 0.1
     # number of epochs to train (default: 300)
-    epochs = 300
+    epochs = 400
     # Input batch size for training (default: 128)
     batch_size = 20
     # Validation batch size override (default: None)

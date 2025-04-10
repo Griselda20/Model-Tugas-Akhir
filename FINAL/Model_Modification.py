@@ -304,7 +304,7 @@ class Local2Global(nn.Module):
 #---------------------------------------------------------------------------------------------------------------
 
 class RelativeAttention(nn.Module):
-    def __init__(self, inp_h, inp_w, in_channels, n_head, d_k, d_v, out_channels, attn_dropout=0.1, ff_dropout=0.1, attn_bias=False):
+    def __init__(self, inp_h, inp_w, in_channels, n_head, d_k, d_v, out_channels, attn_dropout=0.1, ff_dropout=0.1, attn_bias=True):
         super().__init__()
         self.inp_h = inp_h
         self.inp_w = inp_w
@@ -442,7 +442,7 @@ class GlobalBlock(nn.Module):
                 out_channels=token_dim,
                 attn_dropout=0.1,
                 ff_dropout=0.1,
-                attn_bias=False
+                attn_bias=True
             )
 
         self.channel_mlp = nn.Linear(token_dim, token_dim)

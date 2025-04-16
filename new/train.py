@@ -410,6 +410,7 @@ def _parse_args():
 
     # The main arg parser parses the rest of the args, the usual
     # defaults will have been overridden if config file specified.
+    remaining = [arg for arg in remaining if arg != '-f']
     args = parser.parse_args(remaining)
 
     # Cache the args as a text string to save them in the output dir later
@@ -426,7 +427,7 @@ def _assign_hyperparameter(args):
     # path to dataset (root dir)
     args.data_dir = '/home/tasi2425111/restructured_resized_imagenet'  #Disesuaikan dengan kebutuhan
     # number of label classes (Model default if None)
-    args.num_classes = 1000  #Disesuaikan dengan kebutuhan
+    args.num_classes = 200  #Disesuaikan dengan kebutuhan
     # Name of model to train (default: "resnet50")
     # args.model = 'coatnet_3' #Coatnet_3  #Disesuaikan dengan kebutuhan
     # Device (accelerator) to use.

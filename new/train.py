@@ -417,9 +417,63 @@ def _parse_args():
     return args, args_text
 
 
+def _assign_hyperparameter(args):
+    ### CUSTOM ###
+    # Load this checkpoint as if they were the pretrained weights (with adaptation) (default: None).
+    args.pretrained_path = None
+    # Resume full model and optimizer state from checkpoint (default: '')
+    args.resume = ''
+    # path to dataset (root dir)
+    args.data_dir = '/home/tasi2425111/restructured_resized_imagenet'  #Disesuaikan dengan kebutuhan
+    # number of label classes (Model default if None)
+    args.num_classes = 1000  #Disesuaikan dengan kebutuhan
+    # Name of model to train (default: "resnet50")
+    # args.model = 'coatnet_3' #Coatnet_3  #Disesuaikan dengan kebutuhan
+    # Device (accelerator) to use.
+    args.device = 'cuda:0'
+    # Input image center crop percent (for validation only)
+    args.crop_pct = None ## Tidak diikutkan karena sudah diresize
+    # Use AutoAugment policy. "v0" or "original". (default: None)
+    args.aa = 'rand-m15-n2' ## Operation = 2 , Magnitude = 15
+    # mixup alpha, mixup enabled if > 0. (default: 0.)
+    args.mixup = 0.8
+    #loss_type = Softmax #Sudah default di code training
+    # Label smoothing (default: 0.1)
+    args.smoothing = 0.1
+    # number of epochs to train (default: 300)
+    args.epochs = 300
+    # Input batch size for training (default: 128)
+    args.batch_size = 20
+    # Validation batch size override (default: None)
+    args.validation_batch_size = 20
+    # Optimizer (default: "sgd")
+    args.opt = 'AdamW'
+    # learning rate, overrides lr-base if set (default: None)
+    args.lr = 1e-3
+    # lower lr bound for cyclic schedulers that hit 0 (default: 0)
+    args.min_lr = 1e-5
+    # Learning rate scheduler (default: "cosine")
+    args.sched = 'cosine'
+    # epochs to warmup LR, if scheduler supports
+    args.warmup_epochs = 10000
+    # weight decay (default: 2e-5)
+    args.weight_decay = 0.05
+    # Clip gradient norm (default: None, no clipping)
+    args.clip_grad = 1.0
+    # Decay factor for model weights moving average (default: 0.9998)
+    args.model_ema_decay = None
+    # Input all image dimensions (d h w, e.g. --input-size 3 224 224), uses model default if empty
+    args.input_size = (3, 224, 224)
+    # Override mean pixel value of dataset
+    args.mean = (0.485, 0.456, 0.406)
+    # Override std deviation of dataset
+    args.std = (0.229, 0.224, 0.225)
+
+
 def main():
     utils.setup_default_logging()
     args, args_text = _parse_args()
+    _assign_hyperparameter(args)
 
     if args.device_modules:
         for module in args.device_modules:
@@ -1233,7 +1287,5 @@ def validate(
 
     return metrics
 
-
-if __name__ == '__main__':
-    main()
+main()
 #endregion

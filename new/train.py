@@ -540,22 +540,8 @@ def main():
             num_classes=-1,  # force head adaptation
         )
 
-    model = create_model(
-        args.model,
-        pretrained=args.pretrained,
-        in_chans=in_chans,
-        num_classes=args.num_classes,
-        drop_rate=args.drop,
-        drop_path_rate=args.drop_path,
-        drop_block_rate=args.drop_block,
-        global_pool=args.gp,
-        bn_momentum=args.bn_momentum,
-        bn_eps=args.bn_eps,
-        scriptable=args.torchscript,
-        checkpoint_path=args.initial_checkpoint,
-        **factory_kwargs,
-        **args.model_kwargs,
-    )
+    model = globals()[args.model]()
+
     if args.head_init_scale is not None:
         with torch.no_grad():
             model.get_classifier().weight.mul_(args.head_init_scale)
@@ -1092,6 +1078,9 @@ def train_one_epoch(
     losses_m = utils.AverageMeter()
 
     model.train()
+    
+    # -- Tambahan: rekam waktu mulai epoch
+    epoch_start_time = time.time()
 
     accum_steps = args.grad_accum_steps
     last_accum_steps = len(loader) % accum_steps
@@ -1175,10 +1164,12 @@ def train_one_epoch(
                 torch.cuda.synchronize()
             elif device.type == 'npu':
                 torch.npu.synchronize()
+
         time_now = time.time()
-        update_time_m.update(time.time() - update_start_time)
+        update_time_m.update(time_now - update_start_time)
         update_start_time = time_now
 
+        # -- Log progress, termasuk estimasi waktu
         if update_idx % args.log_interval == 0:
             lrl = [param_group['lr'] for param_group in optimizer.param_groups]
             lr = sum(lrl) / len(lrl)
@@ -1190,6 +1181,15 @@ def train_one_epoch(
                 loss_now = utils.reduce_tensor(loss.new([loss_now]), args.world_size).item()
                 update_sample_count *= args.world_size
 
+            # -- Hitung waktu yang telah berjalan & sisa waktu (ETA)
+            waktu_terpakai = time.time() - epoch_start_time
+            progress = (update_idx + 1) / updates_per_epoch  # 0.0 - 1.0
+            if progress > 0:
+                estimasi_total = waktu_terpakai / progress
+                estimasi_sisa = estimasi_total - waktu_terpakai
+            else:
+                estimasi_sisa = 0.0
+
             if utils.is_primary(args):
                 _logger.info(
                     f'Train: {epoch} [{update_idx:>4d}/{updates_per_epoch} '
@@ -1199,6 +1199,7 @@ def train_one_epoch(
                     f'({update_time_m.avg:.3f}s, {update_sample_count / update_time_m.avg:>7.2f}/s)  '
                     f'LR: {lr:.3e}  '
                     f'Data: {data_time_m.val:.3f} ({data_time_m.avg:.3f})'
+                    f'Elapsed/ETA: {waktu_terpakai:.1f}s / {estimasi_sisa:.1f}s'
                 )
 
                 if args.save_images and output_dir:

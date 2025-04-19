@@ -1,2 +1,3 @@
 *.zip
 /dont_commit
+*.tar

@@ -56,7 +56,7 @@ def _assign_hyperparameter(args):
     # number of label classes (Model default if None)
     args.num_classes = 200  #Disesuaikan dengan kebutuhan
     # Name of model to train (default: "resnet50")
-    # args.model = 'coatnet_3' #Coatnet_3  #Disesuaikan dengan kebutuhan
+    args.model = 'coatnet_3' #Coatnet_3  #Disesuaikan dengan kebutuhan
     # Device (accelerator) to use.
     args.device = 'cuda:0'
     
@@ -66,7 +66,7 @@ def _assign_hyperparameter(args):
     args.aa = 'rand-m15-n2-mmax15' ## Operation = 2 , Magnitude = 15, clip magnitude between [0, mmax] instead of default [0, _LEVEL_DENOM]
     # mixup alpha, mixup enabled if > 0. (default: 0.)
     args.mixup = 0.8
-    # args.loss_type = Softmax #Sudah default di code training
+    # args.loss_type = Softmax # di dalam SoftTargetCrossEntropy() terdapat softmax
     # Label smoothing (default: 0.1)
     args.smoothing = 0.1
     # number of epochs to train (default: 300)
@@ -80,7 +80,8 @@ def _assign_hyperparameter(args):
     # lower lr bound for cyclic schedulers that hit 0 (default: 0)
     args.min_lr = 1e-5
     # epochs to warmup LR, if scheduler supports
-    args.warmup_epochs = 10000
+    # args.warmup_epochs = 10000 #diambil dari jumlah data pada train_dataset
+    
     # Learning rate scheduler (default: "cosine")
     args.sched = 'cosine'
     # weight decay (default: 2e-5)
@@ -727,6 +728,20 @@ def main():
         num_samples=args.train_num_samples,
         trust_remote_code=args.dataset_trust_remote_code,
     )
+
+    dataset_size = 0
+    if hasattr(dataset_train, 'num_samples'):
+        dataset_size = dataset_train.num_samples
+    elif hasattr(dataset_train, '__len__'):
+        dataset_size = len(dataset_train)
+    else:
+        dataset_size = None  # Jika ukuran dataset tidak dapat ditemukan
+
+    steps_per_epoch = dataset_size // args.batch_size
+    warmup_steps = 10000  # Warm-up selama 10K steps
+    
+    # Menghitung berapa banyak epoch yang diperlukan untuk mencapai 10K steps
+    args.warmup_epochs = warmup_steps // steps_per_epoch
 
     if args.val_split:
         dataset_eval = create_dataset(

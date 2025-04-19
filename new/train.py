@@ -63,7 +63,7 @@ def _assign_hyperparameter(args):
     # Input image center crop percent (for validation only)
     # args.crop_pct = None ## Tidak diikutkan karena sudah diresize
     # Use AutoAugment policy. "v0" or "original". (default: None)
-    args.aa = 'rand-m15-n2' ## Operation = 2 , Magnitude = 15
+    args.aa = 'rand-m15-n2-mmax15' ## Operation = 2 , Magnitude = 15, clip magnitude between [0, mmax] instead of default [0, _LEVEL_DENOM]
     # mixup alpha, mixup enabled if > 0. (default: 0.)
     args.mixup = 0.8
     # args.loss_type = Softmax #Sudah default di code training

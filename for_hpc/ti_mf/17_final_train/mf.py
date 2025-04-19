@@ -1693,8 +1693,8 @@ __all__ = ['MobileFormer']
 def _cfg(url='', **kwargs):
     return {
         'url': url, 'num_classes': num_classes, 'input_size': (3, 224, 224), 'pool_size': (1, 1),
-        # 'crop_pct': 0.875, 'interpolation': 'bilinear',
-        # 'mean': IMAGENET_DEFAULT_MEAN, 'std': IMAGENET_DEFAULT_STD,
+        'crop_pct': 0.875, 'interpolation': 'bilinear',
+        'mean': IMAGENET_DEFAULT_MEAN, 'std': IMAGENET_DEFAULT_STD,
         'first_conv': 'conv_stem', 'classifier': 'classifier',
         **kwargs
     }
@@ -2258,7 +2258,7 @@ def _assign_hyperparameter(args):
     # number of epochs to train (default: 300)
     args.epochs = 300
     # Input batch size for training (default: 128)
-    args.batch_size = 200
+    args.batch_size = 100
     # Optimizer (default: "sgd")
     args.opt = 'adamw'
     # learning rate, overrides lr-base if set (default: None)

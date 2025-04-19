@@ -1,4 +1,4 @@
-num_classes = 200
+num_classes = 1000
 
 
 
@@ -652,9 +652,9 @@ def _assign_hyperparameter(args):
     # Resume full model and optimizer state from checkpoint (default: '')
     args.resume = ''
     # path to dataset (root dir)
-    args.data_dir = '/home/tasi2425111/restructured-resized-tiny-imagenet-200/'  #Disesuaikan dengan kebutuhan
+    args.data_dir = '/home/tasi2425111/restructured_resized_imagenet/'  #Disesuaikan dengan kebutuhan
     # number of label classes (Model default if None)
-    args.num_classes = 200  #Disesuaikan dengan kebutuhan
+    args.num_classes = 1000  #Disesuaikan dengan kebutuhan
     # Name of model to train (default: "resnet50")
     args.model = 'coatnet_3' #coatnet_3  #Disesuaikan dengan kebutuhan
     # Device (accelerator) to use.
@@ -670,9 +670,9 @@ def _assign_hyperparameter(args):
     # Label smoothing (default: 0.1)
     args.smoothing = 0.1
     # number of epochs to train (default: 300)
-    args.epochs = 300
+    args.epochs = 100
     # Input batch size for training (default: 128)
-    args.batch_size = 20
+    args.batch_size = 100
     # Optimizer (default: "sgd")
     args.opt = 'adamw'
     # learning rate, overrides lr-base if set (default: None)
@@ -1140,11 +1140,7 @@ def main():
             num_classes=-1,  # force head adaptation
         )
 
-    # model = globals()[args.model]()
-
-    model_image_size = (3, 224, 224)
-    model_config=f'coatnet-3'
-    model = CoAtNet(model_image_size[1], model_image_size[2], model_image_size[0], config=model_config, num_classes=num_classes)
+    model = globals()[args.model]()
 
     if args.head_init_scale is not None:
         with torch.no_grad():

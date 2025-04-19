@@ -1,0 +1,1035 @@
+nohup: ignoring input
+/home/tasi2425111/venvmaestro/lib/python3.8/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/tasi2425111/venvmaestro/lib/python3.8/site-packages/timm/models/features.py:4: FutureWarning: Importing from timm.models.features is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/tasi2425111/venvmaestro/lib/python3.8/site-packages/timm/models/hub.py:4: FutureWarning: Importing from timm.models.hub is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+Training with a single process on 1 device (cuda:0).
+Model mobile_former_294m created, param count:11422648
+Data processing configuration for current model + dataset:
+	input_size: (3, 224, 224)
+	interpolation: bicubic
+	mean: (0.485, 0.456, 0.406)
+	std: (0.229, 0.224, 0.225)
+	crop_pct: 0.875
+	crop_mode: center
+Created AdamW (adamw) optimizer: lr: 0.001, betas: (0.9, 0.999), eps: 1e-08, weight_decay: 0.05, amsgrad: False, foreach: None, maximize: False, capturable: False
+AMP not enabled. Training in torch.float32.
+Scheduled epochs: 100 (epochs + cooldown_epochs). Warmup within epochs when warmup_prefix=False. LR stepped per epoch.
+block: 12544, cnn-drop 0.0000, mlp-drop 0.0000
+block: 12544, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 16, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 24, token: 192
+block: 3136, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 24, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 24, token: 192
+block: 3136, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 24, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 48, token: 192
+block: 784, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 48, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 48, token: 192
+block: 784, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 48, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 96, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 96, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 96, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 96, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 128, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 128, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 128, token: 192
+block: 196, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 128, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 192, token: 192
+block: 49, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 192, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 192, token: 192
+block: 49, cnn-drop 0.0000, mlp-drop 0.0000
+L2G: 2 heads, inp: 192, token: 192
+G2G: 4 heads
+use ffn
+G2L: 2 heads, inp: 192, token: 192
+L2G: 2 heads, inp: 192, token: 192
+MobileFormer(
+  (tokens): Embedding(6, 192)
+  (stem): Sequential(
+    (0): Conv2d(3, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU6(inplace=True)
+  )
+  (features): Sequential(
+    (0): DnaBlock3(
+      (conv): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+        (3): Sequential()
+        (4): Conv2d(32, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (5): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(16, 96, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(24, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=24, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=16, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=16, bias=True)
+        (proj): Linear(in_features=16, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=192, out_features=24, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (2): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(24, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(96, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=96, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=192, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=24, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=24, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=192, out_features=24, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (3): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(24, 144, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=24, bias=False)
+        (1): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=288, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(144, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(48, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=384, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=24, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=24, bias=True)
+        (proj): Linear(in_features=24, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=192, out_features=48, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (4): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(48, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=384, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=192, bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=384, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=48, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=192, out_features=48, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (5): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(48, 288, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=576, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(288, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(96, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=96, bias=False)
+        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=768, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=48, bias=True)
+        (proj): Linear(in_features=48, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=192, out_features=96, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (6): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(96, 384, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=768, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=384, bias=False)
+        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=768, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=96, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=96, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=192, out_features=96, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (7): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(96, 576, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1152, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=576, bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1152, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(576, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=96, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=96, bias=True)
+        (proj): Linear(in_features=96, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=192, out_features=128, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (8): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(128, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=768, bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(768, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=128, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=128, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=192, out_features=128, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (9): DnaBlock3(
+      (conv1): Sequential(
+        (0): Conv2d(128, 768, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=128, bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(768, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (conv3): Sequential(
+        (0): Conv2d(192, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=192, bias=False)
+        (1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=1536, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv4): Sequential(
+        (0): Conv2d(768, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act4): DyReLU(
+        (act): Sequential()
+      )
+      (hyper4): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=128, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=128, bias=True)
+        (proj): Linear(in_features=128, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (10): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(1152, 1152, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1152, bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(1152, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=192, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+    (11): DnaBlock(
+      (conv1): Sequential(
+        (0): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act1): DyReLU(
+        (act): Sequential()
+      )
+      (hyper1): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv2): Sequential(
+        (0): Conv2d(1152, 1152, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1152, bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (act2): DyReLU(
+        (act): Sequential()
+      )
+      (hyper2): HyperFunc(
+        (hyper): Sequential(
+          (0): Linear(in_features=192, out_features=48, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=48, out_features=2304, bias=True)
+          (3): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+      )
+      (conv3): Sequential(
+        (0): Conv2d(1152, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Sequential()
+      )
+      (act3): DyReLU(
+        (act): Sequential()
+      )
+      (hyper3): Sequential()
+      (drop_path): DropPath(drop_prob=0.000)
+      (local_global): Local2Global(
+        (alpha): Sequential(
+          (0): Linear(in_features=192, out_features=192, bias=True)
+          (1): h_sigmoid(
+            (relu): ReLU6(inplace=True)
+          )
+        )
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_block): GlobalBlock(
+        (ffn): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): GELU(approximate=none)
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (ffn_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (q): Linear(in_features=192, out_features=192, bias=True)
+        (channel_mlp): Linear(in_features=192, out_features=192, bias=True)
+        (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+      (global_local): Global2Local(
+        (k): Linear(in_features=192, out_features=192, bias=True)
+        (proj): Linear(in_features=192, out_features=192, bias=True)
+        (drop_path): DropPath(drop_prob=0.000)
+      )
+    )
+  )
+  (local_global): Local2Global(
+    (alpha): Sequential(
+      (0): Linear(in_features=192, out_features=192, bias=True)
+      (1): h_sigmoid(
+        (relu): ReLU6(inplace=True)
+      )
+    )
+    (q): Linear(in_features=192, out_features=192, bias=True)
+    (proj): Linear(in_features=192, out_features=192, bias=True)
+    (layer_norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+    (drop_path): DropPath(drop_prob=0.000)
+  )
+  (classifier): MergeClassifier(
+    (conv): Sequential(
+      (0): Sequential()
+      (1): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (2): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (act): DyReLU(
+      (act): ReLU6(inplace=True)
+    )
+    (hyper): Sequential()
+    (avgpool): Sequential(
+      (0): AdaptiveAvgPool2d(output_size=(1, 1))
+      (1): h_swish(
+        (sigmoid): h_sigmoid(
+          (relu): ReLU6(inplace=True)
+        )
+      )
+    )
+    (fc): Sequential(
+      (0): Linear(in_features=1344, out_features=1920, bias=True)
+      (1): BatchNorm1d(1920, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): h_swish(
+        (sigmoid): h_sigmoid(
+          (relu): ReLU6(inplace=True)
+        )
+      )
+    )
+    (classifier): Sequential(
+      (0): Dropout(p=0.0, inplace=False)
+      (1): Linear(in_features=1920, out_features=1000, bias=True)
+    )
+  )
+)
+Train: 0 [   0/20018 (  0%)]  Loss: 6.94 (6.94)  Time: 1.562s,   40.97/s  (1.562s,   40.97/s)  LR: 1.000e-03  Data: 0.505 (0.505)Elapsed/ETA: 1.6s / 31271.4s
+Train: 0 [  50/20018 (  0%)]  Loss: 7.14 (7.28)  Time: 0.263s,  243.64/s  (0.288s,  222.05/s)  LR: 1.000e-03  Data: 0.008 (0.017)Elapsed/ETA: 14.7s / 5754.9s
+Train: 0 [ 100/20018 (  1%)]  Loss: 7.23 (7.22)  Time: 0.263s,  243.74/s  (0.276s,  232.13/s)  LR: 1.000e-03  Data: 0.008 (0.013)Elapsed/ETA: 27.8s / 5491.2s
+Train: 0 [ 150/20018 (  1%)]  Loss: 7.10 (7.20)  Time: 0.262s,  244.19/s  (0.272s,  235.70/s)  LR: 1.000e-03  Data: 0.007 (0.011)Elapsed/ETA: 41.0s / 5394.6s
+Train: 0 [ 200/20018 (  1%)]  Loss: 7.18 (7.17)  Time: 0.264s,  242.12/s  (0.269s,  237.59/s)  LR: 1.000e-03  Data: 0.008 (0.010)Elapsed/ETA: 54.1s / 5338.2s
+Train: 0 [ 250/20018 (  1%)]  Loss: 7.03 (7.15)  Time: 0.263s,  243.22/s  (0.268s,  238.87/s)  LR: 1.000e-03  Data: 0.008 (0.010)Elapsed/ETA: 67.3s / 5296.1s
+Train: 0 [ 300/20018 (  2%)]  Loss: 7.06 (7.13)  Time: 0.264s,  242.02/s  (0.267s,  239.57/s)  LR: 1.000e-03  Data: 0.008 (0.010)Elapsed/ETA: 80.4s / 5267.4s
+Train: 0 [ 350/20018 (  2%)]  Loss: 7.08 (7.13)  Time: 0.264s,  241.99/s  (0.267s,  240.04/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 93.6s / 5243.7s
+Train: 0 [ 400/20018 (  2%)]  Loss: 7.01 (7.13)  Time: 0.255s,  251.02/s  (0.266s,  240.34/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 106.8s / 5223.9s
+Train: 0 [ 450/20018 (  2%)]  Loss: 6.98 (7.12)  Time: 0.265s,  241.90/s  (0.266s,  240.72/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 119.9s / 5202.4s
+Train: 0 [ 500/20018 (  3%)]  Loss: 7.00 (7.12)  Time: 0.261s,  245.42/s  (0.266s,  240.87/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 133.1s / 5185.8s
+Train: 0 [ 550/20018 (  3%)]  Loss: 6.98 (7.11)  Time: 0.264s,  242.47/s  (0.266s,  241.01/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 146.3s / 5169.5s
+Train: 0 [ 600/20018 (  3%)]  Loss: 6.98 (7.11)  Time: 0.265s,  241.90/s  (0.265s,  241.08/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 159.5s / 5154.6s
+Train: 0 [ 650/20018 (  3%)]  Loss: 7.05 (7.11)  Time: 0.265s,  241.36/s  (0.265s,  241.13/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 172.8s / 5140.4s
+Train: 0 [ 700/20018 (  4%)]  Loss: 7.00 (7.10)  Time: 0.267s,  239.31/s  (0.265s,  241.16/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 186.0s / 5126.3s
+Train: 0 [ 750/20018 (  4%)]  Loss: 7.23 (7.10)  Time: 0.265s,  241.42/s  (0.265s,  241.29/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 199.2s / 5110.4s
+Train: 0 [ 800/20018 (  4%)]  Loss: 7.08 (7.10)  Time: 0.264s,  242.08/s  (0.265s,  241.38/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 212.4s / 5095.2s
+Train: 0 [ 850/20018 (  4%)]  Loss: 7.08 (7.10)  Time: 0.263s,  243.66/s  (0.265s,  241.44/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 225.6s / 5080.7s
+Train: 0 [ 900/20018 (  5%)]  Loss: 7.07 (7.10)  Time: 0.263s,  243.49/s  (0.265s,  241.51/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 238.8s / 5066.0s
+Train: 0 [ 950/20018 (  5%)]  Loss: 7.22 (7.10)  Time: 0.267s,  239.63/s  (0.265s,  241.57/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 252.0s / 5051.6s
+Train: 0 [1000/20018 (  5%)]  Loss: 7.03 (7.10)  Time: 0.265s,  241.46/s  (0.265s,  241.57/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 265.2s / 5038.3s
+Train: 0 [1050/20018 (  5%)]  Loss: 7.00 (7.09)  Time: 0.263s,  243.63/s  (0.265s,  241.60/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 278.4s / 5024.3s
+Train: 0 [1100/20018 (  6%)]  Loss: 6.92 (7.09)  Time: 0.262s,  243.84/s  (0.265s,  241.62/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 291.6s / 5010.7s
+Train: 0 [1150/20018 (  6%)]  Loss: 6.97 (7.09)  Time: 0.264s,  242.29/s  (0.265s,  241.69/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 304.8s / 4995.9s
+Train: 0 [1200/20018 (  6%)]  Loss: 7.27 (7.08)  Time: 0.263s,  243.16/s  (0.265s,  241.77/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 317.9s / 4981.1s
+Train: 0 [1250/20018 (  6%)]  Loss: 7.08 (7.08)  Time: 0.256s,  250.43/s  (0.265s,  241.81/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 331.1s / 4967.0s
+Train: 0 [1300/20018 (  6%)]  Loss: 7.26 (7.08)  Time: 0.265s,  241.40/s  (0.265s,  241.84/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 344.3s / 4953.3s
+Train: 0 [1350/20018 (  7%)]  Loss: 6.97 (7.09)  Time: 0.262s,  244.49/s  (0.265s,  241.86/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 357.5s / 4939.5s
+Train: 0 [1400/20018 (  7%)]  Loss: 6.97 (7.09)  Time: 0.266s,  241.04/s  (0.265s,  241.87/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 370.7s / 4926.2s
+Train: 0 [1450/20018 (  7%)]  Loss: 7.10 (7.08)  Time: 0.262s,  244.41/s  (0.265s,  241.87/s)  LR: 1.000e-03  Data: 0.008 (0.009)Elapsed/ETA: 383.9s / 4912.9s
+Train: 0 [1500/20018 (  7%)]  Loss: 7.04 (7.08)  Time: 0.265s,  241.06/s  (0.265s,  241.87/s)  LR: 1.000e-03  Data: 0.009 (0.009)Elapsed/ETA: 397.2s / 4899.7s

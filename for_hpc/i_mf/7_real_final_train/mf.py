@@ -1,4 +1,4 @@
-num_classes = 200
+num_classes = 1000
 
 
 #region 2. DEFINISI ARSITEKTUR MODEL (Mobile Former)
@@ -2238,13 +2238,13 @@ def _assign_hyperparameter(args):
     # Resume full model and optimizer state from checkpoint (default: '')
     args.resume = ''
     # path to dataset (root dir)
-    args.data_dir = '/home/tasi2425111/restructured-resized-tiny-imagenet-200/'  #Disesuaikan dengan kebutuhan
+    args.data_dir = '/home/tasi2425111/restructured_resized_imagenet/'  #Disesuaikan dengan kebutuhan
     # number of label classes (Model default if None)
-    args.num_classes = 200  #Disesuaikan dengan kebutuhan
+    args.num_classes = 1000  #Disesuaikan dengan kebutuhan
     # Name of model to train (default: "resnet50")
     args.model = 'mobile_former_294m' #mobile_former_294m  #Disesuaikan dengan kebutuhan
     # Device (accelerator) to use.
-    args.device = 'cuda:1'
+    args.device = 'cuda:0'
     
     # Input image center crop percent (for validation only)
     # args.crop_pct = None ## Tidak diikutkan karena sudah diresize
@@ -2256,7 +2256,7 @@ def _assign_hyperparameter(args):
     # Label smoothing (default: 0.1)
     args.smoothing = 0.1
     # number of epochs to train (default: 300)
-    args.epochs = 300
+    args.epochs = 100
     # Input batch size for training (default: 128)
     args.batch_size = 64
     # Optimizer (default: "sgd")

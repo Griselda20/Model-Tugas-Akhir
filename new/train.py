@@ -846,6 +846,7 @@ def main():
             )
         else:
             train_loss_fn = SoftTargetCrossEntropy()
+            # di dalam SoftTargetCrossEntropy() terdapat softmax
     elif args.smoothing:
         if args.bce_loss:
             train_loss_fn = BinaryCrossEntropy(

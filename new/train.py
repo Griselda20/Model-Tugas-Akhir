@@ -59,31 +59,30 @@ def _assign_hyperparameter(args):
     # args.model = 'coatnet_3' #Coatnet_3  #Disesuaikan dengan kebutuhan
     # Device (accelerator) to use.
     args.device = 'cuda:0'
+    
     # Input image center crop percent (for validation only)
-    args.crop_pct = None ## Tidak diikutkan karena sudah diresize
+    # args.crop_pct = None ## Tidak diikutkan karena sudah diresize
     # Use AutoAugment policy. "v0" or "original". (default: None)
     args.aa = 'rand-m15-n2' ## Operation = 2 , Magnitude = 15
     # mixup alpha, mixup enabled if > 0. (default: 0.)
     args.mixup = 0.8
-    #loss_type = Softmax #Sudah default di code training
+    # args.loss_type = Softmax #Sudah default di code training
     # Label smoothing (default: 0.1)
     args.smoothing = 0.1
     # number of epochs to train (default: 300)
     args.epochs = 300
     # Input batch size for training (default: 128)
     args.batch_size = 20
-    # Validation batch size override (default: None)
-    args.validation_batch_size = 20
     # Optimizer (default: "sgd")
-    args.opt = 'AdamW'
+    args.opt = 'adamw'
     # learning rate, overrides lr-base if set (default: None)
     args.lr = 1e-3
     # lower lr bound for cyclic schedulers that hit 0 (default: 0)
     args.min_lr = 1e-5
-    # Learning rate scheduler (default: "cosine")
-    args.sched = 'cosine'
     # epochs to warmup LR, if scheduler supports
     args.warmup_epochs = 10000
+    # Learning rate scheduler (default: "cosine")
+    args.sched = 'cosine'
     # weight decay (default: 2e-5)
     args.weight_decay = 0.05
     # Clip gradient norm (default: None, no clipping)
@@ -91,6 +90,7 @@ def _assign_hyperparameter(args):
     # Decay factor for model weights moving average (default: 0.9998)
     args.model_ema_decay = None
     # Input all image dimensions (d h w, e.g. --input-size 3 224 224), uses model default if empty
+
     args.input_size = (3, 224, 224)
     # Override mean pixel value of dataset
     args.mean = (0.485, 0.456, 0.406)

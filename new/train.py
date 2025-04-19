@@ -56,7 +56,7 @@ def _assign_hyperparameter(args):
     # number of label classes (Model default if None)
     args.num_classes = 200  #Disesuaikan dengan kebutuhan
     # Name of model to train (default: "resnet50")
-    args.model = 'coatnet_3' #Coatnet_3  #Disesuaikan dengan kebutuhan
+    args.model = 'mobile_former_294m' #mobile_former_294m  #Disesuaikan dengan kebutuhan
     # Device (accelerator) to use.
     args.device = 'cuda:0'
     

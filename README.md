@@ -8,7 +8,7 @@ Penelitian ini bertujuan untuk membandingkan performa tiga arsitektur deep learn
 
 ## 📂 Struktur File Utama
 
-| Folder/Script                          | Deskripsi                                                                 |
+| File                                  | Deskripsi                                                                |
 |---------------------------------------|--------------------------------------------------------------------------|
 | `Model_CoAtNet.py`                    | Arsitektur model CoAtNet                                                 |
 | `Model_MobileFormer.py`               | Arsitektur model Mobile-Former                                           |
